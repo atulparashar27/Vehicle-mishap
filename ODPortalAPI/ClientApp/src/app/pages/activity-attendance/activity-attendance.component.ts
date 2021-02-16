@@ -168,10 +168,9 @@ export class ActivityAttendanceComponent implements OnInit {
         activityCode: this.selectedActivityCode[0].actId,
         rollNoList: this.selectedRow.map(p => p.rollNo)
       };
-      const s = [];
-      this.attendanceService.saveSelectedAttendance(s).subscribe(
+      this.attendanceService.saveSelectedAttendance(dataToSave).subscribe(
         (response) => {
-          if (response) {
+          if (response.data) {
             this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + 'Attendance Saved Successfully',
               '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_SUCCESS);
             this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + 'Redirecting Please Wait...',
@@ -183,7 +182,7 @@ export class ActivityAttendanceComponent implements OnInit {
             this.resetAll();
           } else {
             setTimeout(() => { this.spinner.hide(); }, 1000);
-            this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
+            this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + 'Could not save Attendance',
               '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
           }
         },

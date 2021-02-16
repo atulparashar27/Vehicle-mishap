@@ -48,5 +48,18 @@ namespace ODPortalWebAPI.Controllers
             };
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("GetSavedAttendance")]
+        public IActionResult GetSavedAttendance(string actCode, DateTime actDate)
+        {
+            var result = new RequestResult<SavedAttendanceModal>()
+            {
+                Data = _attendanceManager.GetSavedAttendance(actCode, actDate),
+                Message = "Success",
+                Success = true
+            };
+            return Ok(result);
+        }
     }
 }

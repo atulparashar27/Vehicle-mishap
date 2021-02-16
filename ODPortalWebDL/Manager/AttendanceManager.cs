@@ -18,5 +18,15 @@ namespace ODPortalWebDL.Manager
         {
             return _attendanceDataAccess.GetPeopleDate(status);
         }
+
+        public bool SubmitActivityAttendance(SubmitActivityAttendanceModal submitActivityAttendanceModal)
+        {
+            return _attendanceDataAccess.SubmitActivityAttendance(submitActivityAttendanceModal);
+        }
+
+        public SavedAttendanceModal GetSavedAttendance(string actCode, DateTime actDate)
+        {
+            return _attendanceDataAccess.GetSavedAttendance(actCode, actDate);
+        }
     }
 }

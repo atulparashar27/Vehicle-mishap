@@ -117,8 +117,8 @@ export class SavedAttendanceComponent implements OnInit {
     this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
     this.attendanceService.getActivityAttendance(code, date).subscribe(
       (response) => {
-        if (response.peopleDetailsList) {
-          this.markedAttendancList = JSON.parse(JSON.stringify(response.peopleDetailsList));
+        if (response.data) {
+          this.markedAttendancList = JSON.parse(JSON.stringify(response.data.savedAttendancePeopleModals));
           if (this.markedAttendancList) {
             for (let i = 0; i < this.markedAttendancList.length; i++) {
               if (this.markedAttendancList[i].iniJigStatus === 'Initiated' &&
@@ -205,8 +205,8 @@ export class SavedAttendanceComponent implements OnInit {
               }
             }
           }
-          this.attendCode = JSON.parse(JSON.stringify(response.activityName));
-          this.attendDate = this.utilsService.formatDateDDMMYYY(response.activityDate);
+          this.attendCode = JSON.parse(JSON.stringify(response.data.activityName));
+          this.attendDate = this.utilsService.formatDateDDMMYYY(response.data.activityDate);
           this.configureRows();
         } else {
           // tslint:disable-next-line: max-line-length

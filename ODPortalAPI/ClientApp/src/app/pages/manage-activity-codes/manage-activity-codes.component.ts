@@ -51,8 +51,8 @@ export class ManageActivityCodesComponent implements OnInit {
     this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
     this.datamanagementService.getAllActivityLists().subscribe(
       (response) => {
-        if (response.activityDetailsList) {
-          this.activityDDList = response.activityDetailsList;
+        if (response.data) {
+          this.activityDDList = response.data;
         } else {
           this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
             '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);

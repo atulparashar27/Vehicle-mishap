@@ -22,5 +22,14 @@ namespace ODPortalWebDL.Constants
         {
             return $"Select * from BranchMaster where Status='{status}'";
         }
+
+        public static string GetSavedAttendance(string actCode, DateTime actDate)
+        {
+            return $"select * " +
+                    $"from Act2018 attend, BranchMaster branch, ActivityCode act " +
+                    $"WHERE attend.Roll_NO = branch.Roll_NO " +
+                    $"AND attend.Act_cd = act.Act_cd " +
+                    $"AND attend.Act_cd='{actCode}' and attend.Act_Date=#{actDate}#";
+        }
     }
 }
