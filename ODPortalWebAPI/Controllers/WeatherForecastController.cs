@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ODPortalWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -26,7 +26,6 @@ namespace ODPortalWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Get")]
         public IActionResult Get1()
         {
             var rng = new Random();

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace ODPortalWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class ActivityController : ControllerBase
     {
         private readonly ActivityCodeData _activityCodeData;

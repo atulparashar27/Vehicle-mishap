@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace ODPortalWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class AttendanceController : ControllerBase
     {
         private readonly ILogger<AttendanceController> _logger;
@@ -25,11 +25,24 @@ namespace ODPortalWebAPI.Controllers
 
         [HttpGet]
         [Route("GetPeopleData")]
-        public IActionResult GetPeopleDate(string status)
+        public IActionResult GetPeopleData(string status)
         {
             var result = new RequestResult<List<ActivityAttendanceModal>>()
             {
                 Data = _attendanceManager.GetPeopleDate(status),
+                Message = "Success",
+                Success = true
+            };
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("SubmitActivityAttendance")]
+        public IActionResult SubmitActivityAttendance(SubmitActivityAttendanceModal submitActivityAttendanceModal)
+        {
+            var result = new RequestResult<bool>()
+            {
+                Data = _attendanceManager.SubmitActivityAttendance(submitActivityAttendanceModal),
                 Message = "Success",
                 Success = true
             };
