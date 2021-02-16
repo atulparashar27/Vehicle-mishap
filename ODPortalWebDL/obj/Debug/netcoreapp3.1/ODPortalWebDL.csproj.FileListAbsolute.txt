@@ -6,4 +6,3 @@ D:\Vehicle-mishap\ODPortalWebDL\obj\Debug\netcoreapp3.1\ODPortalWebDL.AssemblyIn
 D:\Vehicle-mishap\ODPortalWebDL\obj\Debug\netcoreapp3.1\ODPortalWebDL.csproj.CoreCompileInputs.cache
 D:\Vehicle-mishap\ODPortalWebDL\obj\Debug\netcoreapp3.1\ODPortalWebDL.dll
 D:\Vehicle-mishap\ODPortalWebDL\obj\Debug\netcoreapp3.1\ODPortalWebDL.pdb
-D:\Vehicle-mishap\ODPortalWebDL\obj\Debug\netcoreapp3.1\ODPortalWebDL.csprojAssemblyReference.cache

@@ -27,6 +27,7 @@ export class ActivityAttendanceComponent implements OnInit {
       { headerName: 'UID Number', field: 'uidNo', width: 220, resizable: true, filter: true, sortable: true },
       { headerName: 'Name', field: 'name', width: 320, resizable: true, filter: true, sortable: true },
       { headerName: 'Current Status', field: 'iniJigStatus', resizable: true, filter: true, sortable: true },
+      { headerName: 'Family Code', field: 'familyCode', resizable: true, filter: true, sortable: true },
       { headerName: 'Select Person', checkboxSelection: true, filter: true, sortable: true,
        headerCheckboxSelection: true, headerCheckboxSelectionFilteredOnly: true }
       // , field: 'fieldName',
@@ -90,8 +91,8 @@ export class ActivityAttendanceComponent implements OnInit {
     this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
     this.attendanceService.getAllActivityLists().subscribe(
       (response) => {
-        if (response.activityDetailsList) {
-          this.allActivityDDList = response.activityDetailsList;
+        if (response.data) {
+          this.allActivityDDList = response.data;
         } else {
           this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
             '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
@@ -112,13 +113,13 @@ export class ActivityAttendanceComponent implements OnInit {
     this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
     this.attendanceService.getPeopleData().subscribe(
       (response) => {
-        if (response.peopleList) {
+        if (response.data) {
           // response.peopleList.forEach(element => {
           //   element.fieldName = false;
           // });
-          this.attendanceDDList = response.peopleList;
+          this.attendanceDDList = response.data;
         } else {
-          this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
+          this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + 'Something went wrong. Please contact administrator.',
             '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
         }
         setTimeout(() => { this.spinner.hide(); }, 500);

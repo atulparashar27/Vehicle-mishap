@@ -13,5 +13,14 @@ namespace ODPortalWebDL.Constants
                     $"where UID_No='{userName}' and Date_Birth=#{passWord}# " +
                     $"and Status='CR'" ;
         }
+        public static string GetAllActCode()
+        {
+            return $"SELECT * FROM ActivityCode";
+        }
+
+        public static string GetAllPeopleList(string status)
+        {
+            return $"Select * from BranchMaster where Status='{status}'";
+        }
     }
 }

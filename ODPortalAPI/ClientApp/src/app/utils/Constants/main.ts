@@ -3,15 +3,14 @@ export const MAIN = {
         API_VERSION: '1.0',
         MAIN_URL: {
             // HOST_URL: 'http://odrsa.api.server.gsawslab.net:9091/odrsa-service/',
-            // HOST_URL: 'http://localhost:51145/',
-            // HOST_URL: window.location.origin + 'server/'//'
-            HOST_URL: 'http://localhost:63289/' // deployment
+            HOST_URL: window.location.origin + '/api/server/'//
+            // HOST_URL: 'http://localhost:63289/api/' // deployment
             // BASE_URL: window.location.origin + '/'
         },
         URLS: {
-          AUTHENTICATE_USER: 'User',
-          GET_ALL_ACTIVITY_CODE: 'getActivityData',
-          GET_ALL_PEOPLE_DATE: 'getPeopleData',
+          AUTHENTICATE_USER: 'User/Authenticate',
+          GET_ALL_ACTIVITY_CODE: 'Activity/GetAllActivity',
+          GET_ALL_PEOPLE_DATE: 'Attendance/GetPeopleData',
           SAVE_SELECTED_RECORDS: 'submitActivityAttendance',
           GET_PROFILE_DATA: 'getProfileData',
           CALL_RESET_PASSWORD: 'resetPassword',

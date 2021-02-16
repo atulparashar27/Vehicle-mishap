@@ -14,6 +14,6 @@ namespace ODPortalWebDL.DTO
     public class SecurityObjects
     {
         public int RoleId { get; set; }
-        public string Description { get; set; }
+        public string AccessType { get; set; }
     }
 }

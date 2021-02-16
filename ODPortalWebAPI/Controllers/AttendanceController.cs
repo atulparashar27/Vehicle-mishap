@@ -13,24 +13,23 @@ namespace ODPortalWebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class AttendanceController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
-        private readonly UserManager _userManager;
-        public UserController(ILogger<UserController> logger)
+        private readonly ILogger<AttendanceController> _logger;
+        private readonly AttendanceManager _attendanceManager;
+        public AttendanceController(ILogger<AttendanceController> logger)
         {
             _logger = logger;
-            _userManager = new UserManager();
+            _attendanceManager = new AttendanceManager();
         }
 
-        [HttpPost]
-        [Route("Authenticate")]
-        public IActionResult Authenticate(Credentials credentials)
+        [HttpGet]
+        [Route("GetPeopleData")]
+        public IActionResult GetPeopleDate(string status)
         {
-            var data = _userManager.Auth(credentials);
-            var result = new RequestResult<GetUserLoginObject>
+            var result = new RequestResult<List<ActivityAttendanceModal>>()
             {
-                Data = data,
+                Data = _attendanceManager.GetPeopleDate(status),
                 Message = "Success",
                 Success = true
             };
