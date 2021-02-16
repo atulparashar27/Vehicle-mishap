@@ -42,11 +42,11 @@ export class LoginComponent implements OnInit {
             // clearing localStorage
             window.localStorage.clear();
             window.localStorage.removeItem(this.localStorageObjectNames.user_info);
-            response_data.rollNo = response.rollNo;
-            response_data.uidNo = response.uidNo;
-            response_data.userName = response.userName;
-            userRoles =  response.rolesDetailsList;
-            userCodes = [... new Set(response.rolesDetailsList.map(s => s.roleId))];
+            response_data.rollNo = response.data.rollNo;
+            response_data.uidNo = response.data.uidNo;
+            response_data.userName = response.data.userName;
+            userRoles =  response.data.rolesDetailsList;
+            userCodes = [... new Set(response.data.rolesDetailsList.map(s => s.roleId))];
             window.localStorage.setItem(this.localStorageObjectNames.user_info, JSON.stringify(response_data));
             window.localStorage.setItem(this.localStorageObjectNames.user_roles, JSON.stringify(userRoles));
             window.localStorage.setItem(this.localStorageObjectNames.userCodes, JSON.stringify(userCodes));

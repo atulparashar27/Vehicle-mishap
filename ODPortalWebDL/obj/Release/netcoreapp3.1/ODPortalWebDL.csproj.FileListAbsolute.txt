@@ -1,0 +1,9 @@
+D:\Vehicle-mishap\ODPortalWebDL\bin\Release\netcoreapp3.1\ODPortalWebDL.deps.json
+D:\Vehicle-mishap\ODPortalWebDL\bin\Release\netcoreapp3.1\ODPortalWebDL.dll
+D:\Vehicle-mishap\ODPortalWebDL\bin\Release\netcoreapp3.1\ODPortalWebDL.pdb
+D:\Vehicle-mishap\ODPortalWebDL\obj\Release\netcoreapp3.1\ODPortalWebDL.csprojAssemblyReference.cache
+D:\Vehicle-mishap\ODPortalWebDL\obj\Release\netcoreapp3.1\ODPortalWebDL.AssemblyInfoInputs.cache
+D:\Vehicle-mishap\ODPortalWebDL\obj\Release\netcoreapp3.1\ODPortalWebDL.AssemblyInfo.cs
+D:\Vehicle-mishap\ODPortalWebDL\obj\Release\netcoreapp3.1\ODPortalWebDL.csproj.CoreCompileInputs.cache
+D:\Vehicle-mishap\ODPortalWebDL\obj\Release\netcoreapp3.1\ODPortalWebDL.dll
+D:\Vehicle-mishap\ODPortalWebDL\obj\Release\netcoreapp3.1\ODPortalWebDL.pdb

@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ODPortalDL\ODPortalDL.csproj" />
+    <ProjectReference Include="..\ODPortalWebDL\ODPortalWebDL.csproj" />
   </ItemGroup>
 
 

@@ -9,7 +9,7 @@ export const MAIN = {
             // BASE_URL: window.location.origin + '/'
         },
         URLS: {
-          AUTHENTICATE_USER: 'weatherforecast',
+          AUTHENTICATE_USER: 'User',
           GET_ALL_ACTIVITY_CODE: 'getActivityData',
           GET_ALL_PEOPLE_DATE: 'getPeopleData',
           SAVE_SELECTED_RECORDS: 'submitActivityAttendance',
