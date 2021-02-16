@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ODPortalDL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,9 +47,14 @@ namespace ODPortalWebAPI.Controllers
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToList();
-            return Ok(list);
+            }).ToList();
+            var result = new RequestResult<List<WeatherForecast>>()
+            {
+                Data = list,
+                Success = true,
+                Message = "Success"
+            };
+            return Ok(result);
         }
         public class Cred
         {
