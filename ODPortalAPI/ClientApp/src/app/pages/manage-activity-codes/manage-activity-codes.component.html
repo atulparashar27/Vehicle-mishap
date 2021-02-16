@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-md-7 col-sm-7">
+        <div class="card">
+            <div class="card-header">
+                <div class="row pull-right col-md-12"
+                    style="margin-bottom: -30px;margin-top: -17px;justify-content: flex-end;">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-round" [disabled]="hideAddNew" 
+                        (click)="addNewRecord();">Add</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger btn-round" [disabled]="!touchedRow || hideAddNew" 
+                        [hidden]="activityEditPermission" (click)="deleteSelectedRec(processConfirmModal)">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="boxShadow" (window:resize)="onResize($event)"
+                    [style.height]="(height > 350 ? height : 300) + 'px'">
+                    <ag-grid-angular #attendanceTable style="width: 100%; height: 100%;" rowSelection="single"
+                        [localeText]="{noRowsToShow: ''}" [rowData]="activityDDList" [suppressMovableColumns]="true"
+                        [columnDefs]="activtyColumDefs" [class]="tableTheme" (selectionChanged)="onRowClicked($event)"
+                        [rowMultiSelectWithClick]="true" (rowDoubleClicked)="onRowSelection($event)">
+                    </ag-grid-angular>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 col-sm-5">
+        <div class="card">
+            <div class="card-header">
+                <h4>Add/Update Activities</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Code</label>
+                            <input type="text" class="form-control" [disabled]="true" name="ActivityCode"
+                                [(ngModel)]="code" placeholder="Activity Code">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="requiredField">Name</label>
+                            <input type="text" class="form-control" [disabled]="!(enableNameField || selectedROw) "
+                                title="{{name}}" name="ActivityName" [(ngModel)]="name" placeholder="Activity Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-round" [hidden]="activityEditPermission"
+                         (click)="saveModalShow(processConfirmModal);" [disabled]="!(name || code)">Save</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger btn-round" [disabled]="!(name || code)"  (click)="clearForm()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #processConfirmModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Confirm?</h5>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>{{txtMsg}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="modal.close('Close click');changeActivity();">Yes</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">No</button>
+    </div>
+</ng-template>

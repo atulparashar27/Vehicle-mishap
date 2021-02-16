@@ -1,0 +1,11 @@
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\ODPortalWebAPI.exe
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\ODPortalWebAPI.dll
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\ODPortalWebAPI.deps.json
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\ODPortalWebAPI.runtimeconfig.json
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\ODPortalWebAPI.pdb
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\System.Net.Http.Formatting.dll
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\System.Web.Http.dll
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.Bson.dll

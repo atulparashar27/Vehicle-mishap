@@ -1,0 +1,525 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card card-user">
+      <div class="image">
+        <img src="assets/img/damir-bosnjak.jpg" alt="...">
+      </div>
+      <div class="card-body">
+        <div class="author">
+          <a>
+            <img class="avatar border-gray" src="assets/img/logo-small.png" alt="...">
+            <h5 class="title">{{profileList.fullName}}</h5>
+          </a>
+          <p class="description">
+            @{{contactInfoList.mobileNo1}}
+          </p>
+        </div>
+        <p class="description text-center">
+          <!-- "I like the way you work it
+          <br> No diggity
+          <br> I wanna bag it up" -->
+          {{personBrInfoList.statusRemarks}}
+        </p>
+      </div>
+      <div class="card-footer">
+        <hr>
+        <div class="button-container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12 ml-auto">
+              <small>{{contactInfoList.residenceAddr}}</small>
+            </div>
+            <!-- <div class="col-lg-3 col-md-6 col-6 ml-auto">
+              <h5> 
+                <br>
+                <small> </small>
+              </h5>
+            </div>
+            <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+              <h5> 
+                <br>
+                <small> </small>
+              </h5>
+            </div>
+            <div class="col-lg-3 mr-auto">
+              <h5> 
+                <br>
+                <small> </small>
+              </h5>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Team Members</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled team-members">
+          <li>
+            <div class="row">
+              <div class="col-md-2 col-2">
+                <div class="avatar">
+                  <img src="assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image"
+                    class="img-circle img-no-padding img-responsive">
+                </div>
+              </div>
+              <div class="col-md-7 col-7">
+                DJ Khaled
+                <br />
+                <span class="text-muted">
+                  <small>Offline</small>
+                </span>
+              </div>
+              <div class="col-md-3 col-3 text-right">
+                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i
+                    class="fa fa-envelope"></i></button>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-md-2 col-2">
+                <div class="avatar">
+                  <img src="assets/img/faces/joe-gardner-2.jpg" alt="Circle Image"
+                    class="img-circle img-no-padding img-responsive">
+                </div>
+              </div>
+              <div class="col-md-7 col-7">
+                Creative Tim
+                <br />
+                <span class="text-success">
+                  <small>Available</small>
+                </span>
+              </div>
+              <div class="col-md-3 col-3 text-right">
+                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i
+                    class="fa fa-envelope"></i></button>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-md-2 col-2">
+                <div class="avatar">
+                  <img src="assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image"
+                    class="img-circle img-no-padding img-responsive">
+                </div>
+              </div>
+              <div class="col-ms-7 col-7">
+                Flume
+                <br />
+                <span class="text-danger">
+                  <small>Busy</small>
+                </span>
+              </div>
+              <div class="col-md-3 col-3 text-right">
+                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i
+                    class="fa fa-envelope"></i></button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="{{widthConfigure}}">
+    <ngb-accordion #acc="ngbAccordion" (panelChange)="accordionChangeOrOpen($event)">
+      <ngb-panel title="Personal Details" id="config-panel-one">
+        <ng-template ngbPanelContent>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-2  pr-1 pl-1">
+                  <div class="form-group">
+                    <label>Title</label>
+                    <select name="title" class="form-control" id="title" [(ngModel)]="profileList.title"
+                      [disabled]="disablePersonalEditBtn">
+                      <option *ngFor="let n of titleArray" [ngValue]="n">{{n}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 px-1 pr-1 pl-1">
+                  <div class="form-group">
+                    <label class="requiredField">Name</label>
+                    <input autocomplete="off" type="text" class="form-control" ngbTooltip={{profileList.fullName}}
+                      [disabled]="disablePersonalEditBtn" name="fullName" placeholder="Full Name"
+                      [(ngModel)]="profileList.fullName">
+                  </div>
+                </div>
+                <div class="col-md-4 pr-1 pl-1">
+                  <div class="form-group">
+                    <label class="requiredField" for="dateOfBirth">Date of Birth</label>
+                    <input autocomplete="off" class="form-control" [disabled]="disablePersonalEditBtn" type="text"
+                      id="attendDate" name="dob" bsDatepicker [(bsValue)]="profileList.dateOfBirth"
+                      placeholder="Date of Birth"
+                      [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', isAnimated: true, containerClass: 'theme-dark-blue' }" />
+                    <!-- <input class="form-control" placeholder="dd-mm-yyyy" name="dob" [disabled]="disablePersonalEditBtn"
+                      [(ngModel)]="profileList.dateOfBirth" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label>Gender</label>
+                    <input autocomplete="off" type="text" class="form-control" [disabled]="true" name="gender"
+                      placeholder="Gender" [(ngModel)]="profileList.gender">
+                  </div>
+                </div>
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label class="requiredField">Caste</label>
+                    <input autocomplete="off" type="text" [disabled]="disablePersonalEditBtn" name="caste"
+                      placeholder="Caste" [(ngModel)]="profileList.caste" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label class="requiredField">Marital Status</label>
+                    <select name="maritalStatus" id="maritalStatus" [(ngModel)]="profileList.maritalStatus"
+                      [disabled]="disablePersonalEditBtn" class="form-control">
+                      <option *ngFor="let c of maritalArray" [ngValue]="c">{{c}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label class="requiredField">Nationality</label>
+                    <select name="nationalityArray" id="nationalityArray" [(ngModel)]="profileList.nationality"
+                      [disabled]="disablePersonalEditBtn" class="form-control">
+                      <option *ngFor="let x of nationalityArray" [ngValue]="x">{{x}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label>Aadhar Number</label>
+                    <input autocomplete="off" type="number" name="aadharNo" [disabled]="disablePersonalEditBtn"
+                      placeholder="Aadhar number" [(ngModel)]="profileList.aadharNo" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label>Pan Number</label>
+                    <input autocomplete="off" type="text" name="panNuM" [disabled]="disablePersonalEditBtn"
+                      placeholder="PAN number" [(ngModel)]="profileList.panNo" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row pr-1 pl-1">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-round" [disabled]="!disablePersonalEditBtn"
+                    (click)="editForm();">Edit</button>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success btn-round" [disabled]="disablePersonalEditBtn"
+                    (click)="openProfileDetailsPopUp(processConfirmModal, 1)">Save</button>
+                </div>
+                <div class="form-group">
+                  <button type="submit" [disabled]="disablePersonalEditBtn" class="btn btn-danger btn-round"
+                    (click)="resetAll();">Reset</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel title="Contact Details" id="config-panel-two">
+        <ng-template ngbPanelContent>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-12 pr-1 pl-1">
+                  <div class="form-group">
+                    <label class="requiredField">Address</label>
+                    <textarea [disabled]="disablePersonalEditBtn" name="address" placeholder="Residential Address"
+                      [(ngModel)]="contactInfoList.residenceAddr" class="form-control textarea">
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label class="requiredField">City</label>
+                    <input type="text" class="form-control" autocomplete="off" name="city" placeholder="City"
+                      [(ngModel)]="contactInfoList.city" [disabled]="disablePersonalEditBtn">
+                  </div>
+                </div>
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label class="requiredField">Pincode</label>
+                    <input type="number" class="form-control" autocomplete="off" name="Pincode"
+                      [disabled]="disablePersonalEditBtn" placeholder="Pincode" [(ngModel)]="contactInfoList.pincode">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label class="requiredField">Mobile Number 1</label>
+                    <input type="number" class="form-control" autocomplete="off" [disabled]="disablePersonalEditBtn"
+                      [maxLength]="10" name="Mobile1" placeholder="Mobile No 1" [(ngModel)]="contactInfoList.mobileNo1">
+                  </div>
+                </div>
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label>Mobile Number 2</label>
+                    <input type="number" class="form-control" autocomplete="off" [disabled]="disablePersonalEditBtn"
+                      [maxLength]="10" name="Mobile2" placeholder="Alternative Number"
+                      [(ngModel)]="contactInfoList.mobileNo2">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label>Emergency Contact Name</label>
+                    <input type="text" class="form-control" name="emerContact1" autocomplete="off"
+                      [disabled]="disablePersonalEditBtn" placeholder="Emergency Contact Name"
+                      [(ngModel)]="contactInfoList.emergencyContact">
+                  </div>
+                </div>
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label>Emergency Contact Number</label>
+                    <input type="text" class="form-control" name="emerContact2" autocomplete="off"
+                      [disabled]="disablePersonalEditBtn" placeholder="Emergency Contact Number "
+                      [(ngModel)]="contactInfoList.emergencyContactNo">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label>Email 1</label>
+                    <input type="text" class="form-control" title="{{contactInfoList.email1}}" name="Email1"
+                      autocomplete="off" [disabled]="disablePersonalEditBtn" placeholder="Email Address 1"
+                      [(ngModel)]="contactInfoList.email1">
+                  </div>
+                </div>
+                <div class="col-md-6 pr-1 pl-1">
+                  <div class="form-group">
+                    <label>Email 2</label>
+                    <input type="text" class="form-control" title="{{contactInfoList.email2}}" name="EmailID2"
+                      autocomplete="off" [disabled]="disablePersonalEditBtn" placeholder="Email Address 2"
+                      [(ngModel)]="contactInfoList.email2">
+                  </div>
+                </div>
+              </div>
+              <div class="row pr-1 pl-1">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-round" [disabled]="!disablePersonalEditBtn"
+                    (click)="editForm();">Edit</button>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success btn-round" [disabled]="disablePersonalEditBtn"
+                    (click)="openProfileDetailsPopUp(processConfirmModal, 2)">Save</button>
+                </div>
+                <div class="form-group">
+                  <button type="submit" [disabled]="disablePersonalEditBtn" class="btn btn-danger btn-round"
+                    (click)="resetAll();">Reset</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel title="Occupation Details" id="config-panel-three">
+        <ng-template ngbPanelContent>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Organisation Name</label>
+                  <input type="text" class="form-control" [disabled]="disablePersonalEditBtn" name="organisationName"
+                    placeholder="Organisation Name" [(ngModel)]="companyInfoList.orgName">
+                </div>
+              </div>
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Organisation Address</label>
+                  <input type="text" class="form-control" [disabled]="disablePersonalEditBtn" name="organisationAddress"
+                    placeholder="Organisation Address" [(ngModel)]="companyInfoList.orgAddress">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Designation</label>
+                  <input type="text" class="form-control" [disabled]="disablePersonalEditBtn" name="Designation"
+                    placeholder="Designation" [(ngModel)]="companyInfoList.designation">
+                </div>
+              </div>
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Occupation</label>
+                  <input type="text" class="form-control" [disabled]="disablePersonalEditBtn" name="occupation"
+                    placeholder="Occupation" [(ngModel)]="companyInfoList.occupation">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Office Number 1</label>
+                  <input type="text" class="form-control" [disabled]="disablePersonalEditBtn" name="officeNo1"
+                    placeholder="Office Number 1" [(ngModel)]="companyInfoList.officePh1">
+                </div>
+              </div>
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Office Number 2</label>
+                  <input type="text" class="form-control" [disabled]="disablePersonalEditBtn" name="officeNo2"
+                    placeholder="Office Number 2" [(ngModel)]="companyInfoList.officePh2">
+                </div>
+              </div>
+            </div>
+            <div class="row pr-1 pl-1">
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-round" [disabled]="!disablePersonalEditBtn"
+                  (click)="editForm();">Edit</button>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-round" [disabled]="disablePersonalEditBtn"
+                  (click)="openProfileDetailsPopUp(processConfirmModal, 3)">Save</button>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-danger btn-round" [disabled]="disablePersonalEditBtn"
+                  (click)="resetAll();">Reset</button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel title="Qualification Details" id="config-panel-four">
+        <ng-template ngbPanelContent>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Qualification Info</label>
+                  <input [disabled]="disablePersonalEditBtn" name="Qualification" placeholder="Qualification Details"
+                    [(ngModel)]="qualificationInfoList.qualification" class="form-control textarea">
+                </div>
+              </div>
+            </div>
+            <div class="row pr-1 pl-1">
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-round" [disabled]="!disablePersonalEditBtn"
+                  (click)="editForm();">Edit</button>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-round" [disabled]="disablePersonalEditBtn"
+                  (click)="openProfileDetailsPopUp(processConfirmModal, 4)">Save</button>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-danger btn-round" [disabled]="disablePersonalEditBtn"
+                  (click)="resetAll();">Reset</button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel title="Branch Details">
+        <ng-template ngbPanelContent>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Roll Number</label>
+                  <input type="text" class="form-control" name="RollNo" placeholder="Roll No"
+                    [disabled]="disablePersonalEditBtn" [(ngModel)]="personBrInfoList.rollNo">
+                </div>
+              </div>
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>UID Number</label>
+                  <input type="text" class="form-control" name="uidNo" placeholder="UID No"
+                    [disabled]="disablePersonalEditBtn" [(ngModel)]="personBrInfoList.uidNo">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Date Of Initiation 1</label>
+                  <input type="text" class="form-control" name="dateOfIni1" placeholder="Date Of Ini 1"
+                    [disabled]="disablePersonalEditBtn" [(ngModel)]="personBrInfoList.dateOfIni1">
+                </div>
+              </div>
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Date Of Initiation 2</label>
+                  <input type="text" class="form-control" name="dateOfIni2" placeholder="Date Of Ini 2"
+                    [disabled]="disablePersonalEditBtn" [(ngModel)]="personBrInfoList.dateOfIni2">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Branch Title</label>
+                  <input type="text" class="form-control" name="brTitle" [disabled]="disablePersonalEditBtn"
+                    placeholder="Branch Title" [(ngModel)]="personBrInfoList.brTitle">
+                </div>
+              </div>
+              <div class="col-md-6 pr-1 pl-1">
+                <div class="form-group">
+                  <label>Grid Coordinator</label>
+                  <input type="text" class="form-control" name="gridCoord" [disabled]="disablePersonalEditBtn"
+                    placeholder="Grid Coordinator" [(ngModel)]="personBrInfoList.gridCoord">
+                </div>
+              </div>
+            </div>
+            <div class="row pr-1 pl-1">
+              <div class="form-group" *ngIf="branchDetailsBtnFlag">
+                <button type="submit" class="btn btn-primary btn-round" [disabled]="!disablePersonalEditBtn"
+                  (click)="editForm();">Edit</button>
+              </div>
+              <div class="form-group" *ngIf="branchDetailsBtnFlag">
+                <button type="submit" class="btn btn-success btn-round" [disabled]="disablePersonalEditBtn"
+                  (click)="openProfileDetailsPopUp(processConfirmModal, 5)">Save</button>
+              </div>
+              <div class="form-group" *ngIf="branchDetailsBtnFlag">
+                <button type="submit" [disabled]="disablePersonalEditBtn" class="btn btn-danger btn-round"
+                  (click)="resetAll();">Reset</button>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-warning btn-round">Grid Coordinator Photo</button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+
+    </ngb-accordion>
+  </div>
+</div>
+
+<ng-template #processConfirmModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Confirm?</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <p>Are you sure you want to save <b>{{textMsg}}</b> changes?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close('Close click'); saveData();">Yes</button>
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">No</button>
+  </div>
+</ng-template>

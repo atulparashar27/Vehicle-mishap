@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace ODPortalAPI
 {
@@ -57,7 +58,17 @@ namespace ODPortalAPI
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
+            app.Use(async (context, next) =>
+            {
+                await next();
 
+                if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
+            });
+            app.UseDefaultFiles();
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,

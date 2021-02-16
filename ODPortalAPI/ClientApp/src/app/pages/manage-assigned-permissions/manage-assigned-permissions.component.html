@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="requiredField">Roles</label>
+                            <ng-multiselect-dropdown [placeholder]="'-- Select Roles --'" [settings]="dropdownSettings"
+                                [(ngModel)]="selectedRolesCode" [data]="allRolesPermissionDDList" [disabled]="enableDropDown">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="requiredField">Action</label>
+                            <ng-multiselect-dropdown [placeholder]="'-- Select Action --'" [settings]="dropdownSettings"
+                                [(ngModel)]="actionCode" [data]="actionArray" [disabled]="enableDropDown">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <div class="row" style="margin-top: 13px;margin-bottom: -22px;margin-left: 1px;">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-round"
+                                        [disabled]="(selectedRolesCode.length === 0 || actionCode.length === 0)"
+                                        (click)="addSelectedPermissions();">Add
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-round"
+                                        (click)="confirmAddRole(processSaveConfirmModal);"
+                                        [disabled]="newlyAddPermissions.length === 0">Submit</button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-danger btn-round"
+                                        [disabled]="!selectedRow || selectedRow.length === 0"
+                                        (click)="confirmDeleteRoles(processDeleteConfirmModal);">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="boxShadow" (window:resize)="onResize($event)"
+                    [style.height]="(height > 350 ? height : 350) + 'px'">
+                    <ag-grid-angular style="width: 100%; height: 100%;" rowSelection="single"
+                        [localeText]="{noRowsToShow: ''}" [rowData]="allPeopleList" [suppressMovableColumns]="true"
+                        [columnDefs]="peopleColumDefs" [class]="tableTheme" [rowMultiSelectWithClick]="false"
+                        (rowDoubleClicked)="onRowDoubleClick($event)" (selectionChanged)="onUidNoSelect($event)">
+                    </ag-grid-angular>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="boxShadow" (window:resize)="onResize($event)"
+                    [style.height]="(height > 350 ? height : 350) + 'px'">
+                    <ag-grid-angular style="width: 100%; height: 100%;" rowSelection="multiple"
+                        [localeText]="{noRowsToShow: ''}" [rowData]="selectedPeoplePermissions"
+                        [suppressMovableColumns]="true" [columnDefs]="assignedRolesColumnDefs" [class]="tableTheme"
+                        [rowMultiSelectWithClick]="true" (selectionChanged)="onRowSelection($event)">
+                    </ag-grid-angular>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #processSaveConfirmModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Confirm?</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p>Are you sure you want to save the Roles?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary"
+            (click)="modal.close('Close click'); addNewRoleChanges();">Yes</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">No</button>
+    </div>
+</ng-template>
+
+<ng-template #processDeleteConfirmModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Confirm?</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p>Are you sure you want to delete the Roles?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary"
+            (click)="modal.close('Close click'); deleteSelectedRoles();">Yes</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">No</button>
+    </div>
+</ng-template>

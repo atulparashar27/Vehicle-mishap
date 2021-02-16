@@ -1,0 +1,55 @@
+<div class="sidebar-wrapper">
+  <div class="logo">
+    <a class="simple-text logo-mini">
+      <div class="logo-image-small">
+        <img src="assets/img/logo-small.png">
+      </div>
+    </a>
+    <a class="simple-text logo-normal">
+      {{username}}
+    </a>
+  </div>
+  <ul class="nav">
+    <li routerLinkActive="active">
+      <a [routerLink]="'/dashboard'">
+        <i class="nc-icon nc-bank"></i>
+        <p>Home</p>
+      </a>
+    </li>
+    <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+      <a [routerLink]="[menuItem.path]">
+        <i class="{{menuItem.icon}}"></i>
+        <p>{{menuItem.title}}</p>
+      </a>
+    </li>
+    <!-- <li routerlinkactive="active">
+      <a data-toggle="collapse" (click)="hideOrShow()"><i class="nc-icon nc-layout-11"></i>
+        <p>Components<b class="caret"></b></p>
+      </a>
+      <div class="collapse" id="components">
+        <ul class="nav">
+          <li routerlinkactive="active"><a href="#/components/buttons"><span class="nc-icon nc-bank"></span><span
+                class="sidebar-normal"> Buttons</span></a></li>
+          <li routerlinkactive="active"><a href="#/components/grid"><span class="sidebar-mini-icon">GS</span><span
+                class="sidebar-normal">Grid System</span></a></li>
+          <li routerlinkactive="active"><a href="#/components/panels"><span class="sidebar-mini-icon">P</span><span
+                class="sidebar-normal">Panels</span></a></li>
+          <li routerlinkactive="active"><a href="#/components/sweet-alert"><span
+                class="sidebar-mini-icon">SA</span><span class="sidebar-normal">Sweet Alert</span></a></li>
+          <li routerlinkactive="active"><a href="#/components/notifications"><span
+                class="sidebar-mini-icon">N</span><span class="sidebar-normal">Notifications</span></a></li>
+          <li routerlinkactive="active"><a href="#/components/icons"><span class="sidebar-mini-icon">I</span><span
+                class="sidebar-normal">Icons</span></a></li>
+          <li routerlinkactive="active"><a href="#/components/typography"><span class="sidebar-mini-icon">T</span><span
+                class="sidebar-normal">Typography</span></a></li>
+        </ul>
+      </div>
+    </li> -->
+    <li routerLinkActive="active" class="">
+      <a [routerLink]="'/logout'" (click)="logOut();">
+        <i class="nc-icon nc-button-power"></i>
+        <p>Log Out</p>
+      </a>
+    </li>
+  </ul>
+</div>

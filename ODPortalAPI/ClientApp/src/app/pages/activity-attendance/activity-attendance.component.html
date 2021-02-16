@@ -1,0 +1,131 @@
+<div class="form-group">
+    <div class="card col-md-12 col-sm-12">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="col-md-3 col-form-label requiredField">
+                            Activity
+                        </label>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <ng-multiselect-dropdown [placeholder]="'-- Select Activity --'"
+                                    [settings]="dropdownSettings" [(ngModel)]="selectedActivityCode"
+                                    [data]="allActivityDDList" (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="col-md-3 col-form-label requiredField">
+                            Date
+                        </label>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <input class="form-control" autocomplete="off" id="attendDate" name="date"
+                                    [disabled]="roleEditPermission" class="form-control" [(bsValue)]="attendDate"
+                                    value="{{ attendDate | date:'dd-MM-yyyy' }}" placeholder="Attendance Date"
+                                    type="text" [bsConfig]="{ isAnimated: true, containerClass: 'theme-dark-blue',
+                                    dateInputFormat: 'DD-MM-YYYY' }" bsDatepicker
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row" style="margin-bottom: -19px;margin-top: -9px;">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-round" [disabled]="currentActiveTab ? 
+                                !(attendDate && selectedActivityCode.length > 0 && selectedRow.length > 0) :
+                                !(attendDate && selectedActivityCode.length > 0 && visitorsRowFilled)"
+                                (click)="openProcessConfirmModal(processConfirmModal);" [hidden]="roleEditPermission">
+                                 Submit
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger btn-round"
+                                (click)="openProcessResetConfirmModal(processResetConfirmModal);"> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tabStyles">
+    <ngb-tabset [destroyOnHide]="false" (tabChange)="tabChanges($event)">
+        <ngb-tab title="Branch Member Attendance">
+            <ng-template ngbTabContent>
+                <div class="form-group">
+                    <div class="card col-md-12 col-sm-12">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="row boxShadow" (window:resize)="onResize($event)"
+                                    [style.height]="(height > 350 ? height : 300) + 'px'">
+                                    <ag-grid-angular #attendanceTable style="width: 100%; height: 100%;"
+                                        rowSelection="multiple" [localeText]="{noRowsToShow: ''}"
+                                        [rowData]="attendanceDDList" [columnDefs]="attendanceColumDefs"
+                                        [class]="tableTheme" [rowMultiSelectWithClick]="true"
+                                        (selectionChanged)="onRowSelection($event)">
+                                    </ag-grid-angular>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Visitors Attendance" [disabled]="roleVisitorsEditPermission">
+            <ng-template ngbTabContent>
+                <div class="card col-md-12 col-sm-12">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <app-visitors-attendance #visitorsAttendance
+                                (dataFilledInVisitors)="dataFilledInVisitors($event)">
+                            </app-visitors-attendance>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>
+
+<ng-template #processConfirmModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Confirm?</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p>Are you sure you want to save these records?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary"
+            (click)="modal.close('Close click'); goForAttendanceSave();">Yes</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">No</button>
+    </div>
+</ng-template>
+
+<ng-template #processResetConfirmModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Let's be sure....</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p>If you continue any unsaved changes will be lost</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary"
+            (click)="modal.close('Close click'); goForResetAllRecords();">Ok</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cancel</button>
+    </div>
+</ng-template>

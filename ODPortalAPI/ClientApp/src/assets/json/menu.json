@@ -1,0 +1,11 @@
+[
+  { "isActive": true, "name" : "Profile", "routeUrl" : "/profile", "children": [], "mobileActive": false, "menuCode": 1 },
+  { "isActive": true, "name" : "Family Profile", "routeUrl" : "/familyDetails", "children": [], "mobileActive": false, "menuCode": 2 },
+  { "isActive": true, "name" : "Reset Password", "routeUrl" : "/resetPassword", "children": [], "mobileActive": false, "menuCode": 3 },
+  { "isActive": true, "name" : "Attendance", "routeUrl" : "/attendance", "children": [], "mobileActive": false, "menuCode": 4 },
+  { "isActive": true, "name" : "Visitor Attendance", "routeUrl" : "/visitorsAttendance", "children": [], "mobileActive": false, "menuCode": 5 },
+  { "isActive": true, "name" : "Manage Activity", "routeUrl" : "/manageActivities", "children": [], "mobileActive": false, "menuCode": 7 },
+  { "isActive": true, "name" : "Manage Permission", "routeUrl" : "/managePermissions", "children": [], "mobileActive": false, "menuCode": 8 },
+  { "isActive": true, "name" : "Manage Branch Details", "routeUrl" : "/manageBranchDetails", "children": [], "mobileActive": false, "menuCode": 8 },
+  { "isActive": true, "name" : "Reports", "routeUrl" : "/reports", "children": [], "mobileActive": false, "menuCode": 8 }
+]

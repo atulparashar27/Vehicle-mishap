@@ -1,0 +1,124 @@
+<div class="form-group row">
+    <div class="card col-md-12 col-sm-12">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-md-4 pr-1 pl-1 col-form-label requiredField">
+                            Activity
+                        </label>
+                        <div class="form-group">
+                            <ng-multiselect-dropdown [placeholder]="'-- Select Activity --'"
+                                [settings]="dropdownSettings" [(ngModel)]="selectedActivityCode"
+                                [data]="allActivityDDList">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-md-8 pr-1 pl-1 col-form-label requiredField">
+                            Start & End Date
+                        </label>
+                        <div class="form-group">
+                            <input class="form-control" autocomplete="off" id="attendDate" name="date"
+                                [disabled]="false" class="form-control" [(bsValue)]="attendDateRange"
+                                value="{{ attendDateRange | date:'dd-MM-yyyy' }}" placeholder="Date Range" type="text"
+                                [bsConfig]="{ isAnimated: true, containerClass: 'theme-dark-blue',
+                                rangeInputFormat : 'DD-MM-YYYY', dateInputFormat: 'DD-MM-YYYY' }" bsDaterangepicker />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-md-8 pr-1 pl-1 col-form-label requiredField">
+                            Branch Title
+                        </label>
+                        <div class="form-group">
+                            <select name="title" class="form-control" id="title" [(ngModel)]="branchTitle"
+                                [disabled]="false">
+                                <option *ngFor="let n of branchTitleArray" [ngValue]="n">{{n}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-md-6 pr-1 pl-1 col-form-label requiredField">
+                            Age Between
+                        </label>
+                        <div class="form-group">
+                            <input autocomplete="off" type="number" class="form-control" [disabled]="false"
+                                name="startAge" placeholder="Start Age Range" [(ngModel)]="startAge" maxlength="3">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-md-3 pr-1 pl-1 col-form-label requiredField">
+                            And
+                        </label>
+                        <div class="form-group">
+                            <input autocomplete="off" type="number" class="form-control" [disabled]="false"
+                                name="endDate" placeholder="End Age Range" [(ngModel)]="endAge" maxlength="3">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-md-3 pr-1 pl-1 col-form-label">
+                    </label>
+                    <div class="row" style="margin-left: 0px;">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-round"
+                                [disabled]="!(endAge > 0 && (startAge === 0 || startAge) && attendDateRange)"
+                                (click)="getBranchPeopleAttendance()">Submit
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger btn-round" (click)="clearAll()"> Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card col-md-12">
+        <div class="card-body">
+            <div class="form-group">
+                <div class="row boxShadow" (window:resize)="onResize($event)"
+                    [style.height]="(height > 350 ? height : 300) + 'px'">
+                    <ag-grid-angular #attendanceTable style="width: 100%; height: 100%;" rowSelection="multiple"
+                        [localeText]="{noRowsToShow: ''}" [rowData]="branchPeopleAttendance"
+                        [columnDefs]="branchPeopleAttendanceColumDefs" [class]="tableTheme"
+                        [rowMultiSelectWithClick]="true"
+                        (rowDoubleClicked)="viewDetailedAttendance($event, detailedSummaryModal)">
+                    </ag-grid-angular>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #detailedSummaryModal let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <div class="row boxShadow" (window:resize)="onResize($event)"
+            [style.height]="(height > 350 ? height : 300) + 'px'">
+            <ag-grid-angular #attendanceTable style="width: 100%; height: 100%;" rowSelection="multiple"
+                [localeText]="{noRowsToShow: ''}" [rowData]="branchPeopleDetailedAttendance" (gridReady)="onGridReady($event)"
+                [columnDefs]="branchPeopleDetailedAttendanceColumDefs" [class]="tableTheme" [rowMultiSelectWithClick]="true">
+            </ag-grid-angular>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close('Close click'); onBtnExport();">Download</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

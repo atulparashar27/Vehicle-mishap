@@ -1,0 +1,88 @@
+<ngb-accordion #acc="ngbAccordion" activeIds="{{panelArray}}">
+    <ngb-panel title="Visitors Attendance Form" id="config-panel-one">
+        <ng-template ngbPanelContent>
+            <div class="card-body">
+                <div>
+                    <div class="row">
+                        <div class="col-md-6 pr-1 pl-1">
+                            <div class="form-group">
+                                <label class="requiredField">Name</label>
+                                <input autocomplete="off" class="form-control" type="text" [disabled]="false"
+                                    name="fullName" placeholder="Full Name" title="{{visitorName}}"
+                                    [(ngModel)]="visitorName">
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1 pr-1 pl-1">
+                            <div class="form-group">
+                                <label class="requiredField">Branch Name</label>
+                                <input autocomplete="off" class="form-control" type="text" [disabled]="false"
+                                    name="BranchName" placeholder="Branch Name" title="{{branchName}}"
+                                    [(ngModel)]="branchName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-1 pl-1">
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select name="nationalityArray" class="form-control" id="nationalityArray"
+                                    [(ngModel)]="gender" [disabled]="false">
+                                    <option *ngFor="let x of genderArray" [ngValue]="x">{{x}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pr-1 pl-1">
+                            <div class="form-group">
+                                <label>Initiated</label>
+                                <select name="nationalityArray" class="form-control" id="nationalityArray"
+                                    [(ngModel)]="isInitiated" [disabled]="false">
+                                    <option *ngFor="let c of isInitiatedArray" [ngValue]="c">{{c}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pr-1 pl-1">
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input autocomplete="off" type="number" class="form-control" [disabled]="false"
+                                    name="BranchName" placeholder="Age" [(ngModel)]="age">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-round" (click)="addRowAfterFilling()"
+                                [disabled]="!(visitorName && branchName)">Add Row</button>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger btn-round" (click)="resetForm()">Clear
+                                Form</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-panel>
+
+    <ngb-panel title="Total Visitors Added" id="config-panel-two">
+        <ng-template ngbPanelContent>
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="">
+                            <button type="submit" class="btn btn-danger btn-round" [disabled]="!selectedRowData"
+                                (click)="deleteSelectedRow()">Delete Row</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" (window:resize)="onResize($event)"
+                    [style.height]="(height > 350 ? height : 250) + 'px'">
+                    <ag-grid-angular #attendanceTable style="width: 100%; height: 100%;" rowSelection="single"
+                        [localeText]="{noRowsToShow: ''}" [rowData]="attendanceDDList" [suppressMovableColumns]="true"
+                        [columnDefs]="attendanceColumDefs" [class]="tableTheme" [rowMultiSelectWithClick]="false"
+                        (selectionChanged)="onSelectedRowData($event)">
+                    </ag-grid-angular>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>

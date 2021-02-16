@@ -1,0 +1,52 @@
+<div class="header col-sm-12">
+    <img class="logo" src="favicon.ico" style="float: left;">
+    <p style="display: inline-block; font-size: 3.5vmin;">Old Delhi Satsang Branch</p>
+</div>
+<div class="row col-sm-12  justify-content-center align-items-center" style="margin-top: 12px">
+    <div *ngIf="attendCode" class="form-group">
+        <h2>Attendance for <b class="head">{{attendCode}}</b> on <b class="head">{{attendDate}}</b></h2>
+    </div>
+</div>
+<div class="row col-sm-12  justify-content-center align-items-center" style="margin-top: -32px;margin-bottom: 0px;">
+    <div *ngIf="attendCode" class="form-group">
+        <button type="button" class="btn btnanimat btn--animated button buttonGroups btn btn-primary btn-round"
+           (click)="openModal(summaryModal)" >View
+            Summary
+        </button>
+    </div>
+</div>
+<div class="col-sm-8" style="margin: auto;">
+    <div class="row1" (window:resize)="onResize($event)" [style.height]="(height > 350 ? height : 350) + 'px'">
+        <ag-grid-angular #attendanceTable style="width: 100%; height: 100%;" rowSelection="multiple"
+            [localeText]="{noRowsToShow: ''}" [rowData]="markedAttendancList" [suppressMovableColumns]="true"
+            [columnDefs]="attendanceColumDefs" [class]="tableTheme" [rowMultiSelectWithClick]="true"
+            (selectionChanged)="onRowSelection($event)">
+        </ag-grid-angular>
+    </div>
+</div>
+<div class="footer">
+    <p style="display: inline;">Copyright © 2020-2021 Old Delhi Satsang Branch</p>
+</div>
+
+<ng-template #summaryModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Attendance Summary</h5>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body text-center">
+        <div class="row1" (window:resize)="onResize($event)" [style.height]="(height > 350 ? height : 350) + 'px'">
+            <ag-grid-angular #summaryTable style="width: 100%; height: 100%;" rowSelection="multiple"
+              [localeText]="{noRowsToShow: ''}" [rowData]="summaryAttendanceList"
+              [suppressMovableColumns]="true" [columnDefs]="summaryAttendanceColDefs" [class]="tableTheme"
+              [rowMultiSelectWithClick]="true" 
+              (selectionChanged)="onRowSelection($event)" (gridReady)="onGridReady($event)">
+            </ag-grid-angular>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="modal.close('Close click'); onBtnExport();">Download</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

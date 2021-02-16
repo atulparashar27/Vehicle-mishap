@@ -1,16 +1,129 @@
 /* You can add global styles to this file, and also import other style files */
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.ag-theme-balham [class^='ag-'], .ag-theme-balham [class^='ag-']:focus, .ag-theme-balham [class^='ag-']:after, .ag-theme-balham [class^='ag-']:before {
+    box-sizing: border-box;
+    outline: none;
+    color: black;
+    text-align: left;
+}
+.ag-theme-balham {clear: both;}
+.ag-theme-balham .ag-header {
+    background-color: #3498DB !important;
+    color: black !important;
+    font: 700 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.ag-theme-balham .ag-pinned-left-cols-container .ag-row {
+    background: #feffff; /* Old browsers */
+    background: -moz-linear-gradient(left, hsla(180,100%,100%,1) 0%, hsla(180,8%,93%,1) 46%, hsla(180,8%,83%,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, hsla(180,100%,100%,1) 0%,hsla(180,8%,93%,1) 46%,hsla(180,8%,83%,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, hsla(180,100%,100%,1) 0%,hsla(180,8%,93%,1) 46%,hsla(180,8%,83%,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#cfd6d6',GradientType=1 ); /* IE6-9 */
 }
 
-code {
-  color: #e01a76;
+
+.tabStyles .nav-tabs .nav-link.active, .nav-tabs .nav-item.show  {
+    color: white !important;
+    background-color: #3498DB !important;
+    border-bottom: 3px solid #f6b220 !important;
+    font-weight: bolder;
+    padding: 6px;
+    font-size: 12px;
+    margin-left: 1px;
+    margin-right: 1px;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.tabStyles .nav-item .nav-link {
+    background-color: #b5c2cfc5;
+    color: black;
+    border-bottom: 3px solid #b5c2cfc5;
+    padding: 6px;
+    font-size: 12px;
+    margin-left: 1px;
+    margin-right: 1px;
 }
+
+.boxShadow {
+    box-shadow: 0 10px 40px rgba(51, 58, 64,1.55);
+}
+
+.requiredField:after {
+    content: " *";
+    color: #eb6532;
+}
+
+.body {
+	background-color: #ffffcc !important;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+}
+
+@media screen and (max-width: 600px) {
+	img.logo {
+	  height: 30px;
+    }
+    .logoHeader {
+        font-size: 1em !important;
+    }
+}
+  
+  @media screen and (min-width: 600px) {
+	img.logo {
+	  height: 47px;
+    }
+    .logoHeader {
+        font-size: 2em !important;
+    }
+}
+
+.modal-dialog{
+    animation-name: modalAnimation;
+    animation-duration: 0.5s;
+}
+  
+@keyframes modalAnimation {
+    0%   {transform: scale(0.5)}
+    75%  {transform: scale(1.1)}
+    100% {transform: scale(1)}
+}
+
+  /* Fading animation */
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 10s;
+    animation-name: fade;
+    animation-duration: 10s;
+  }
+
+  @-webkit-keyframes fade {
+    from {opacity: .9} 
+    to {opacity: 1}
+  }
+
+  @keyframes fade {
+    from {opacity: .9} 
+    to {opacity: 1}
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    border-radius: 10px;
+  }
