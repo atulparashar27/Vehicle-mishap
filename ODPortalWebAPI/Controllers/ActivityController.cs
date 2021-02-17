@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ODPortalDL.DTO;
 using ODPortalWebDL.DTO;
 using ODPortalWebDL.Manager;
@@ -15,8 +16,10 @@ namespace ODPortalWebAPI.Controllers
     public class ActivityController : ControllerBase
     {
         private readonly ActivityCodeData _activityCodeData;
-        public ActivityController()
+        private readonly ILogger<ActivityController> _logger;
+        public ActivityController(ILogger<ActivityController> logger)
         {
+            _logger = logger;
             _activityCodeData = new ActivityCodeData();
         }
 

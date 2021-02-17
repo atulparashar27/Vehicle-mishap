@@ -1,4 +1,5 @@
-﻿using ODPortalWebDL.Constants;
+﻿using Microsoft.Extensions.Logging;
+using ODPortalWebDL.Constants;
 using ODPortalWebDL.DTO;
 using ODPortalWebDL.Manager;
 using System;
@@ -11,8 +12,10 @@ namespace ODPortalWebDL.DataAccess
     public class ActivityCodeDataList
     {
         private readonly DbConnection _dbConnection;
+        //private readonly ILogger _logger;
         public ActivityCodeDataList()
         {
+            //_logger = logger;
             _dbConnection = new DbConnection();
         }
         internal List<AllActivityCode> GetAllActivity()

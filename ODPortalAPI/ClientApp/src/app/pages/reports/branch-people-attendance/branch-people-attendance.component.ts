@@ -17,7 +17,7 @@ export class BranchPeopleAttendanceComponent implements OnInit {
   attendDateRange = '';
   dropdownSettings = {};
   allActivityDDList = [];
-  selectedActivityCode = [{actId: 'All', actName: 'All'}];
+  selectedActivityCode = [];
   branchTitle = 'All';
   branchTitleArray = ['All', 'Initiated', 'Jigyasus', 'Children', 'Sant Su'];
   startAge = 0;
@@ -53,12 +53,12 @@ export class BranchPeopleAttendanceComponent implements OnInit {
   ngOnInit(): void {
     this.height = this.height ? this.height : (window.innerHeight - 305);
     this.dropdownSettings = {
-      singleSelection: true,
+      singleSelection: false,
       idField: 'actId',
       textField: 'actName',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 1,
       allowSearchFilter: true
     };
     this.getAllActivityLists();
@@ -68,13 +68,13 @@ export class BranchPeopleAttendanceComponent implements OnInit {
     this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
     this.reportService.getAllActivityLists().subscribe(
       (response) => {
-        if (response.activityDetailsList) {
-          const dataToPush = [];
-          dataToPush.push({actId: 'All', actName: 'All'});
-          for (let i = 0; i < response.activityDetailsList.length; i++) {
-            dataToPush.push(response.activityDetailsList[i]);
-          }
-          this.allActivityDDList = dataToPush;
+        if (response.data) {
+          // const dataToPush = [];
+          // dataToPush.push({actId: 'All', actName: 'All'});
+          // for (let i = 0; i < response.data.length; i++) {
+          //   dataToPush.push(response.data[i]);
+          // }
+          this.allActivityDDList = response.data;
         } else {
           this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
             '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
@@ -146,6 +146,7 @@ export class BranchPeopleAttendanceComponent implements OnInit {
   clearAll() {
     this.attendDateRange = '';
     this.branchPeopleAttendance = [];
+    this.selectedActivityCode = [];
   }
 
   viewDetailedAttendance(uidNo, modal) {

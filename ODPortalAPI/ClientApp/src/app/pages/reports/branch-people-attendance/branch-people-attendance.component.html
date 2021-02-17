@@ -72,7 +72,7 @@
                     <div class="row" style="margin-left: 0px;">
                         <div class="form-group">
                             <button type="submit" class="btn btn-success btn-round"
-                                [disabled]="!(endAge > 0 && (startAge === 0 || startAge) && attendDateRange)"
+                                [disabled]="!(endAge > 0 && (startAge === 0 || startAge) && attendDateRange && selectedActivityCode.length !== 0)"
                                 (click)="getBranchPeopleAttendance()">Submit
                             </button>
                         </div>

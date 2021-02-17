@@ -1,4 +1,5 @@
-﻿using ODPortalWebDL.DataAccess;
+﻿using Microsoft.Extensions.Logging;
+using ODPortalWebDL.DataAccess;
 using ODPortalWebDL.DTO;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ namespace ODPortalWebDL.Manager
 {
     public class UserManager
     {
-        //private readonly ILogger<UserController> _logger;
         private readonly UserManagerDataAccess _userManagerDataAccess;
         public UserManager()
         {
@@ -18,6 +18,8 @@ namespace ODPortalWebDL.Manager
 
         public GetUserLoginObject Auth(Credentials credentials)
         {
+            var date = DateTime.Now;
+            //_logger.LogTrace($"@@@@@Login session@@@@ at @@@ {date} BY --->> {credentials.UserName}");
             return _userManagerDataAccess.CheckUserPassWord(credentials);
         }
     }

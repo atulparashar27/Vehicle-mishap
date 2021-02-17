@@ -1,4 +1,5 @@
-﻿using ODPortalWebDL.Constants;
+﻿using Microsoft.Extensions.Logging;
+using ODPortalWebDL.Constants;
 using ODPortalWebDL.DTO;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,11 @@ namespace ODPortalWebDL.DataAccess
     public class AttendanceDataAccess
     {
         private readonly DbConnection _dbConnection;
+
+        //private readonly ILogger _logger;
         public AttendanceDataAccess()
         {
+            //_logger = logger;
             _dbConnection = new DbConnection();
         }
         internal List<ActivityAttendanceModal> GetPeopleDate(string status)

@@ -70,8 +70,8 @@ export class ManageAssignedPermissionsComponent implements OnInit {
     this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
     this.datamanagementService.getPeopleData('CR').subscribe(
       (response) => {
-        if (response.peopleList) {
-          this.allPeopleList = response.peopleList;
+        if (response.data) {
+          this.allPeopleList = response.data;
           this.allRolesPermissionDDList = this.allRolesList;
           this.actionArray = [{ actId: 'Read', actName: 'Read' }, { actId: 'Write', actName: 'Write' }];
         } else {

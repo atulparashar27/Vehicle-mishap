@@ -1,4 +1,5 @@
-﻿using ODPortalWebDL.Constants;
+﻿using Microsoft.Extensions.Logging;
+using ODPortalWebDL.Constants;
 using ODPortalWebDL.DTO;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,11 @@ namespace ODPortalWebDL.DataAccess
     public class UserManagerDataAccess
     {
         private readonly DbConnection _dbConnection;
+        //private readonly ILogger _logger;
         public UserManagerDataAccess()
         {
             _dbConnection = new DbConnection();
+            
         }
         internal GetUserLoginObject CheckUserPassWord(Credentials credentials)
         {
@@ -23,6 +26,7 @@ namespace ODPortalWebDL.DataAccess
                 rolesDetailsLists.Add(new SecurityObjects() { RoleId = i, AccessType = "Write" });
             }
             var tableResponse = _dbConnection.GetModelDetails(RawSQL.CheckAuth(credentials.UserName, credentials.Password));
+            //_logger.LogTrace("Login ------- Table fething");
             var tableRow = tableResponse.AsEnumerable().FirstOrDefault();
             if (tableRow != null)
             {

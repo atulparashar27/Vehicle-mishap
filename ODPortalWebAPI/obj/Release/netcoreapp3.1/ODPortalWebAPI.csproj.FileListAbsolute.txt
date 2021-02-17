@@ -47,3 +47,11 @@ D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\runtimes\win\lib\netc
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\ODPortalWebDL.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\ODPortalWebDL.pdb
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll

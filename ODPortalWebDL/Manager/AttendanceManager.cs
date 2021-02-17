@@ -1,4 +1,5 @@
-﻿using ODPortalWebDL.DataAccess;
+﻿using Microsoft.Extensions.Logging;
+using ODPortalWebDL.DataAccess;
 using ODPortalWebDL.DTO;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,10 @@ namespace ODPortalWebDL.Manager
     public class AttendanceManager
     {
         private readonly AttendanceDataAccess _attendanceDataAccess;
+        //private readonly ILogger _logger;
         public AttendanceManager()
         {
+            //_logger = logger;
             _attendanceDataAccess = new AttendanceDataAccess();
         }
 
