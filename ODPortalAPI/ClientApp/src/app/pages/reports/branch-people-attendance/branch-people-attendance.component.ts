@@ -26,6 +26,7 @@ export class BranchPeopleAttendanceComponent implements OnInit {
   branchPeopleAttendance = [];
   branchPeopleDetailedAttendance = [];
   branchPeopleAttendanceColumDefs = [
+    { headerName: 'Activity Code', field: 'singleActivityCode', width: 120, resizable: true, filter: true, sortable: true },
     { headerName: 'Activity Name', field: 'activityName', width: 220, resizable: true, filter: true, sortable: true },
     { headerName: 'UID Number', field: 'uidNo', width: 120, resizable: true, filter: true, sortable: true },
     { headerName: 'Roll Number', field: 'rollNo', width: 120, resizable: true, filter: true, sortable: true },
@@ -44,6 +45,8 @@ export class BranchPeopleAttendanceComponent implements OnInit {
     { headerName: 'Attendance Count', field: 'attendanceCount', width: 150, resizable: true, filter: true, sortable: true },
   ];
   gridApi: GridOptions;
+  page = 1;
+  pageSize = 0;
   @HostBinding('style.height') height;
   constructor(private reportService: ReportsService, private spinner: NgxSpinnerService,
     private alertService: ToastrService, private utilsService: UtilsService, private activeModal: NgbModal) { }
@@ -92,24 +95,25 @@ export class BranchPeopleAttendanceComponent implements OnInit {
 
   getBranchPeopleAttendance() {
     const dataToPush = {
-      activityCode: this.selectedActivityCode[0].actId,
+      activityCode: this.selectedActivityCode.map(s => s.actId),
       startDate: this.utilsService.formatDate(this.attendDateRange[0]),
       endDate: this.utilsService.formatDate(this.attendDateRange[1]),
       brTitle: this.branchTitle,
       startAge: this.startAge,
       endAge: this.endAge,
-      uidNo: 'All'
+      uidNo: null
     };
     let count = 1;
     this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
-    this.reportService.getBranchPeopleAttendance(dataToPush).subscribe(
+    this.reportService.getBranchPeopleAttendance(dataToPush, this.page).subscribe(
       (response) => {
-        if (response) {
+        if (response.success) {
           console.log(response);
-          response = response.sort((a, b) => (a.activityName > b.activityName) ? 1 : (b.activityName > a.activityName) ? -1 : 0);
+          response.data.branchPeopleAttendance = response.data.branchPeopleAttendance.sort((a, b) => (a.activityName > b.activityName)
+          ? 1 : (b.activityName > a.activityName) ? -1 : 0);
           const finalPush = [];
-          const mainWindowObj = response.map(s => ({ activityName: s.activityName, uidNo: s.uidNo,
-             rollNo: s.rollNo, name: s.name, brTitle: s.brTitle }));
+          const mainWindowObj = response.data.branchPeopleAttendance.map(s => ({ activityName: s.activityName, uidNo: s.uidNo,
+             rollNo: s.rollNo, name: s.name, brTitle: s.brTitle, singleActivityCode: s.singleActivityCode }));
              for (let i = 0; i < mainWindowObj.length; i++) {
               if (mainWindowObj[i + 1] && mainWindowObj[i].name === mainWindowObj[i + 1].name &&
                   mainWindowObj[i].activityName === mainWindowObj[i + 1].activityName) {
@@ -122,12 +126,14 @@ export class BranchPeopleAttendanceComponent implements OnInit {
                     rollNo: mainWindowObj[i].rollNo,
                     name: mainWindowObj[i].name,
                     brTitle: mainWindowObj[i].brTitle,
-                    attendanceCount: count
+                    attendanceCount: count,
+                    singleActivityCode: mainWindowObj[i].singleActivityCode
                   });
                   count = 1;
               }
           }
           this.branchPeopleAttendance = finalPush;
+          this.pageSize = (Math.ceil(response.data.count / 500)) * 10;
         } else {
           this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
             '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
@@ -149,31 +155,32 @@ export class BranchPeopleAttendanceComponent implements OnInit {
     this.selectedActivityCode = [];
   }
 
-  viewDetailedAttendance(uidNo, modal) {
-    this.getDetailedUserAttendance(uidNo.data.uidNo, uidNo.data.rollNo);
+  viewDetailedAttendance(event, modal) {
+    this.getDetailedUserAttendance(event.data.uidNo, event.data.rollNo, event.data.singleActivityCode);
     this.activeModal.open(modal, { size: 'xl' });
   }
 
-  getDetailedUserAttendance(uidNo, rollNo) {
+  getDetailedUserAttendance(uidNo, rollNo, activityName) {
     const dataToPush = {
-      activityCode: this.selectedActivityCode[0].actId,
+      // activityCode: this.selectedActivityCode[0].actId,
       startDate: this.utilsService.formatDate(this.attendDateRange[0]),
       endDate: this.utilsService.formatDate(this.attendDateRange[1]),
       brTitle: this.branchTitle,
       startAge: this.startAge,
       endAge: this.endAge,
       uidNo,
-      rollNo
+      rollNo,
+      singleActivityCode: activityName
     };
     this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
-    this.reportService.getBranchPeopleAttendance(dataToPush).subscribe(
+    this.reportService.getBranchPeopleAttendance(dataToPush, 0).subscribe(
       (response) => {
         if (response) {
-          console.log(response);
-          response.forEach(element => {
+          console.log(response.data);
+          response.data.branchPeopleAttendance.forEach(element => {
             element.attendanceDate = this.utilsService.formatDateDDMMYYY(element.attendanceDate)
           });
-          this.branchPeopleDetailedAttendance = response;
+          this.branchPeopleDetailedAttendance = response.data.branchPeopleAttendance;
         } else {
           this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
             '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
@@ -202,4 +209,7 @@ export class BranchPeopleAttendanceComponent implements OnInit {
     this.gridApi.api.exportDataAsCsv(params);
   }
 
+  changePage(event) {
+    this.getBranchPeopleAttendance();
+  }
 }

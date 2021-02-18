@@ -18,7 +18,8 @@ export class ReportsService extends HttpService {
     return this.get(this.relativeUrl + CONSTANTS.MAIN.APP.URLS.GET_ALL_ACTIVITY_CODE);
   }
 
-  getBranchPeopleAttendance(dataToPush) {
-    return this.postWithoutHeaders(this.relativeUrl + CONSTANTS.MAIN.APP.URLS.GET_ALL_BRANCH_PEOPLE_ATTENDANCE, dataToPush);
+  getBranchPeopleAttendance(dataToPush, page) {
+    return this.postWithoutHeaders(this.relativeUrl +
+      CONSTANTS.MAIN.APP.URLS.GET_ALL_BRANCH_PEOPLE_ATTENDANCE + `?page=${page}`, dataToPush);
   }
 }

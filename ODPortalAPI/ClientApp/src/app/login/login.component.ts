@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       this.spinner.show(undefined, {type: 'ball-fussion', color: 'rgba(100,149,237,.8)'});
       this.loginService.loginUserService(this.user).subscribe(
         (response) => {
-          if (response) {
+          if (response.success === true) {
             const response_data: any = {};
             let userRoles: any = {};
             let userCodes = [];
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/dashboard']);
           } else {
             this.router.navigate(['/login']);
-            this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + 'Invalid Login details entered.',
+            this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
                  '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
           }
           setTimeout(() => { this.spinner.hide(); }, 500);

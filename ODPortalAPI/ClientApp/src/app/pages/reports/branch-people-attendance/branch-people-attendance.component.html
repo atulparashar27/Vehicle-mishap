@@ -100,6 +100,10 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        <ngb-pagination class="d-flex justify-content-end" [collectionSize]="pageSize" [(page)]="page" [maxSize]="5" 
+        [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="changePage($event)"></ngb-pagination>
+    </div>
 </div>
 
 <ng-template #detailedSummaryModal let-modal>

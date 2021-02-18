@@ -55,6 +55,8 @@ export class UtilsService {
       errMsg = CONSTANTS.MAIN.APP.MESSAGES.UNAUTH_ERR;
       localStorage.clear();
       this.router.navigate(['/login' ]);
+    } else if (error.status === 400 && !error.response) {
+      errMsg = error.title;
     } else if (error.status === 400 && error.response && error.response.Success === false) {
       errMsg = error.response.message;
     } else if (error.status === 404) {

@@ -20,12 +20,8 @@ namespace ODPortalWebDL.DataAccess
         {
             ILoggerFactory loggerFactory = new LoggerFactory();
             _logger = loggerFactory.CreateLogger<DbConnection>();
-            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={path};Persist Security Info=True";
+            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={prod};Persist Security Info=True";
         }
-        //public DbConnection(ILogger<DbConnection> logger)
-        //{
-        //    _logger = logger;
-        //}
         public DataTable GetModelDetails(string rawSql)
         {
             _logger.LogInformation($"$$$Initial Connection####");
@@ -44,7 +40,7 @@ namespace ODPortalWebDL.DataAccess
                         sqlCmd.CommandTimeout = 300;
                         using (var sqlAdapt = new OleDbDataAdapter(sqlCmd))
                         {
-                            _logger.LogInformation($"#####Table  Retrieved####");
+                            _logger.LogWarning($"#####Table  Retrieved####");
                             sqlAdapt.Fill(table);
                             return table;
                         }
