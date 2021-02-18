@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using ODPortalWebDL.DataAccess;
 using ODPortalWebDL.DTO;
+using ODPortalWebDL.DTO.ExceptionModal;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,6 +20,15 @@ namespace ODPortalWebDL.Manager
         public List<AllActivityCode> GetAllActivity()
         {
             return _activityCodeDataList.GetAllActivity();
+        }
+
+        public bool ManageActivity(AllActivityCode allActivityCode, string action)
+        {
+            if (string.IsNullOrWhiteSpace(action))
+            {
+                throw new CustomException("Selected Action cannot be perfomed");
+            }
+            return _activityCodeDataList.ManageActivity(allActivityCode, action);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using ODPortalWebDL.Constants;
 using ODPortalWebDL.DTO;
+using ODPortalWebDL.DTO.ExceptionModal;
 using ODPortalWebDL.Manager;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,33 @@ namespace ODPortalWebDL.DataAccess
                 codeLists.Add(record);
             }
             return codeLists;
+        }
+
+        internal bool ManageActivity(AllActivityCode allActivityCode, string action)
+        {
+            int rowAffected;
+            if (action == "ADD")
+            {
+                _dbConnection.AddNewActivity(allActivityCode, out rowAffected);
+            }
+            else if (action == "EDIT")
+            {
+                _dbConnection.UpdateActivity(allActivityCode, out rowAffected);
+            }
+            else if (action == "DELETE")
+            {
+                _dbConnection.DeleteActivity(allActivityCode, out rowAffected);
+            }
+            else
+            {
+                throw new CustomException("Failed to update Activity codes.");
+            }
+            if (rowAffected > 0)
+            {
+                return true;
+            }
+
+            throw new CustomException("Failed to update Activity codes.");
         }
     }
 }

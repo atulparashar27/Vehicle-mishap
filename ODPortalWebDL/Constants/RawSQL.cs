@@ -1,4 +1,5 @@
 ﻿using ODPortalWebDL.DTO;
+using ODPortalWebDL.DTO.ExceptionModal;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,7 @@ namespace ODPortalWebDL.Constants
                     $"AND Date_Birth=#{passWord}# " +
                     $"AND Status='CR' " ;
         }
+
         public static string GetAllActCode()
         {
             return $"SELECT * FROM ActivityCode";
@@ -53,7 +55,8 @@ namespace ODPortalWebDL.Constants
                     $"AND attend.Act_Date >= #{branchPeopleAttendance.StartDate}# " +
                     $"AND attend.Act_Date <= #{branchPeopleAttendance.EndDate}# " +
                     $"GROUP BY code.Act_Name, mstBr.UID_No, mstBr.Roll_NO, mstBr.Name_Full, " +
-                    $"mstBr.INI_JIG_NON, attend.Act_Date, code.Act_cd " ;
+                    $"mstBr.INI_JIG_NON, attend.Act_Date, code.Act_cd " +
+                    $"ORDER BY mstBr.Name_Full" ;
         }
 
         internal static string ReportsBranchIndividualAttendance(BranchPeopleAttendance branchPeopleAttendance)
@@ -72,6 +75,23 @@ namespace ODPortalWebDL.Constants
                     $"AND (mstBr.Roll_No = {rollNo}) " +
                     $"GROUP BY code.Act_Name, mstBr.UID_No, mstBr.Roll_NO, mstBr.Name_Full, " +
                     $"mstBr.INI_JIG_NON, attend.Act_Date ";
+        }
+
+        internal static string GetProfileData(string uidNo, string rollNo)
+        {
+            var doubleRollNo = Convert.ToDouble(rollNo);
+            if (!string.IsNullOrWhiteSpace(uidNo))
+            {
+                return $"SELECT * FROM BranchMaster WHERE Uid_No = '{uidNo}'";
+            }
+            else if (!string.IsNullOrWhiteSpace(rollNo))
+            {
+                return $"SELECT * FROM BranchMaster WHERE Roll_NO = '{doubleRollNo}'";
+            }
+            else
+            {
+                throw new CustomException("This user is not valid");
+            }
         }
     }
 }

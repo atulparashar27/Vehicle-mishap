@@ -20,7 +20,7 @@ namespace ODPortalWebDL.DataAccess
         {
             ILoggerFactory loggerFactory = new LoggerFactory();
             _logger = loggerFactory.CreateLogger<DbConnection>();
-            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={prod};Persist Security Info=True";
+            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={path};Persist Security Info=True";
         }
         public DataTable GetModelDetails(string rawSql)
         {
@@ -53,6 +53,7 @@ namespace ODPortalWebDL.DataAccess
                 return table;
             }
         }
+
         public bool SaveActivityAttendance(SubmitActivityAttendanceModal submitActivityAttendanceModal)
         {
             int final = 0;
@@ -86,9 +87,85 @@ namespace ODPortalWebDL.DataAccess
             }
         }
 
-        //string[] appPath = Path.Split(new string[] { "bin" }, StringSplitOptions.None);
-        //AppDomain.CurrentDomain.SetData("DataDirectory", appPath[0]);
-        //d:\\DZHosts\\LocalUser\\atulparashar27\\www.odrsa.somee.com\\serverApp_Data\\ODBranch_AttendanceEntry.accdb
+        public void GetTableStructure()
+        {
+            using (var sqlCon = new OleDbConnection(connString))
+            {
+                sqlCon.Open();
+                DataTable tableColumns = sqlCon.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, "ActivityCode", null });
+                foreach (DataRow row in tableColumns.Rows)
+                {
+                    var columnNameColumn = row["COLUMN_NAME"];
+                    var dateTypeColumn = row["DATA_TYPE"];
+                    var ordinalPositionColumn = row["ORDINAL_POSITION"];
+                }
+            }
+        }
+
+        public void AddNewActivity(AllActivityCode allActivityCode, out int rowAffected)
+        {
+            try
+            {
+                using (var connection = new OleDbConnection(connString))
+                {
+                    connection.Open();
+                    using (var cmd = new OleDbCommand(@"INSERT into ActivityCode (Act_cd, Act_Name) VALUES (@Act_cd, @Act_Name)", connection))
+                    {
+                        cmd.CommandTimeout = 300;
+                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_cd", Value = allActivityCode.ActId });
+                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_Name", Value = allActivityCode.ActName });
+                        rowAffected = cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ManageActivity####Error Message ->>>{ex} && {ex.Message}###### + StackTrace {ex.StackTrace}######## + InnerEx{ex.InnerException}#####");
+                rowAffected = 0;
+            }
+        }
+        public void UpdateActivity(AllActivityCode allActivityCode, out int rowAffected)
+        {
+            try
+            {
+                using (var connection = new OleDbConnection(connString))
+                {
+                    connection.Open();
+                    using (var cmd = new OleDbCommand())
+                    {
+                        cmd.CommandTimeout = 300;
+                        cmd.Connection = connection;
+                        cmd.CommandText = "UPDATE ActivityCode SET Act_Name = '" + allActivityCode.ActName + "' WHERE Act_cd = '"+ allActivityCode.ActId +"'";
+                        rowAffected = cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ManageActivity####Error Message ->>>{ex} && {ex.Message}###### + StackTrace {ex.StackTrace}######## + InnerEx{ex.InnerException}#####");
+                rowAffected = 0;
+            }
+        }
+        public void DeleteActivity(AllActivityCode allActivityCode, out int rowAffected)
+        {
+            try
+            {
+                using (var connection = new OleDbConnection(connString))
+                {
+                    connection.Open();
+                    using (var cmd = new OleDbCommand($"DELETE FROM ActivityCode WHERE Act_cd = '{allActivityCode.ActId}'", connection))
+                    {
+                        cmd.CommandTimeout = 300;
+                        rowAffected = cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ManageActivity####Error Message ->>>{ex} && {ex.Message}###### + StackTrace {ex.StackTrace}######## + InnerEx{ex.InnerException}#####");
+                rowAffected = 0;
+            }
+        }
     }
 
 }

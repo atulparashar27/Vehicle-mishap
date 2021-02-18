@@ -35,5 +35,18 @@ namespace ODPortalWebAPI.Controllers
             };
             return Ok(res);
         }
+
+        [HttpPost]
+        [Route("ManageActivities")]
+        public IActionResult ManageActivity(AllActivityCode allActivityCode, string action)
+        {
+            var res = new RequestResult<bool>()
+            {
+                Data = _activityCodeData.ManageActivity(allActivityCode, action),
+                Message = "Success",
+                Success = true
+            };
+            return Ok(res);
+        }
     }
 }
