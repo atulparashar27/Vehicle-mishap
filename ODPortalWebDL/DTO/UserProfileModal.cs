@@ -16,7 +16,7 @@ namespace ODPortalWebDL.DTO
     {
         public string Title { get; set; }
         public string FullName { get; set; }
-        public string DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string Gender { get; set; }
         public string Caste { get; set; }
         public string MaritalStatus { get; set; }

@@ -22,35 +22,38 @@ namespace ODPortalWebDL.DataAccess
 
             var res = _dbConnection.GetModelDetails(RawSQL.GetProfileData(uidNo, rollNo)).AsEnumerable().FirstOrDefault();
 
-            var sdfsd = res.ItemArray;
+            var sdfsd = res.Table;
             var sdfssfg = res.GetHashCode();
             var profileData = new ProfileInfo()
             {
-                Title = res.Field<string>("title"),
-                FullName = res.Field<string>("Name_Full"),
-                DateOfBirth = res.Field<DateTime?>("Date_Birth"),
-                Gender = res.Field<string>("Gender"),
-                Caste = res.Field<string>("Caste"),
-                MaritalStatus = res.Field<string>("Marital_Status"),
-                Nationality = res.Field<string>("Nationality"),
-                AadharNo = res.Field<string>("aadharNo"),
-                PanNo = res.Field<string>("panNo")
+                Title = res?.Field<string>("title"),
+                FullName = res?.Field<string>("Name_Full"),
+                DateOfBirth = res?.Field<DateTime?>("Date_Birth"),
+                Gender = res?.Field<string>("Gender"),
+                Caste = res?.Field<string>("Caste"),
+                MaritalStatus = Convert.ToString(res?.Field<Double?>("Marital_Status")),
+                Nationality = res?.Field<string>("Nationality"),
+                //AadharNo = res.Field<string>("aadharNo"),
+                //PanNo = res.Field<string>("panNo")
             };
 
             var contactData = new ContactInfo()
             {
-                ResidenceAddr = res.Field<string>("residenceAddr"),
-                City = res.Field<string>("city"),
-                Pincode = res.Field<string>("pincode"),
-                MobileNo1 = res.Field<string>("mobileNo1"),
-                MobileNo2 = res.Field<string>("mobileNo2"),
-                EmergencyContact = res.Field<string>("emergencyContact"),
-                EmergencyContactNo = res.Field<string>("emergencyContactNo"),
-                Email1 = res.Field<string>("email1"),
-                Email2 = res.Field<string>("email2")
+                ResidenceAddr = res?.Field<string>("residenceAddr"),
+                City = res?.Field<string>("city"),
+                Pincode = res?.Field<string>("pincode"),
+                MobileNo1 = res?.Field<string>("mobileNo1"),
+                MobileNo2 = res?.Field<string>("mobileNo2"),
+                EmergencyContact = res?.Field<string>("emergencyContact"),
+                EmergencyContactNo = res?.Field<string>("emergencyContactNo"),
+                Email1 = res?.Field<string>("email1"),
+                Email2 = res?.Field<string>("email2")
             };
 
-            return new UserProfileModal();
+            userProfileModal.ProfileList = profileData;
+            userProfileModal.ContactInfo = contactData;
+
+            return userProfileModal;
         }
     }
 }
