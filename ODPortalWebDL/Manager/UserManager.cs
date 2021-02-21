@@ -10,16 +10,19 @@ namespace ODPortalWebDL.Manager
 {
     public class UserManager
     {
+        private readonly ILogger<UserManager> _logger;
         private readonly UserManagerDataAccess _userManagerDataAccess;
         public UserManager()
         {
+            ILoggerFactory loggerFactory = new LoggerFactory();
+            _logger = loggerFactory.CreateLogger<UserManager>();
             _userManagerDataAccess = new UserManagerDataAccess();
         }
 
         public GetUserLoginObject Auth(Credentials credentials)
         {
             var date = DateTime.Now;
-            //_logger.LogTrace($"@@@@@Login session@@@@ at @@@ {date} BY --->> {credentials.UserName}");
+            _logger.LogInformation($"@@@@@Login session@@@@ at @@@ {date} BY --->> {credentials.UserName}");
             return _userManagerDataAccess.CheckUserPassWord(credentials);
         }
     }

@@ -31,5 +31,10 @@ namespace ODPortalWebDL.Manager
         {
             return _attendanceDataAccess.GetSavedAttendance(actCode, actDate);
         }
+
+        public bool DeleteSavedAttendance(SubmitActivityAttendanceModal deleteSavedAttendance)
+        {
+            return _attendanceDataAccess.DeleteSavedAttendance(deleteSavedAttendance);
+        }
     }
 }

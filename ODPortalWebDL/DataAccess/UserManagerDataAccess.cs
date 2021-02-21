@@ -25,27 +25,31 @@ namespace ODPortalWebDL.DataAccess
         internal GetUserLoginObject CheckUserPassWord(Credentials credentials)
         {
             _logger.LogInformation($"$$$$$$ --- USER----{credentials.UserName} ----------$$$$$$$$$");
-            List<SecurityObjects> rolesDetailsLists = new List<SecurityObjects>();
-            for (int i = 1; i < 11; i++)
+            var checkPassword = _dbConnection.GetModelDetails(RawSQL.GetAllUserPassword(credentials.UserName));
+            var checkSecurity = checkPassword.AsEnumerable().FirstOrDefault();
+            if (checkSecurity != null)
             {
-                rolesDetailsLists.Add(new SecurityObjects() { RoleId = i, AccessType = "Write" });
-            }
-            var tableResponse = _dbConnection.GetModelDetails(RawSQL.CheckAuth(credentials.UserName, credentials.Password));
-            _logger.LogInformation("Login ------- Table fething");
-            var tableRow = tableResponse.AsEnumerable().FirstOrDefault();
-            if (tableRow != null)
-            {
-                var record = new GetUserLoginObject()
+                if (checkSecurity.Field<string>("UserName").Trim() == credentials.UserName &&
+                checkSecurity.Field<string>("Password").Trim() == credentials.Password)
                 {
-                    UserName = tableRow.Field<string>("Name_Full"),
-                    Password = Convert.ToDateTime(tableRow.Field<DateTime>("Date_Birth")).ToString("yyyy-MM-dd"),
-                    RollNo = Convert.ToInt32(tableRow.Field<double>("Roll_No")),
-                    UidNo = tableRow.Field<string>("UID_No") ?? "",
-                    RolesDetailsList = rolesDetailsLists
-                };
-                if (record.UidNo == credentials.UserName && record.Password == credentials.Password)
-                {
-                    return record;
+                    var tableResponse = _dbConnection.GetModelDetails(RawSQL.CheckAuth(credentials.UserName, credentials.Password));
+                    var tableRow = tableResponse.AsEnumerable().FirstOrDefault();
+                    if (tableRow != null)
+                    {
+                        var record = new GetUserLoginObject()
+                        {
+                            UserName = tableRow.Field<string>("Name_Full"),
+                            Password = Convert.ToDateTime(tableRow.Field<DateTime>("Date_Birth")).ToString("yyyy-MM-dd"),
+                            RollNo = Convert.ToInt32(tableRow.Field<double>("Roll_No")),
+                            UidNo = tableRow.Field<string>("UID_No") ?? "",
+                            RolesDetailsList = GetUserRoles(credentials.UserName)
+                        };
+                        return record;
+                    }
+                    else
+                    {
+                        throw new CustomException("Invalid Login details entered.", HttpStatusCode.OK);
+                    }
                 }
                 else
                 {
@@ -56,6 +60,23 @@ namespace ODPortalWebDL.DataAccess
             {
                 throw new CustomException("Invalid Login details entered.", HttpStatusCode.OK);
             }
+        }
+
+
+        internal List<SecurityObjects> GetUserRoles(string userName)
+        {
+            List<SecurityObjects> securityObjects = new List<SecurityObjects>();
+            var tableResponse = _dbConnection.GetModelDetails(RawSQL.GetAllUserRoles(userName)).AsEnumerable();
+            foreach (DataRow dataRow in tableResponse.AsEnumerable())
+            {
+                var obj = new SecurityObjects()
+                {
+                    AccessType = dataRow.Field<string>("AccessType"),
+                    RoleId = dataRow.Field<int>("RoleId")
+                };
+                securityObjects.Add(obj);
+            }
+            return securityObjects;
         }
     }
 }

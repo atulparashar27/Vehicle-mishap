@@ -13,8 +13,17 @@ namespace ODPortalWebDL.Constants
             return $"SELECT Name_Full, Date_Birth, Roll_No, UID_No " +
                     $"FROM BranchMaster " +
                     $"WHERE UID_No='{userName}' " +
-                    $"AND Date_Birth=#{passWord}# " +
                     $"AND Status='CR' " ;
+        }
+
+        internal static string GetAllUserPassword(string userName)
+        {
+            return $"SELECT UserName, Password FROM Login_Details WHERE UserName = '{userName}'";
+        }
+
+        internal static string GetAllUserRoles(string userName)
+        {
+            return $"SELECT * FROM Users_Roles where UserId = '{userName}'";
         }
 
         public static string GetAllActCode()
@@ -37,6 +46,7 @@ namespace ODPortalWebDL.Constants
                     $"AND attend.Act_Date=#{actDate}# ";
         }
 
+
         internal static string ReportsBranchPeopleAttendance(BranchPeopleAttendance branchPeopleAttendance)
         {
             string allActCode = string.Join("' , '", branchPeopleAttendance.ActivityCode);
@@ -58,6 +68,7 @@ namespace ODPortalWebDL.Constants
                     $"mstBr.INI_JIG_NON, attend.Act_Date, code.Act_cd " +
                     $"ORDER BY mstBr.Name_Full" ;
         }
+
 
         internal static string ReportsBranchIndividualAttendance(BranchPeopleAttendance branchPeopleAttendance)
         {
@@ -92,6 +103,19 @@ namespace ODPortalWebDL.Constants
             {
                 throw new CustomException("This user is not valid");
             }
+        }
+
+        internal static string GetUserRolesData()
+        {
+            return "SELECT * FROM Roles";
+        }
+
+        internal static string GetUserIndividualRoles(string userName)
+        {
+            return $"SELECT * " +
+                    $"FROM Users_Roles urs inner join Roles rs " +
+                    $"on urs.RoleId = rs.RoleId " +
+                    $"WHERE urs.UserId = '{userName}'";
         }
     }
 }

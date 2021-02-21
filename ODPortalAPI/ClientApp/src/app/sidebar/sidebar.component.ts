@@ -18,7 +18,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/manageActivities', title: 'Manage Activities', icon: 'nc-icon nc-tile-56', class: '', menuCode: 7 },
     { path: '/managePermissions', title: 'Manage Permissions', icon: 'nc-icon nc-money-coins', class: '', menuCode: 8 },
     { path: '/manageBranchDetails', title: 'Manage Branch Details', icon: 'nc-icon nc-badge', class: '', menuCode: 8 },
-    { path: '/reports', title: 'Reports', icon: 'nc-icon nc-glasses-2', class: '', menuCode: 8 },
+    { path: '/reports', title: 'Reports', icon: 'nc-icon nc-glasses-2', class: '', menuCode: 10 },
     // { path: '/icons', title: 'Icons', icon: 'nc-icon nc-ruler-pencil', class: '', menuCode: 1 },
     // { path: '/maps', title: 'Maps', icon: 'nc-icon nc-pin-3', class: '', menuCode: 1 },
     // { path: '/notifications', title: 'Notifications', icon: 'nc-icon nc-bell-55', class: '', menuCode: 1 },

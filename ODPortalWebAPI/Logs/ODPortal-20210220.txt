@@ -32,3 +32,211 @@ System.ArgumentException: Column 'residenceAddr' does not belong to table .
 2021-02-20T02:04:26.4513215+05:30  [INF] Hosting environment: "Development" (c3307c92)
 2021-02-20T02:04:26.4535778+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
 2021-02-20T02:04:26.5303250+05:30 8000006e-0001-fe00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-02-20T16:03:00.0169873+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-20T16:03:00.0353452+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-20T16:03:00.0383783+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
+2021-02-20T16:03:00.0945359+05:30 80000081-0003-fc00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-02-20T16:03:27.9272723+05:30 800000bb-0005-f800-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+ODPortalWebDL.DTO.ExceptionModal.CustomException: Invalid Login details entered.
+   at ODPortalWebDL.DataAccess.UserManagerDataAccess.CheckUserPassWord(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\DataAccess\UserManagerDataAccess.cs:line 59
+   at ODPortalWebDL.Manager.UserManager.Auth(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\Manager\UserManager.cs:line 23
+   at ODPortalWebAPI.Controllers.UserController.Authenticate(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebAPI\Controllers\UserController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at ODPortalWebAPI.Startup.<>c.<<Configure>b__5_1>d.MoveNext() in D:\Vehicle-mishap\ODPortalWebAPI\Startup.cs:line 54
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-02-20T16:03:38.8666085+05:30 800000bd-0005-f800-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+ODPortalWebDL.DTO.ExceptionModal.CustomException: Invalid Login details entered.
+   at ODPortalWebDL.DataAccess.UserManagerDataAccess.CheckUserPassWord(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\DataAccess\UserManagerDataAccess.cs:line 59
+   at ODPortalWebDL.Manager.UserManager.Auth(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\Manager\UserManager.cs:line 23
+   at ODPortalWebAPI.Controllers.UserController.Authenticate(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebAPI\Controllers\UserController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at ODPortalWebAPI.Startup.<>c.<<Configure>b__5_1>d.MoveNext() in D:\Vehicle-mishap\ODPortalWebAPI\Startup.cs:line 54
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-02-20T16:20:35.1300173+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-20T16:20:35.1635787+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-20T16:20:35.1667451+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
+2021-02-20T16:20:35.3483185+05:30 80000083-0003-fc00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-02-20T16:25:05.3272544+05:30 8000004e-0001-fd00-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+ODPortalWebDL.DTO.ExceptionModal.CustomException: Invalid Login details entered.
+   at ODPortalWebDL.DataAccess.UserManagerDataAccess.CheckUserPassWord(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\DataAccess\UserManagerDataAccess.cs:line 59
+   at ODPortalWebDL.Manager.UserManager.Auth(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\Manager\UserManager.cs:line 26
+   at ODPortalWebAPI.Controllers.UserController.Authenticate(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebAPI\Controllers\UserController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at ODPortalWebAPI.Startup.<>c.<<Configure>b__5_1>d.MoveNext() in D:\Vehicle-mishap\ODPortalWebAPI\Startup.cs:line 54
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-02-20T16:25:20.8353426+05:30 80000050-0001-fd00-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+ODPortalWebDL.DTO.ExceptionModal.CustomException: Invalid Login details entered.
+   at ODPortalWebDL.DataAccess.UserManagerDataAccess.CheckUserPassWord(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\DataAccess\UserManagerDataAccess.cs:line 59
+   at ODPortalWebDL.Manager.UserManager.Auth(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\Manager\UserManager.cs:line 26
+   at ODPortalWebAPI.Controllers.UserController.Authenticate(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebAPI\Controllers\UserController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at ODPortalWebAPI.Startup.<>c.<<Configure>b__5_1>d.MoveNext() in D:\Vehicle-mishap\ODPortalWebAPI\Startup.cs:line 54
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-02-20T16:27:56.6822461+05:30 80000095-0006-f900-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+ODPortalWebDL.DTO.ExceptionModal.CustomException: Invalid Login details entered.
+   at ODPortalWebDL.DataAccess.UserManagerDataAccess.CheckUserPassWord(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\DataAccess\UserManagerDataAccess.cs:line 59
+   at ODPortalWebDL.Manager.UserManager.Auth(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\Manager\UserManager.cs:line 26
+   at ODPortalWebAPI.Controllers.UserController.Authenticate(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebAPI\Controllers\UserController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at ODPortalWebAPI.Startup.<>c.<<Configure>b__5_1>d.MoveNext() in D:\Vehicle-mishap\ODPortalWebAPI\Startup.cs:line 54
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-02-20T16:28:08.3591502+05:30 80000097-0006-f900-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+ODPortalWebDL.DTO.ExceptionModal.CustomException: Invalid Login details entered.
+   at ODPortalWebDL.DataAccess.UserManagerDataAccess.CheckUserPassWord(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\DataAccess\UserManagerDataAccess.cs:line 59
+   at ODPortalWebDL.Manager.UserManager.Auth(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\Manager\UserManager.cs:line 26
+   at ODPortalWebAPI.Controllers.UserController.Authenticate(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebAPI\Controllers\UserController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at ODPortalWebAPI.Startup.<>c.<<Configure>b__5_1>d.MoveNext() in D:\Vehicle-mishap\ODPortalWebAPI\Startup.cs:line 54
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-02-20T16:30:04.2970752+05:30 80000099-0006-f900-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+ODPortalWebDL.DTO.ExceptionModal.CustomException: Invalid Login details entered.
+   at ODPortalWebDL.DataAccess.UserManagerDataAccess.CheckUserPassWord(Credentials credentials)
+   at ODPortalWebDL.Manager.UserManager.Auth(Credentials credentials)
+   at ODPortalWebAPI.Controllers.UserController.Authenticate(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebAPI\Controllers\UserController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at ODPortalWebAPI.Startup.<>c.<<Configure>b__5_1>d.MoveNext() in D:\Vehicle-mishap\ODPortalWebAPI\Startup.cs:line 54
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-02-20T16:30:16.8822296+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-20T16:30:16.8973742+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-20T16:30:16.9001713+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
+2021-02-20T16:30:16.9462659+05:30 80000059-0000-fb00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-02-20T17:39:21.9321261+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-20T17:39:21.9494369+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-20T17:39:21.9515779+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
+2021-02-20T17:39:22.0111335+05:30 80000052-0001-fd00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-02-20T17:46:57.8096460+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-20T17:46:57.8311522+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-20T17:46:57.8338417+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
+2021-02-20T17:46:57.8903370+05:30 80000085-0003-fc00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-02-20T21:02:38.4915179+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-20T21:02:38.5044672+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-20T21:02:38.5062769+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
+2021-02-20T21:02:38.5459483+05:30 8000009f-0006-f900-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-02-20T21:03:38.1233991+05:30 8000007a-0000-fe00-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+ODPortalWebDL.DTO.ExceptionModal.CustomException: Invalid Login details entered.
+   at ODPortalWebDL.DataAccess.UserManagerDataAccess.CheckUserPassWord(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\DataAccess\UserManagerDataAccess.cs:line 59
+   at ODPortalWebDL.Manager.UserManager.Auth(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\Manager\UserManager.cs:line 26
+   at ODPortalWebAPI.Controllers.UserController.Authenticate(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebAPI\Controllers\UserController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at ODPortalWebAPI.Startup.<>c.<<Configure>b__5_1>d.MoveNext() in D:\Vehicle-mishap\ODPortalWebAPI\Startup.cs:line 54
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)

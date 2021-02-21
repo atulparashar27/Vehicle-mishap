@@ -61,5 +61,18 @@ namespace ODPortalWebAPI.Controllers
             };
             return Ok(result);
         }
+
+        [HttpPost]
+        [Route("DeleteSavedAttendance")]
+        public IActionResult DeleteSavedAttendance(SubmitActivityAttendanceModal deleteSavedAttendance)
+        {
+            var result = new RequestResult<bool>()
+            {
+                Data = _attendanceManager.DeleteSavedAttendance(deleteSavedAttendance),
+                Message = "Success",
+                Success = true
+            };
+            return Ok(result);
+        }
     }
 }

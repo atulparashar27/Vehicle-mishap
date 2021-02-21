@@ -59,8 +59,8 @@ export class ManagePermissionsCodesComponent implements OnInit {
     this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
     this.datamanagementService.getAllRolesLists().subscribe(
       (response) => {
-        if (response.rolesDetails) {
-          this.rolesDDList = response.rolesDetails;
+        if (response.data) {
+          this.rolesDDList = response.data;
         } else {
           this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
             '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
@@ -135,7 +135,7 @@ export class ManagePermissionsCodesComponent implements OnInit {
       }
     }
     const dataToPush = {
-      roleId: this.code,
+      roleId: this.code || -1,
       roleName: this.name,
       roleDesc: this.desc
     };

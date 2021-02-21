@@ -71,5 +71,10 @@ namespace ODPortalWebDL.DataAccess
         {
             return _dbConnection.SaveActivityAttendance(submitActivityAttendanceModal);
         }
+
+        internal bool DeleteSavedAttendance(SubmitActivityAttendanceModal deleteSavedAttendance)
+        {
+            return _dbConnection.DeleteSavedAttendance(deleteSavedAttendance) > 1 ? true : false;
+        }
     }
 }

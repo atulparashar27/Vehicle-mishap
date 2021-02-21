@@ -1,0 +1,35 @@
+2021-02-22T00:00:25.8827419+05:30 8000002f-0005-fa00-b63f-84710c7967bb [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+ODPortalWebDL.DTO.ExceptionModal.CustomException: Invalid Login details entered.
+   at ODPortalWebDL.DataAccess.UserManagerDataAccess.CheckUserPassWord(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\DataAccess\UserManagerDataAccess.cs:line 63
+   at ODPortalWebDL.Manager.UserManager.Auth(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebDL\Manager\UserManager.cs:line 26
+   at ODPortalWebAPI.Controllers.UserController.Authenticate(Credentials credentials) in D:\Vehicle-mishap\ODPortalWebAPI\Controllers\UserController.cs:line 30
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at ODPortalWebAPI.Startup.<>c.<<Configure>b__5_1>d.MoveNext() in D:\Vehicle-mishap\ODPortalWebAPI\Startup.cs:line 54
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-02-22T00:02:00.6139402+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-22T00:02:00.6270428+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-22T00:02:00.6288108+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
+2021-02-22T00:02:00.6778720+05:30 800000b7-0003-fc00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-02-22T00:06:00.1541384+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-22T00:06:00.1663318+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-22T00:06:00.1680953+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
+2021-02-22T00:06:00.2102348+05:30 800000cf-0001-ff00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-02-22T00:06:23.3846124+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-02-22T00:06:23.3938635+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-02-22T00:06:23.3940449+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
+2021-02-22T00:06:23.4294765+05:30 8000002e-0007-fc00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)

@@ -100,8 +100,8 @@ export class ManageAssignedPermissionsComponent implements OnInit {
       this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
       this.datamanagementService.getAssignedRoles(this.selectedUidNo).subscribe(
         (response) => {
-          if (response.rolesDetailsList) {
-            this.selectedPeoplePermissions = response.rolesDetailsList;
+          if (response.data) {
+            this.selectedPeoplePermissions = response.data;
             this.enableDropDown = false;
             this.resetPermissionArray();
           } else {
