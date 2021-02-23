@@ -1,10 +1,12 @@
-﻿using ODPortalWebDL.Constants;
+﻿using Newtonsoft.Json;
+using ODPortalWebDL.Constants;
 using ODPortalWebDL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace ODPortalWebDL.DataAccess
 {
@@ -20,37 +22,14 @@ namespace ODPortalWebDL.DataAccess
         }
         internal List<UserRolesModal> GetUserRolesData()
         {
-            var tableResponse = _dbConnection.GetModelDetails(RawSQL.GetUserRolesData());
-            List<UserRolesModal> rolesLists = new List<UserRolesModal>();
-            foreach (DataRow dataRow in tableResponse.AsEnumerable())
-            {
-                var record = new UserRolesModal()
-                {
-                    RoleId = dataRow.Field<int>("RoleId"),
-                    RoleName = dataRow.Field<String>("RoleName"),
-                    RoleDesc = dataRow.Field<String>("RoleDesc")
-                };
-                rolesLists.Add(record);
-            }
-            return rolesLists;
+            var tableResponse = JsonConvert.SerializeObject(_dbConnection.GetModelDetails(RawSQL.GetUserRolesData()));
+            return JsonConvert.DeserializeObject<List<UserRolesModal>>(tableResponse);
         }
 
         internal List<UserRolesModal> GetUserRoles(string userName)
         {
-            List<UserRolesModal> securityObjects = new List<UserRolesModal>();
-            var tableResponse = _dbConnection.GetModelDetails(RawSQL.GetUserIndividualRoles(userName)).AsEnumerable();
-            foreach (DataRow dataRow in tableResponse.AsEnumerable())
-            {
-                var obj = new UserRolesModal()
-                {
-                    RoleId = dataRow.Field<int>("urs.RoleId"),
-                    RoleName = dataRow.Field<String>("RoleName"),
-                    RoleDesc = dataRow.Field<String>("RoleDesc"),
-                    AccessType = dataRow.Field<string>("AccessType")
-                };
-                securityObjects.Add(obj);
-            }
-            return securityObjects;
+            var tableResponse = JsonConvert.SerializeObject(_dbConnection.GetModelDetails(RawSQL.GetUserIndividualRoles(userName)));
+            return JsonConvert.DeserializeObject<List<UserRolesModal>>(tableResponse);
         }
 
         internal bool DeleteRoles(UserRolesModal userRolesModal)

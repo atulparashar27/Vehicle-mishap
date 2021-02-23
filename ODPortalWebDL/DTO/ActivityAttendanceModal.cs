@@ -9,8 +9,8 @@ namespace ODPortalWebDL.DTO
         public string UidNo { get; set; }
         public string Name { get; set; }
         public string IniJigStatus { get; set; }
-        public int RollNo { get; internal set; }
-        public int? FamilyCode { get; internal set; }
+        public int RollNo { get; set; }
+        public int? FamilyCode { get; set; }
     }
     public class SubmitActivityAttendanceModal
     {
@@ -32,6 +32,18 @@ namespace ODPortalWebDL.DTO
         public string BranchName { get; set; }
         public string Gender { get; set; }
         public string IsSantSu { get; set; }
-        public string Name { get; internal set; }
+        public string Name { get; set; }
+        public string RollNo { get; internal set; }
+    }
+
+    public class VisitorsAttendanceModal
+    {
+        public string VisitorName { get; set; }
+        public string BranchName { get; set; }
+        public string Gender { get; set; }
+        public int? Age { get; set; }
+        public DateTime? ActivityDate { get; set; }
+        public string ActivityCode { get; set; }
+        public string IsInitiated { get; set; }
     }
 }

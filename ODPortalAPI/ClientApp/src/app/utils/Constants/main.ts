@@ -3,8 +3,8 @@ export const MAIN = {
         API_VERSION: '1.0',
         MAIN_URL: {
             // HOST_URL: 'http://odrsa.api.server.gsawslab.net:9091/odrsa-service/', // AWS
-            HOST_URL: window.location.origin + '/server/'
-            // HOST_URL: 'http://localhost:63289/' // local
+            // HOST_URL: window.location.origin + '/server/'
+            HOST_URL: 'http://localhost:63289/' // local
             // BASE_URL: window.location.origin + '/'
         },
         URLS: {
@@ -20,7 +20,8 @@ export const MAIN = {
           SAVE_COMPANY_INFO: 'updateCompanyDetails',
           GET_SAVED_ATTENDANCE: 'Attendance/GetSavedAttendance',
           GET_FAMILY_DETAILS: 'getFamilyDetails',
-          SAVE_VISITORS_ATTENDANCE : 'submitVisitorsAttendance',
+          SAVE_VISITORS_ATTENDANCE : 'Attendance/SubmitVisitorsAttendance',
+          DELETE_SELECTED_PEOPLE_ATTENDANCE: 'Attendance/DeleteSavedAttendance',
           CHANGE_ACTIVITY_CODES: 'Activity/ManageActivities',
           GET_ROLES_DATA: 'Roles/GetRolesData',
           CHANGE_ROLE_CODES: 'Roles/ManageRoles',

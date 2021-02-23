@@ -37,10 +37,10 @@ namespace ODPortalWebAPI
 
             loggerFactory.AddFile("Logs/ODPortal-{Date}.txt");
 
-            if (!env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (!env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
             app.UseHttpsRedirection();

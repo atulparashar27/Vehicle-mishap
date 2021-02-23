@@ -93,7 +93,7 @@ namespace ODPortalWebDL.DataAccess
             using (var sqlCon = new OleDbConnection(connString))
             {
                 sqlCon.Open();
-                DataTable tableColumns = sqlCon.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, "Roles", null });
+                DataTable tableColumns = sqlCon.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, "Act2018", null });
                 foreach (DataRow row in tableColumns.Rows)
                 {
                     var columnNameColumn = row["COLUMN_NAME"];
@@ -155,9 +155,11 @@ namespace ODPortalWebDL.DataAccess
                 using (var connection = new OleDbConnection(connString))
                 {
                     connection.Open();
-                    using (var cmd = new OleDbCommand($"DELETE FROM ActivityCode WHERE Act_cd = '{allActivityCode.ActId}'", connection))
+                    using (var cmd = new OleDbCommand())
                     {
                         cmd.CommandTimeout = 300;
+                        cmd.Connection = connection;
+                        cmd.CommandText = "UPDATE ActivityCode SET DeleteInd = '" + 0 + "' WHERE Act_cd = '" + allActivityCode.ActId + "'";
                         rowAffected = cmd.ExecuteNonQuery();
                     }
                 }
@@ -169,25 +171,24 @@ namespace ODPortalWebDL.DataAccess
             }
         }
 
-        internal int DeleteSavedAttendance(SubmitActivityAttendanceModal deleteSavedAttendance)
+        internal int DeleteSavedAttendance(SubmitActivityAttendanceModal obj)
         {
-            var rollNos = string.Join(" , ", (deleteSavedAttendance.RollNoList));
             int final = 0;
-            //GetTableStructure();
             try
             {
                 using (var connection = new OleDbConnection(connString))
                 {
                     connection.Open();
-                    foreach (var rollNo in deleteSavedAttendance.RollNoList)
+                    using (var cmd = new OleDbCommand("DELETE FROM Act2018 WHERE Act_Date = @Act_Date and Roll_NO = @Roll_NO and Act_cd = @Act_cd", connection))
                     {
-                        using (var cmd = new OleDbCommand())
+                        cmd.Connection = connection;
+                        cmd.CommandTimeout = 300;
+                        for (int i = 0; i < obj.RollNoList.Count(); i++)
                         {
-                            cmd.Connection = connection;
-                            cmd.CommandTimeout = 300;
                             cmd.Parameters.Clear();
-                            cmd.CommandText 
-                                = $"Delete FROM Act2018 WHERE Act_Date = '" + Convert.ToDateTime(deleteSavedAttendance.ActivityDate) + "' and Roll_NO = '"+ Convert.ToDouble(rollNo) +"' and Act_cd = '" + deleteSavedAttendance.ActivityCode + "'";
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_Date", Value = (obj.ActivityDate), OleDbType = OleDbType.Date });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Roll_No", Value = obj.RollNoList[i], OleDbType = OleDbType.SmallInt });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_cd", Value = obj.ActivityCode, OleDbType = OleDbType.WChar });
                             final += cmd.ExecuteNonQuery();
                         }
                     }
@@ -333,6 +334,44 @@ namespace ODPortalWebDL.DataAccess
                         cmd.Connection = connection;
                         cmd.CommandText = "UPDATE Roles SET DeleteInd =" + 0 + " , RoleName='"+ obj.RoleName + "' , LastUpdatedDt=" + DateTime.Now.ToString("MM/dd/yyyy") + " , RoleDesc='"+ obj.RoleDesc +"' WHERE RoleId =" + obj.RoleId;
                         final = final + cmd.ExecuteNonQuery();
+                        return final;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"$$$SaveActivityAttend$$$####Error Message ->>>{ex} && {ex.Message}###### + StackTrace {ex.StackTrace}######## + InnerEx{ex.InnerException}#####");
+                return 0;
+            }
+        }
+
+        internal int SubmitVisitorsAttendance(List<VisitorsAttendanceModal> visitors)
+        {
+            int final = 0;
+            int count = 0;
+            var maxCount = GetModelDetails("select MAX(ID) as ID from VisitorOD").AsEnumerable().FirstOrDefault().Field<int>("ID");
+            try
+            {
+                using (var connection = new OleDbConnection(connString))
+                {
+                    connection.Open();
+                    using (var cmd = new OleDbCommand(@"INSERT into VisitorOD (ID, VisitorName, Act_cd, Act_date, Branch_Visitor, Gender, Initiated, Age) VALUES (@ID, @VisitorName, @Act_cd, @Act_date, @Branch_Visitor, @Gender, @Initiated, @Age)", connection))
+                    {
+                        cmd.CommandTimeout = 300;
+                        foreach(var i in visitors)
+                        {
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@ID", Value = maxCount + 1 + count, OleDbType = OleDbType.Integer });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@VisitorName", Value = i.VisitorName, OleDbType = OleDbType.VarWChar });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_cd", Value = i.ActivityCode, OleDbType = OleDbType.VarWChar });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_date", Value = i.ActivityDate, OleDbType = OleDbType.Date });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Branch_Visitor", Value = i.BranchName, OleDbType = OleDbType.VarWChar });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Gender", Value = i.Gender, OleDbType = OleDbType.VarWChar });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Initiated", Value = i.IsInitiated, OleDbType = OleDbType.VarWChar });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Age", Value = i.Age ?? 0, OleDbType = OleDbType.Integer });
+                            count++;
+                            final = final + cmd.ExecuteNonQuery();
+                        }
                         return final;
                     }
                 }

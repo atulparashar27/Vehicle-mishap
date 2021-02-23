@@ -4,6 +4,7 @@ using ODPortalWebDL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace ODPortalWebDL.DataAccess
@@ -57,13 +58,17 @@ namespace ODPortalWebDL.DataAccess
                                     : dataRow.Field<string>("INI_JIG_NON") == "OTH" ? "Other"
                                     : dataRow.Field<string>("INI_JIG_NON") == "JIG" ? "Jigyasu" : "",
                     IsSantSu = dataRow.Field<string>("Sant_su") != null ? "Y": "N",
-                    UidNo = dataRow.Field<string>("UID_No") ?? ""
+                    UidNo = dataRow.Field<string>("UID_No") ?? "",
+                    RollNo = dataRow.Field<Int16>("Roll_No").ToString()
                 };
                 attendPeopleList.Add(record);
-                peopleList.ActivityDate = dataRow.Field<DateTime>("Act_Date");
-                peopleList.ActivityName = dataRow.Field<string>("Act_Name");
             }
             peopleList.SavedAttendancePeopleModals = attendPeopleList;
+            peopleList.SavedAttendancePeopleModals.AddRange(GetSavedVisitorsAttendance(actCode, actDate));
+
+            var actRes = _dbConnection.GetModelDetails(RawSQL.GetSingleActivity(actCode, actDate));
+            peopleList.ActivityDate = actDate;
+            peopleList.ActivityName = actRes.AsEnumerable().FirstOrDefault()?.Field<string>("ActName");
             return peopleList;
         }
 
@@ -76,5 +81,30 @@ namespace ODPortalWebDL.DataAccess
         {
             return _dbConnection.DeleteSavedAttendance(deleteSavedAttendance) > 1 ? true : false;
         }
+
+        internal bool SubmitVisitorsAttendance(List<VisitorsAttendanceModal> visitors)
+        {
+            return _dbConnection.SubmitVisitorsAttendance(visitors) > 1 ? true : false;
+        }
+
+        private List<SavedAttendancePeopleModal> GetSavedVisitorsAttendance(string actCode, DateTime actDate)
+        {
+            var tableResponse = _dbConnection.GetModelDetails(RawSQL.GetSaveVisitorsAttendance(actCode, actDate));
+            List<SavedAttendancePeopleModal> attendPeopleList = new List<SavedAttendancePeopleModal>();
+            foreach (DataRow dataRow in tableResponse.AsEnumerable())
+            {
+                var record = new SavedAttendancePeopleModal()
+                {
+                    BranchName = "Visitors Branch",
+                    Gender = dataRow.Field<string>("Gender"),
+                    Name = dataRow.Field<string>("VisitorName"),
+                    IniJigStatus = dataRow.Field<string>("Initiated").ToLower() == "yes" ? "Initiated"
+                                    : "Other"
+                };
+                attendPeopleList.Add(record);
+            }
+                return attendPeopleList;
+        }
+
     }
 }

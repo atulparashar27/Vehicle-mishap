@@ -33,4 +33,8 @@ export class AttendanceService extends HttpService {
   saveVisitorsAttendance(postData) {
     return this.postWithoutHeaders(this.relativeUrl + CONSTANTS.MAIN.APP.URLS.SAVE_VISITORS_ATTENDANCE, postData);
   }
+
+  deleteSelectedAttendance(data) {
+    return this.postWithoutHeaders(this.relativeUrl + CONSTANTS.MAIN.APP.URLS.DELETE_SELECTED_PEOPLE_ATTENDANCE, data);
+  }
 }

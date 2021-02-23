@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using ODPortalWebDL.Constants;
 using ODPortalWebDL.DTO;
 using ODPortalWebDL.DTO.ExceptionModal;
@@ -21,18 +22,8 @@ namespace ODPortalWebDL.DataAccess
         }
         internal List<AllActivityCode> GetAllActivity()
         {
-            var tableResponse = _dbConnection.GetModelDetails(RawSQL.GetAllActCode());
-            List<AllActivityCode> codeLists = new List<AllActivityCode>();
-            foreach (DataRow dataRow in tableResponse.AsEnumerable())
-            {
-                var record = new AllActivityCode()
-                {
-                    ActId = dataRow.Field<String>("Act_cd"),
-                    ActName = dataRow.Field<String>("Act_Name")
-                };
-                codeLists.Add(record);
-            }
-            return codeLists;
+            var tableResponse = JsonConvert.SerializeObject(_dbConnection.GetModelDetails(RawSQL.GetAllActCode()));
+            return JsonConvert.DeserializeObject<List<AllActivityCode>>(tableResponse);
         }
 
         internal bool ManageActivity(AllActivityCode allActivityCode, string action)

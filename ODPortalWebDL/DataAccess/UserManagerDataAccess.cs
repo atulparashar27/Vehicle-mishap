@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using ODPortalWebDL.Constants;
 using ODPortalWebDL.DTO;
 using ODPortalWebDL.DTO.ExceptionModal;
@@ -39,7 +40,6 @@ namespace ODPortalWebDL.DataAccess
                         var record = new GetUserLoginObject()
                         {
                             UserName = tableRow.Field<string>("Name_Full"),
-                            Password = Convert.ToDateTime(tableRow.Field<DateTime>("Date_Birth")).ToString("yyyy-MM-dd"),
                             RollNo = Convert.ToInt32(tableRow.Field<double>("Roll_No")),
                             UidNo = tableRow.Field<string>("UID_No") ?? "",
                             RolesDetailsList = GetUserRoles(credentials.UserName)
@@ -65,18 +65,8 @@ namespace ODPortalWebDL.DataAccess
 
         internal List<SecurityObjects> GetUserRoles(string userName)
         {
-            List<SecurityObjects> securityObjects = new List<SecurityObjects>();
-            var tableResponse = _dbConnection.GetModelDetails(RawSQL.GetAllUserRoles(userName)).AsEnumerable();
-            foreach (DataRow dataRow in tableResponse.AsEnumerable())
-            {
-                var obj = new SecurityObjects()
-                {
-                    AccessType = dataRow.Field<string>("AccessType"),
-                    RoleId = dataRow.Field<int>("RoleId")
-                };
-                securityObjects.Add(obj);
-            }
-            return securityObjects;
+            var tableRes = JsonConvert.SerializeObject(_dbConnection.GetModelDetails(RawSQL.GetAllUserRoles(userName)));
+            return JsonConvert.DeserializeObject<List<SecurityObjects>>(tableRes);
         }
     }
 }

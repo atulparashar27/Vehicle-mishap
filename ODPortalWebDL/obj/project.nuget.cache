@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+3DpSdptIpv6ibyB0n9ZNGEShhcUJMtk0RffHolwUBEyYKlPvbpd3UQNgOGJhJbvoqsJ+RnGj98z2XpYgYWGMg==",
+  "dgSpecHash": "pGNk7ybCpbKiHmhtF/4Utxg8lgX809G3ReNMzA1AWaXFMAhAS/d/lgznD9aFOkrlOXzWVNVuvii2PysGdI8/cg==",
   "success": true,
   "projectFilePath": "D:\\Vehicle-mishap\\ODPortalWebDL\\ODPortalWebDL.csproj",
   "expectedPackageFiles": [
@@ -18,6 +18,7 @@
     "C:\\Users\\ATUL PARASHAR\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\ATUL PARASHAR\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
+    "C:\\Users\\ATUL PARASHAR\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

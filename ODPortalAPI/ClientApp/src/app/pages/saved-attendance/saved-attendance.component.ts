@@ -5,6 +5,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid-community';
 import { CONSTANTS } from 'app/utils/Constants';
 import { AttendanceService } from 'app/utils/services/attendance/attendance.service';
+import { LoginService } from 'app/utils/services/login/login.service';
 import { UtilsService } from 'app/utils/services/util.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -71,14 +72,18 @@ export class SavedAttendanceComponent implements OnInit {
   attendCode = null;
   attendDate = null;
   gridApi: GridOptions;
+  routePassedCode = null;
   public tableTheme = CONSTANTS.MAIN.APP.CONSTANTS.AG_GRID_CLS_THEME;
+  selectedRows = [];
+  isAllowDelete = false;
   @ViewChild('attendanceTable', { static: false }) ErTableGrid: AgGridAngular;
   @ViewChild('summaryTable', { static: false }) summaryTable: AgGridAngular;
   // @ViewChild('attendanceSummaryModal', { static: false }) attendanceSummaryModal: ngb;
   @HostBinding('style.height') height;
   constructor(private route: ActivatedRoute, public alertService: ToastrService,
     public attendanceService: AttendanceService, private spinner: NgxSpinnerService,
-    private utilsService: UtilsService, private activeModal: NgbModal) { }
+    private utilsService: UtilsService, private activeModal: NgbModal,
+    private loginService: LoginService) { }
   onResize(event) {
     this.height = (event.target.innerHeight - 265);
   }
@@ -87,6 +92,7 @@ export class SavedAttendanceComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params['code'] && params['date']) {
         const passedCode = params['code'];
+        this.routePassedCode = passedCode;
         const passedAttendDate = params['date'];
         this.getSavedAttendance(passedCode, passedAttendDate);
       }
@@ -101,6 +107,11 @@ export class SavedAttendanceComponent implements OnInit {
       enableColResize: true,
       enableSorting: true
     };
+    const attendanceRoleList = this.loginService.getUserRoles()
+      .some(function (res: any) { return (res.roleId === 11 && res.accessType === 'Write'); });
+    if (attendanceRoleList) {
+      this.isAllowDelete = true;
+    }
   }
 
   onGridReady(params) {
@@ -225,10 +236,6 @@ export class SavedAttendanceComponent implements OnInit {
     );
   }
 
-  onRowSelection(event) {
-    console.log(event);
-  }
-
   onBtnExport() {
     const params = {
       skipHeader: false,
@@ -293,5 +300,39 @@ export class SavedAttendanceComponent implements OnInit {
 
   openModal(modal) {
     this.activeModal.open(modal, { size: 'lg' });
+  }
+
+  deleteModla(modal) {
+    this.activeModal.open(modal, { size: 'sm' });
+  }
+
+  onRowSelection(event) {
+    this.selectedRows = event.api.getSelectedRows();
+  }
+
+  deleteSelectedAttendance() {
+    const dataToSend = {
+      rollNoList: this.selectedRows.map(s => +s.rollNo),
+      activityCode: this.routePassedCode,
+      activityDate: this.utilsService.formatDate(this.attendDate)
+    };
+    this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
+    this.attendanceService.deleteSelectedAttendance(dataToSend).subscribe(
+      (response) => {
+        if (response.success) {
+          this.ngOnInit();
+        } else {
+          this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
+            '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
+        }
+        setTimeout(() => { this.spinner.hide(); }, 500);
+      },
+      (error) => {
+        this.spinner.hide();
+        const errMsg = this.utilsService.errorServiceHandler(error);
+        this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + errMsg,
+          '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
+      }
+    );
   }
 }

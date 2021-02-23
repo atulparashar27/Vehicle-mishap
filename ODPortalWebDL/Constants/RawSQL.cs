@@ -28,7 +28,12 @@ namespace ODPortalWebDL.Constants
 
         public static string GetAllActCode()
         {
-            return $"SELECT * FROM ActivityCode";
+            return $"SELECT Act_cd as ActId, Act_Name as ActName FROM ActivityCode WHERE DeleteInd is null";
+        }
+
+        public static string GetSingleActivity(string actCode, DateTime actDate)
+        {
+            return $"SELECT Act_cd as ActId, Act_Name as ActName FROM ActivityCode WHERE DeleteInd is null and Act_cd = '{actCode}'";
         }
 
         public static string GetAllPeopleList(string status)
@@ -38,14 +43,20 @@ namespace ODPortalWebDL.Constants
 
         public static string GetSavedAttendance(string actCode, DateTime actDate)
         {
-            return $"SELECT Gender, Name_Full, INI_JIG_NON, Sant_su, UID_No, Act_Date, Act_Name " +
-                    $"FROM Act2018 attend, BranchMaster branch, ActivityCode act " +
+            return $"SELECT Gender, Name_Full, INI_JIG_NON, Sant_su, UID_No, Act_Date, attend.Roll_No as Roll_No " +
+                    $"FROM Act2018 attend, BranchMaster branch " +
                     $"WHERE attend.Roll_NO = branch.Roll_NO " +
-                    $"AND attend.Act_cd = act.Act_cd " +
                     $"AND attend.Act_cd='{actCode}' " +
                     $"AND attend.Act_Date=#{actDate}# ";
         }
 
+        public static string GetSaveVisitorsAttendance(string actCode, DateTime actDate)
+        {
+            return $"SELECT VisitorName, Act_cd, Act_date, Branch_Visitor, Gender, Initiated, Age " +
+                    $"FROM VisitorOD " +
+                    $"WHERE Act_cd='{actCode}' " +
+                    $"AND Act_date=#{actDate}# ";
+        }
 
         internal static string ReportsBranchPeopleAttendance(BranchPeopleAttendance branchPeopleAttendance)
         {
@@ -112,7 +123,7 @@ namespace ODPortalWebDL.Constants
 
         internal static string GetUserIndividualRoles(string userName)
         {
-            return $"SELECT * " +
+            return $"SELECT urs.RoleId as RoleId, RoleName, RoleDesc, AccessType " +
                     $"FROM Users_Roles urs inner join Roles rs " +
                     $"on urs.RoleId = rs.RoleId " +
                     $"WHERE urs.UserId = '{userName}'";

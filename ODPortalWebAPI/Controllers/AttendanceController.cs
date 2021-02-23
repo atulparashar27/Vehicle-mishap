@@ -74,5 +74,18 @@ namespace ODPortalWebAPI.Controllers
             };
             return Ok(result);
         }
+
+        [HttpPost]
+        [Route("SubmitVisitorsAttendance")]
+        public IActionResult SubmitVisitorsAttendance(List<VisitorsAttendanceModal> visitors)
+        {
+            var res = new RequestResult<bool>
+            {
+                Data = _attendanceManager.SubmitVisitorsAttendance(visitors),
+                Message = "Success",
+                Success = true
+            };
+            return Ok(res);
+        }
     }
 }

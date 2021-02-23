@@ -36,5 +36,10 @@ namespace ODPortalWebDL.Manager
         {
             return _attendanceDataAccess.DeleteSavedAttendance(deleteSavedAttendance);
         }
+
+        public bool SubmitVisitorsAttendance(List<VisitorsAttendanceModal> visitors)
+        {
+            return _attendanceDataAccess.SubmitVisitorsAttendance(visitors);
+        }
     }
 }

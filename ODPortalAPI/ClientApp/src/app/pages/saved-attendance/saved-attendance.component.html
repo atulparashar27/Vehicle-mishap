@@ -13,6 +13,9 @@
            (click)="openModal(summaryModal)" >View
             Summary
         </button>
+        <button type="button" class="btn btnanimat btn--animated button buttonGroups btn btn-danger btn-round"
+            (click)="deleteModla(deleteAttendanceModal)" [hidden]="!isAllowDelete" [disabled]="selectedRows.length === 0" >Delete
+        </button>
     </div>
 </div>
 <div class="col-sm-8" style="margin: auto;">
@@ -40,13 +43,28 @@
             <ag-grid-angular #summaryTable style="width: 100%; height: 100%;" rowSelection="multiple"
               [localeText]="{noRowsToShow: ''}" [rowData]="summaryAttendanceList"
               [suppressMovableColumns]="true" [columnDefs]="summaryAttendanceColDefs" [class]="tableTheme"
-              [rowMultiSelectWithClick]="true" 
-              (selectionChanged)="onRowSelection($event)" (gridReady)="onGridReady($event)">
+              [rowMultiSelectWithClick]="true" (gridReady)="onGridReady($event)">
             </ag-grid-angular>
         </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-primary" (click)="modal.close('Close click'); onBtnExport();">Download</button>
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #deleteAttendanceModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Confirm?</h5>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body text-center">
+        <p>Are you sure you want to delete selected people Attendance?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="modal.close('Close click');deleteSelectedAttendance();">Yes</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">No</button>
     </div>
 </ng-template>
