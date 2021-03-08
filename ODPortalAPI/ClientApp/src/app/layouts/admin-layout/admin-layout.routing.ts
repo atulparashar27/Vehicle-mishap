@@ -16,6 +16,7 @@ import { PermissionAccessGuard } from 'app/utils/services/guards/permission.serv
 import { ResetPasswordComponent } from 'app/pages/reset-password/reset-password.component';
 import { ManageBranchDetailsComponent } from 'app/pages/manage-branch-details/manage-branch-details.component';
 import { ReportsComponent } from 'app/pages/reports/reports.component';
+import { MiscComponent } from 'app/pages/misc/misc.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -32,5 +33,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'managePermissions', component: ManagePermissionsCodesComponent, canActivate: [PermissionAccessGuard] },
     { path: 'resetPassword', component: ResetPasswordComponent, canActivate: [PermissionAccessGuard] },
     { path: 'manageBranchDetails', component: ManageBranchDetailsComponent, canActivate: [PermissionAccessGuard] },
-    { path: 'reports', component: ReportsComponent, canActivate: [PermissionAccessGuard]}
+    { path: 'reports', component: ReportsComponent, canActivate: [PermissionAccessGuard]},
+    { path: 'misc', component: MiscComponent, canActivate: [PermissionAccessGuard]}
 ];

@@ -30,6 +30,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BsDatepickerModule  } from 'ngx-bootstrap/datepicker';
+import { MiscComponent } from 'app/pages/misc/misc.component';
+import { GridCoordComponent } from 'app/pages/misc/grid-coord/grid-coord.component';
 
 @NgModule({
   imports: [
@@ -62,7 +64,9 @@ import { BsDatepickerModule  } from 'ngx-bootstrap/datepicker';
     ReportsComponent,
     BranchPeopleAttendanceComponent,
     BranchPeopleDataComponent,
-    AttendanceSummaryComponent
+    AttendanceSummaryComponent,
+    MiscComponent,
+    GridCoordComponent
   ]
 })
 

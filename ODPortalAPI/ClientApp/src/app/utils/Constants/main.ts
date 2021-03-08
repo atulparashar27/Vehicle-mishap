@@ -2,7 +2,7 @@ export const MAIN = {
     APP: {
         API_VERSION: '1.0',
         MAIN_URL: {
-            // HOST_URL: 'http://odrsa.api.server.gsawslab.net:9091/odrsa-service/', // AWS
+            // HOST_URL: 'http://odrsa.somee.com/server/', // Somee
             // HOST_URL: window.location.origin + '/server/'
             HOST_URL: 'http://localhost:63289/' // local
             // BASE_URL: window.location.origin + '/'
@@ -28,6 +28,8 @@ export const MAIN = {
           GET_ASSIGNED_PERMISSIONS: 'Roles/GetAssignedRoles',
           SAVE_USER_PERMISSIONS: 'Roles/AssignUnassignRoles',
           GET_ALL_BRANCH_PEOPLE_ATTENDANCE: 'Reports/GetPeopleAttendance',
+          GET_ALL_LOCALITY_LIST: 'Misc/GetLocalityList',
+          GET_ALL_LOCALITY_PEOPLE_LIST: 'Misc/GetLocalityPeopleList',
           GET_MENU_JSON: '/assets/json/menu.json'
         },
         CONSTANTS: {

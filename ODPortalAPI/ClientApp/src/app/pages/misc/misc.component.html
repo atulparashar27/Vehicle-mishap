@@ -1,0 +1,36 @@
+<div class="tabStyles">
+    <ngb-tabset [destroyOnHide]="true">
+        <ngb-tab title="Grid Coordinator">
+            <ng-template ngbTabContent>
+                <div class="form-group">
+                    <app-grid-coord>
+                    </app-grid-coord>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Manage Grid Coordinator Peoples">
+            <ng-template ngbTabContent>
+                <div class="row">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <app-branch-people-data>
+                            </app-branch-people-data>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <!-- <ngb-tab title="Branch Attendance Summary">
+            <ng-template ngbTabContent>
+                <div class="row">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <app-attendance-summary>
+                            </app-attendance-summary>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab> -->
+    </ngb-tabset>
+</div>

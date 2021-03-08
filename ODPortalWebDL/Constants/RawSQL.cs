@@ -128,5 +128,20 @@ namespace ODPortalWebDL.Constants
                     $"on urs.RoleId = rs.RoleId " +
                     $"WHERE urs.UserId = '{userName}'";
         }
+
+        internal static string GetLocalityLists()
+        {
+            return $"SELECT LOCA_CD as LocalityId, Locality " +
+                    $"FROM LocalityCode ";
+        }
+
+        internal static string GetLocalityPeople(int localityId)
+        {
+            return $"SELECT UID_No as UIDNo, Name_Full as FullName, Mobile as MobileNum, Mobile1 as MobileNum2, Family_cd as FamilyCode," +
+                    $" LOCA_CD as LocalityId, Grid_Coord as GridCoord " +
+                    $"FROM BranchMaster " +
+                    $"Where LOCA_CD like ('{localityId}') and status='CR' " +
+                    $"ORDER BY Family_cd" ;
+        }
     }
 }

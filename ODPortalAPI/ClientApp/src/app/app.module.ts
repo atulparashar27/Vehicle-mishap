@@ -33,6 +33,8 @@ import { LoginComponent } from './login/login.component';
 import { SavedAttendanceComponent } from './pages/saved-attendance/saved-attendance.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ReportsService } from './utils/services/reports/reports.service';
+import { MiscService } from './utils/services/misc/misc.service';
+
 
 
 @NgModule({
@@ -63,7 +65,7 @@ import { ReportsService } from './utils/services/reports/reports.service';
   ],
   providers: [UtilsService, AlertService, LocalStorage, LoginService, AttendanceService, DataManagmentService,
      OnlyLoggedInUsersGuard, ProfileService, PermissionAccessGuard, UserPermissionService, NgbActiveModal, NgbModalConfig,
-     {provide: NgbDateAdapter, useClass: NgbCustomAdapterService}, ReportsService,
+     {provide: NgbDateAdapter, useClass: NgbCustomAdapterService}, ReportsService, MiscService,
      {provide: NgbDateParserFormatter, useClass: NgbCustomDateParserFormatterService}],
   bootstrap: [AppComponent]
 })
