@@ -8,5 +8,5 @@
   { "isActive": true, "name" : "Manage Permission", "routeUrl" : "/managePermissions", "children": [], "mobileActive": false, "menuCode": 8 },
   { "isActive": true, "name" : "Manage Branch Details", "routeUrl" : "/manageBranchDetails", "children": [], "mobileActive": false, "menuCode": 8 },
   { "isActive": true, "name" : "Reports", "routeUrl" : "/reports", "children": [], "mobileActive": false, "menuCode": 10 },
-  { "isActive": true, "name" : "Misc", "routeUrl" : "/misc", "children": [], "mobileActive": false, "menuCode": 10 }
+  { "isActive": true, "name" : "Misc", "routeUrl" : "/misc", "children": [], "mobileActive": false, "menuCode": 12 }
 ]

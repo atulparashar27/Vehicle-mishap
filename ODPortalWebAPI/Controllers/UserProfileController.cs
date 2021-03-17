@@ -36,5 +36,20 @@ namespace ODPortalWebAPI.Controllers
             };
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("GetFamilyDetails")]
+        public IActionResult GetFamilyData(string uidNo)
+        {
+            var data = _userProfileManager.GetFamilyData(uidNo);
+            var result = new RequestResult<List<UserFamilyModal>>
+            {
+                Data = data,
+                Message = "Success",
+                Success = true
+            };
+            return Ok(result);
+        }
+        //List<UserFamilyModal> GetFamilyData(string uidNo, string rollNo)
     }
 }

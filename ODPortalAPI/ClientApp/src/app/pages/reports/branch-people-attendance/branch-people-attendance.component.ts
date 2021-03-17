@@ -32,8 +32,9 @@ export class BranchPeopleAttendanceComponent implements OnInit {
     { headerName: 'Roll Number', field: 'rollNo', width: 120, resizable: true, filter: true, sortable: true },
     { headerName: 'Name', field: 'name', width: 220, resizable: true, filter: true, sortable: true },
     { headerName: 'Branch Title', field: 'brTitle', width: 150, resizable: true, filter: true, sortable: true },
-    // { headerName: 'Attendance Date', field: 'attendanceDate', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Attendance Count', field: 'attendanceCount', width: 150, resizable: true, filter: true, sortable: true },
+    { headerName: 'Attendance Date', field: 'attendanceDate', width: 150, resizable: true, filter: true, sortable: true },
+    { headerName: 'Mobile Number', field: 'mobileNum', width: 150, resizable: true, filter: true, sortable: true },
+    { headerName: 'Attendance Count', field: 'attendanceCount', width: 150, resizable: true, filter: true, sortable: true }
   ];
   branchPeopleDetailedAttendanceColumDefs = [
     { headerName: 'Activity Name', field: 'activityName', width: 220, resizable: true, filter: true, sortable: true },
@@ -111,28 +112,31 @@ export class BranchPeopleAttendanceComponent implements OnInit {
           console.log(response);
           response.data.branchPeopleAttendance = response.data.branchPeopleAttendance.sort((a, b) => (a.activityName > b.activityName)
           ? 1 : (b.activityName > a.activityName) ? -1 : 0);
-          const finalPush = [];
-          const mainWindowObj = response.data.branchPeopleAttendance.map(s => ({ activityName: s.activityName, uidNo: s.uidNo,
-             rollNo: s.rollNo, name: s.name, brTitle: s.brTitle, singleActivityCode: s.singleActivityCode }));
-             for (let i = 0; i < mainWindowObj.length; i++) {
-              if (mainWindowObj[i + 1] && mainWindowObj[i].name === mainWindowObj[i + 1].name &&
-                  mainWindowObj[i].activityName === mainWindowObj[i + 1].activityName) {
-                count = count + 1;
-              } else {
-                  finalPush.push(
-                  {
-                    activityName: mainWindowObj[i].activityName,
-                    uidNo: mainWindowObj[i].uidNo,
-                    rollNo: mainWindowObj[i].rollNo,
-                    name: mainWindowObj[i].name,
-                    brTitle: mainWindowObj[i].brTitle,
-                    attendanceCount: count,
-                    singleActivityCode: mainWindowObj[i].singleActivityCode
-                  });
-                  count = 1;
-              }
-          }
-          this.branchPeopleAttendance = finalPush;
+          // const finalPush = [];
+          // const mainWindowObj = response.data.branchPeopleAttendance.map(s => ({ activityName: s.activityName, uidNo: s.uidNo,
+          //    rollNo: s.rollNo, name: s.name, brTitle: s.brTitle, singleActivityCode: s.singleActivityCode }));
+          //    for (let i = 0; i < mainWindowObj.length; i++) {
+          //     if (mainWindowObj[i + 1] && mainWindowObj[i].name === mainWindowObj[i + 1].name &&
+          //         mainWindowObj[i].activityName === mainWindowObj[i + 1].activityName) {
+          //       count = count + 1;
+          //     } else {
+          //         finalPush.push(
+          //         {
+          //           activityName: mainWindowObj[i].activityName,
+          //           uidNo: mainWindowObj[i].uidNo,
+          //           rollNo: mainWindowObj[i].rollNo,
+          //           name: mainWindowObj[i].name,
+          //           brTitle: mainWindowObj[i].brTitle,
+          //           attendanceCount: count,
+          //           singleActivityCode: mainWindowObj[i].singleActivityCode
+          //         });
+          //         count = 1;
+          //     }
+          // }
+          response.data.branchPeopleAttendance.forEach(element => {
+            element.attendanceDate = this.utilsService.formatDateDDMMYYY(element.attendanceDate)
+          });
+          this.branchPeopleAttendance = response.data.branchPeopleAttendance;
           this.pageSize = (Math.ceil(response.data.count / 500)) * 10;
         } else {
           this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,

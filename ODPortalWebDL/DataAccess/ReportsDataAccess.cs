@@ -32,7 +32,9 @@ namespace ODPortalWebDL.DataAccess
                                     : dataRow.Field<string>("INI_JIG_NON") == "JIG" ? "Jigyasu" : "",
                     AttendanceCount = dataRow.Field<int?>("AttendanceCount"),
                     ActivityName = dataRow.Field<string>("Act_Name"),
-                    SingleActivityCode = dataRow.Field<string>("Act_cd")
+                    SingleActivityCode = dataRow.Field<string>("Act_cd"),
+                    AttendanceDate = dataRow.Field<DateTime?>("Act_Date"),
+                    MobileNum = dataRow.Field<string>("Mobile")
                 };
                 lst.Add(record);
             }

@@ -69,16 +69,16 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfileDataList(uidNo, rollNo).subscribe(
       (response) => {
         if (response) {
-          this.profileList = response.personalInfo;
+          this.profileList = response.data.profileList;
           if (this.profileList.dateOfBirth) {
             // this.profileList.dateOfBirth = this.profileList.dateOfBirth.split('-').reverse().join('-');
             this.profileList.dateOfBirth = new Date(this.profileList.dateOfBirth);
           }
           this.profileList.title = this.profileList.title || this.titleArray[0];
-          this.contactInfoList = response.contactInfo;
-          this.companyInfoList = response.companyInfo;
-          this.qualificationInfoList = response.qualificationInfo;
-          this.personBrInfoList = response.personBrInfo;
+          this.contactInfoList = response.data.contactInfo;
+          this.companyInfoList = response.data.companyInfo;
+          this.qualificationInfoList = response.data.qualificationInfo;
+          this.personBrInfoList = response.data.personBrInfo;
         } else {
           this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
             '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);

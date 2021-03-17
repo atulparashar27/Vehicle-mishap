@@ -64,7 +64,7 @@ namespace ODPortalWebDL.Constants
             var startAge = Convert.ToDouble(branchPeopleAttendance.StartAge);
             var endAge = Convert.ToDouble(branchPeopleAttendance.EndAge);
             return $"SELECT code.Act_cd, code.Act_Name as Act_Name, mstBr.UID_No as UID_No, " +
-                    $"mstBr.Roll_NO as Roll_NO, mstBr.Name_Full as Name_Full, " +
+                    $"mstBr.Roll_NO as Roll_NO, mstBr.Name_Full as Name_Full, mstBr.Mobile, " +
                     $"mstBr.INI_JIG_NON as INI_JIG_NON, attend.Act_Date as Act_Date, " +
                     $"count(mstBr.Roll_NO) as AttendanceCount " +
                     $"FROM BranchMaster mstBr, Act2018 attend, ActivityCode code " +
@@ -76,7 +76,7 @@ namespace ODPortalWebDL.Constants
                     $"AND attend.Act_Date >= #{branchPeopleAttendance.StartDate}# " +
                     $"AND attend.Act_Date <= #{branchPeopleAttendance.EndDate}# " +
                     $"GROUP BY code.Act_Name, mstBr.UID_No, mstBr.Roll_NO, mstBr.Name_Full, " +
-                    $"mstBr.INI_JIG_NON, attend.Act_Date, code.Act_cd " +
+                    $"mstBr.INI_JIG_NON, attend.Act_Date, code.Act_cd, mstBr.Mobile " +
                     $"ORDER BY mstBr.Name_Full" ;
         }
 
@@ -104,16 +104,49 @@ namespace ODPortalWebDL.Constants
             var doubleRollNo = Convert.ToDouble(rollNo);
             if (!string.IsNullOrWhiteSpace(uidNo))
             {
-                return $"SELECT * FROM BranchMaster WHERE Uid_No = '{uidNo}'";
+                return $"SELECT mstBr.Title,mstBr.Name_Full,mstBr.Date_Birth,mstBr.Gender, " +
+                        $"mstBr.Caste,mstBr.Marital_Status,mstBr.Mobile,mstBr.Mobile1, mstBr.Email1, " +
+                        $"mstBr.Email2,mstBr.Organization, mstBr.Place,mstBr.Designation, " +
+                        $"mstBr.Occupation,mstBr.Qualification, mstBr.Roll_NO, mstBr.UID_No," +
+                        $"mstBr.Title_1, mstBr.Grid_Coord,mstBr.Rem_Bran_mast, " +
+                        $"mstBr.Off_ph1, mstBr.Off_ph2, mstBr.Title_1, " +
+                        $"mstBr.Nationality, mstBr.AadharNo, mstBr.PanCardNo, " +
+                        $"mstRs.Add1,mstRs.Add2,mstRs.Add3,mstRs.City,mstRs.Pin_cd, " +
+                        $"mstRs.EmergencyContact, mstRs.EmergencyContactNo " +
+                        $"FROM BranchMaster mstBr, ResidenceMaster mstRs " +
+                        $"WHERE mstBr.Residence_cd = mstRs.Residence_cd " +
+                        $"AND mstBr.Uid_No = '{uidNo}' " +
+                        $"AND mstBr.status = 'CR' ";
             }
             else if (!string.IsNullOrWhiteSpace(rollNo))
             {
-                return $"SELECT * FROM BranchMaster WHERE Roll_NO = '{doubleRollNo}'";
+                return $"SELECT Title,Name_Full,Date_Birth,Gender,Caste,Marital_Status, " +
+                        $"Nationality,AadharNo,PanCardNo " +
+                        $"FROM BranchMaster WHERE Roll_NO = '{doubleRollNo}' ";
             }
             else
             {
                 throw new CustomException("This user is not valid");
             }
+        }
+
+        internal static string GetProfileBrInfo(double rollNo)
+        {
+            return $"SELECT DOI_1, DOI_2 " +
+                    $"FROM InitiatedMembers " +
+                    $"WHERE Roll_No = {rollNo} ";
+        }
+
+        internal static string GetFamilyCode(string uidNo)
+        {
+            return $"SELECT Family_cd FROM BranchMaster where Uid_No = '{uidNo}'";
+        }
+
+        internal static string GetAllFamilyPeople(double? cd)
+        {
+            return $"SELECT mstBr.Name_Full, mstBr.Uid_No, mstBr.Reelation, mstBr.INI_JIG_NON, mstBr.Roll_No " +
+                    $"FROM BranchMaster mstBr " +
+                    $"WHERE Family_cd = {cd} ";
         }
 
         internal static string GetUserRolesData()

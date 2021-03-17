@@ -19,6 +19,7 @@ namespace ODPortalWebDL.DTO
         public string ActivityName { get; set; }
         public string SingleActivityCode { get; set; }
         public DateTime? AttendanceDate { get; internal set; }
+        public string MobileNum { get; internal set; }
     }
     public class BranchPeoplePaginationAttendance
     {

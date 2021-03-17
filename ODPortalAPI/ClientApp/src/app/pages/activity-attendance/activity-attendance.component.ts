@@ -179,7 +179,7 @@ export class ActivityAttendanceComponent implements OnInit {
               this.spinner.hide();
               window.open('/#/savedAttendance/' + dataToSave.activityCode + '/' + dataToSave.activityDate, '_blank');
             }, 1000);
-            this.resetAll();
+            // this.resetAll();
           } else {
             setTimeout(() => { this.spinner.hide(); }, 1000);
             this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + 'Could not save Attendance',

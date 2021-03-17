@@ -18,5 +18,9 @@ namespace ODPortalWebDL.Manager
         {
             return _userProfileDataAccess.GetProfileData(uidNo, rollNo);
         }
+        public List<UserFamilyModal> GetFamilyData(string uidNo)
+        {
+            return _userProfileDataAccess.GetFamilyData(uidNo);
+        }
     }
 }

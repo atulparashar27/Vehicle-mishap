@@ -72,7 +72,7 @@ export class ManageFamilyDetailsComponent implements OnInit {
     this.profileService.getFamilyDetails(event).subscribe(
       (response) => {
         if (response) {
-          this.familyDetailsList = response.peopleDetailsList;
+          this.familyDetailsList = response.data;
         } else {
           this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + response.message,
                  '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
