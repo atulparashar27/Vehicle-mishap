@@ -13,7 +13,7 @@ namespace ODPortalWebDL.DataAccess
     public class DbConnection
     {
         private readonly ILogger<DbConnection> _logger;
-        private readonly string path = Environment.CurrentDirectory + $"\\App_Data\\odrsa-database.accdb";
+        private readonly string local = Environment.CurrentDirectory + $"\\App_Data\\odrsa-database.accdb";
         private readonly string prod = "d:\\DZHosts\\LocalUser\\atulparashar27\\www.odrsa.somee.com\\server\\App_Data\\odrsa-database.accdb";
         private readonly string connString = "";
 
@@ -21,7 +21,7 @@ namespace ODPortalWebDL.DataAccess
         {
             ILoggerFactory loggerFactory = new LoggerFactory();
             _logger = loggerFactory.CreateLogger<DbConnection>();
-            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={path};Persist Security Info=True";
+            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={local};Persist Security Info=True";
         }
         public DataTable GetModelDetails(string rawSql)
         {

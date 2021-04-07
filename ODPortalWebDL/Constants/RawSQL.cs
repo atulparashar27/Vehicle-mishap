@@ -99,6 +99,24 @@ namespace ODPortalWebDL.Constants
                     $"mstBr.INI_JIG_NON, attend.Act_Date ";
         }
 
+        internal static string ReportsBranchPeopleSummary(BranchPeopleSummaryModel branchPeopleAttendance)
+        {
+            string allActCode = string.Join("' , '", branchPeopleAttendance.ActivityCode);
+            return $"SELECT code.Act_cd, code.Act_Name as Act_Name, mstBr.UID_No as UID_No, " +
+                    $"mstBr.Roll_NO as Roll_NO, mstBr.Name_Full as Name_Full, mstBr.Mobile, " +
+                    $"mstBr.INI_JIG_NON as INI_JIG_NON, attend.Act_Date as Act_Date, " +
+                    $"count(mstBr.Roll_NO) as AttendanceCount, mstBr.SANT_SU " +
+                    $"FROM BranchMaster mstBr, Act2018 attend, ActivityCode code " +
+                    $"WHERE mstBr.Roll_NO = attend.Roll_NO " +
+                    $"AND attend.Act_cd = code.Act_cd " +
+                    $"AND attend.Act_cd in ('{allActCode}') " +
+                    $"AND attend.Act_Date >= #{branchPeopleAttendance.StartDate}# " +
+                    $"AND attend.Act_Date <= #{branchPeopleAttendance.EndDate}# " +
+                    $"GROUP BY code.Act_Name, mstBr.UID_No, mstBr.Roll_NO, mstBr.Name_Full, " +
+                    $"mstBr.INI_JIG_NON, attend.Act_Date, code.Act_cd, mstBr.Mobile, mstBr.SANT_SU " +
+                    $"ORDER BY mstBr.Name_Full";
+        }
+
         internal static string GetProfileData(string uidNo, string rollNo)
         {
             var doubleRollNo = Convert.ToDouble(rollNo);

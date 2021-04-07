@@ -28,6 +28,7 @@ export const MAIN = {
           GET_ASSIGNED_PERMISSIONS: 'Roles/GetAssignedRoles',
           SAVE_USER_PERMISSIONS: 'Roles/AssignUnassignRoles',
           GET_ALL_BRANCH_PEOPLE_ATTENDANCE: 'Reports/GetPeopleAttendance',
+          GET_ALL_BRANCH_PEOPLE_ATTENDANCE_SUMMARY: 'Reports/GetPeopleAttendanceSummary',
           GET_ALL_LOCALITY_LIST: 'Misc/GetLocalityList',
           GET_ALL_LOCALITY_PEOPLE_LIST: 'Misc/GetLocalityPeopleList',
           GET_MENU_JSON: '/assets/json/menu.json'

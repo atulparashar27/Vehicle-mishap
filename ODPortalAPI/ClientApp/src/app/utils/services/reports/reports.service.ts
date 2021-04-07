@@ -22,4 +22,9 @@ export class ReportsService extends HttpService {
     return this.postWithoutHeaders(this.relativeUrl +
       CONSTANTS.MAIN.APP.URLS.GET_ALL_BRANCH_PEOPLE_ATTENDANCE + `?page=${page}`, dataToPush);
   }
+
+  getBranchPeopleAttendanceSummary(dataToPush) {
+    return this.postWithoutHeaders(this.relativeUrl +
+      CONSTANTS.MAIN.APP.URLS.GET_ALL_BRANCH_PEOPLE_ATTENDANCE_SUMMARY, dataToPush);
+  }
 }

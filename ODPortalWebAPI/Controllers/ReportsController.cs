@@ -35,5 +35,18 @@ namespace ODPortalWebAPI.Controllers
             };
             return Ok(result);
         }
+
+        [HttpPost]
+        [Route("GetPeopleAttendanceSummary")]
+        public IActionResult GetPeoplAttendanceSummary(BranchPeopleSummaryModel model)
+        {
+            var result = new RequestResult<List<BranchAttendanceSummary>>()
+            {
+                Data = _reportsManager.GetPeopleAttendanceSummary(model),
+                Message = "Success",
+                Success = true
+            };
+            return Ok(result);
+        }
     }
 }

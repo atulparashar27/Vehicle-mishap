@@ -1,1 +1,73 @@
-<p>attendance-summary works!</p>
+<div class="form-group row">
+    <div class="card col-md-12 col-sm-12">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-md-4 pr-1 pl-1 col-form-label requiredField">
+                            Activity
+                        </label>
+                        <div class="form-group">
+                            <ng-multiselect-dropdown [placeholder]="'-- Select Activity --'"
+                                [settings]="dropdownSettings" [(ngModel)]="selectedActivityCode"
+                                [data]="allActivityDDList">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-md-8 pr-1 pl-1 col-form-label requiredField">
+                            Start & End Date
+                        </label>
+                        <div class="form-group">
+                            <input class="form-control" autocomplete="off" id="attendDate" name="date"
+                                [disabled]="false" class="form-control" [(bsValue)]="attendDateRange"
+                                value="{{ attendDateRange | date:'dd-MM-yyyy' }}" placeholder="Date Range" type="text"
+                                [bsConfig]="{ isAnimated: true, containerClass: 'theme-dark-blue',
+                                rangeInputFormat : 'DD-MM-YYYY', dateInputFormat: 'DD-MM-YYYY' }" bsDaterangepicker />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-md-3 pr-1 pl-1 col-form-label">
+                    </label>
+                    <div class="row" style="margin-left: 0px;">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-round"
+                                [disabled]="!(attendDateRange && selectedActivityCode.length !== 0)"
+                                (click)="getBranchPeopleAttendance()">Submit
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger btn-round" (click)="clearAll()"> Clear
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-round" [disabled]="branchPeopleAttendance.length === 0"
+                             (click)="onBtnExport();">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card col-md-12">
+        <div class="card-body">
+            <div class="form-group">
+                <div class="row boxShadow" (window:resize)="onResize($event)"
+                    [style.height]="(height > 350 ? height : 300) + 'px'">
+                    <ag-grid-angular #attendanceTable style="width: 100%; height: 100%;" rowSelection="multiple"
+                        [localeText]="{noRowsToShow: ''}" [rowData]="branchPeopleAttendance"
+                        [columnDefs]="branchPeopleAttendanceColumDefs" [class]="tableTheme"
+                        [rowMultiSelectWithClick]="true" (gridReady)="onGridReady($event)">
+                    </ag-grid-angular>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <ngb-pagination class="d-flex justify-content-end" [collectionSize]="pageSize" [(page)]="page" [maxSize]="5" 
+        [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="changePage($event)"></ngb-pagination>
+    </div>
+</div>

@@ -25,7 +25,7 @@ namespace ODPortalWebAPI.Controllers
 
         [HttpGet]
         [Route("GetAllActivity")]
-        public IActionResult GetActivity()
+        public async Task<IActionResult> GetActivity()
         {
             var res = new RequestResult<List<AllActivityCode>>()
             {

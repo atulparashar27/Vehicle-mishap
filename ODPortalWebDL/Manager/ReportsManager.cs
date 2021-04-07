@@ -21,5 +21,7 @@ namespace ODPortalWebDL.Manager
             }
             return _reportsDataAccess.GetPeopleAttendance(branchPeopleAttendance, page);
         }
+
+        public List<BranchAttendanceSummary> GetPeopleAttendanceSummary(BranchPeopleSummaryModel branchPeopleAttendance) => _reportsDataAccess.GetPeopleAttendanceSummary(branchPeopleAttendance);
     }
 }

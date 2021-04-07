@@ -68,9 +68,53 @@ namespace ODPortalWebDL.DataAccess
                 };
                 lst.Add(record);
             }
-            var finalLst = new BranchPeoplePaginationAttendance();
-            finalLst.BranchPeopleAttendance = lst;
-            finalLst.Count = 0;
+            var finalLst = new BranchPeoplePaginationAttendance
+            {
+                BranchPeopleAttendance = lst,
+                Count = 0
+            };
+            return finalLst;
+        }
+        internal List<BranchAttendanceSummary> GetPeopleAttendanceSummary(BranchPeopleSummaryModel branchPeopleAttendance)
+        {
+            var tableResponse = _dbConnection.GetModelDetails(RawSQL.ReportsBranchPeopleSummary(branchPeopleAttendance));
+            List<BranchPeopleAttendance> lst = new List<BranchPeopleAttendance>();
+            foreach (DataRow dataRow in tableResponse.AsEnumerable())
+            {
+                var record = new BranchPeopleAttendance()
+                {
+                    BrTitle = dataRow.Field<string>("INI_JIG_NON") == "INI" ? "Initiated"
+                                    : dataRow.Field<string>("INI_JIG_NON") == "CHL" && string.IsNullOrWhiteSpace(dataRow.Field<string>("SANT_SU")) ? "Children"
+                                    : dataRow.Field<string>("INI_JIG_NON") == "CHL" && !string.IsNullOrWhiteSpace(dataRow.Field<string>("SANT_SU")) ? "SantSu"
+                                    : dataRow.Field<string>("INI_JIG_NON") == "OTH" ? "Other"
+                                    : dataRow.Field<string>("INI_JIG_NON") == "JIG" ? "Jigyasu" : "",
+                    ActivityName = dataRow.Field<string>("Act_Name"),
+                    AttendanceDate = dataRow.Field<DateTime?>("Act_Date")
+                };
+                lst.Add(record);
+            }
+
+            List<BranchAttendanceSummary> finalLst = new List<BranchAttendanceSummary>();
+            foreach (var calc in lst.OrderBy(s => s.AttendanceDate).GroupBy(s => new { s.ActivityName , s.AttendanceDate }))
+            {
+                var totalIni = calc.Count(s => s.BrTitle == "Initiated");
+                var totalJig = calc.Count(s => s.BrTitle == "Jigyasu");
+                var totalOther = calc.Count(s => s.BrTitle == "Other");
+                var totalChild = calc.Count(s => s.BrTitle == "Children");
+                var totalSantSu = calc.Count(s => s.BrTitle == "SantSu");
+                var totalPeople = totalIni + totalJig + totalOther + totalChild + totalSantSu;
+                finalLst.Add(new BranchAttendanceSummary
+                {
+                    ActivityName = calc.Key.ActivityName,
+                    AttendanceDate = calc.Key.AttendanceDate,
+                    TotalIni = totalIni,
+                    TotalJig = totalJig,
+                    TotalChil = totalChild,
+                    TotalSantSu = totalSantSu,
+                    TotalOther = totalOther,
+                    TotalPeople = totalPeople
+                });
+            }
             return finalLst;
         }
     }
