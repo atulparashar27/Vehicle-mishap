@@ -20,6 +20,7 @@ namespace ODPortalWebDL.DTO
         public string SingleActivityCode { get; set; }
         public DateTime? AttendanceDate { get; internal set; }
         public string MobileNum { get; internal set; }
+        public bool IsVisitors { get; set; }
     }
     public class BranchPeoplePaginationAttendance
     {
@@ -37,6 +38,8 @@ namespace ODPortalWebDL.DTO
         public int TotalOther { get; set; }
         public string ActivityName { get; set; }
         public DateTime? AttendanceDate { get; set; }
+        public int TotalVisitorOther { get; internal set; }
+        public int TotalVisitorIni { get; internal set; }
     }
 
     public class BranchPeopleSummaryModel

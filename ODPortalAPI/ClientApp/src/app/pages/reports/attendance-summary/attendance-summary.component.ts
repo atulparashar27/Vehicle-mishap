@@ -30,9 +30,11 @@ export class AttendanceSummaryComponent implements OnInit {
     { headerName: 'Attendance Date', field: 'attendanceDate', width: 150, resizable: true, filter: true, sortable: true },
     { headerName: 'Total Initiated', field: 'totalIni', width: 150, resizable: true, filter: true, sortable: true },
     { headerName: 'Total Jigyasu', field: 'totalJig', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Total Child', field: 'totalChil', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Total Sant Su', field: 'totalSantSu', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Total Other', field: 'totalOther', width: 150, resizable: true, filter: true, sortable: true },
+    { headerName: 'Total Childs', field: 'totalChil', width: 150, resizable: true, filter: true, sortable: true },
+    // { headerName: 'Total Sant Su', field: 'totalSantSu', width: 150, resizable: true, filter: true, sortable: true },
+    { headerName: 'Total Others', field: 'totalOther', width: 150, resizable: true, filter: true, sortable: true },
+    { headerName: 'Total Initiated Visitors', field: 'totalVisitorIni', width: 150, resizable: true, filter: true, sortable: true },
+    { headerName: 'Total Other Visitors', field: 'totalVisitorOther', width: 150, resizable: true, filter: true, sortable: true },
     { headerName: 'Total People', field: 'totalPeople', width: 150, resizable: true, filter: true, sortable: true },
   ];
   gridApi: GridOptions;

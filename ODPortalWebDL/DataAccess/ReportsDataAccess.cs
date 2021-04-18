@@ -77,9 +77,9 @@ namespace ODPortalWebDL.DataAccess
         }
         internal List<BranchAttendanceSummary> GetPeopleAttendanceSummary(BranchPeopleSummaryModel branchPeopleAttendance)
         {
-            var tableResponse = _dbConnection.GetModelDetails(RawSQL.ReportsBranchPeopleSummary(branchPeopleAttendance));
+            var branchAttendance = _dbConnection.GetModelDetails(RawSQL.ReportsBranchPeopleSummary(branchPeopleAttendance));
             List<BranchPeopleAttendance> lst = new List<BranchPeopleAttendance>();
-            foreach (DataRow dataRow in tableResponse.AsEnumerable())
+            foreach (DataRow dataRow in branchAttendance.AsEnumerable())
             {
                 var record = new BranchPeopleAttendance()
                 {
@@ -94,27 +94,44 @@ namespace ODPortalWebDL.DataAccess
                 lst.Add(record);
             }
 
+            var visitorsAttendance = _dbConnection.GetModelDetails(RawSQL.ReportsBranchVisitorsPeopleSummary(branchPeopleAttendance));
+            foreach (DataRow dataRow in visitorsAttendance.AsEnumerable())
+            {
+                var record = new BranchPeopleAttendance()
+                {
+                    BrTitle = dataRow.Field<string>("Initiated").ToLower() == "yes".ToLower() ? "Initiated" : "Other" ,
+                    ActivityName = dataRow.Field<string>("Act_Name"),
+                    AttendanceDate = dataRow.Field<DateTime?>("Act_Date"),
+                    IsVisitors = true
+                };
+                lst.Add(record);
+            }
             List<BranchAttendanceSummary> finalLst = new List<BranchAttendanceSummary>();
             foreach (var calc in lst.OrderBy(s => s.AttendanceDate).GroupBy(s => new { s.ActivityName , s.AttendanceDate }))
             {
-                var totalIni = calc.Count(s => s.BrTitle == "Initiated");
+                var totalIni = calc.Where(s => s.IsVisitors != true).Count(s => s.BrTitle == "Initiated");
                 var totalJig = calc.Count(s => s.BrTitle == "Jigyasu");
-                var totalOther = calc.Count(s => s.BrTitle == "Other");
+                var totalOther = calc.Where(s => s.IsVisitors != true).Count(s => s.BrTitle == "Other");
                 var totalChild = calc.Count(s => s.BrTitle == "Children");
                 var totalSantSu = calc.Count(s => s.BrTitle == "SantSu");
-                var totalPeople = totalIni + totalJig + totalOther + totalChild + totalSantSu;
+                var totalVisitorIni = calc.Where(s => s.IsVisitors).Count(s => s.BrTitle == "Initiated");
+                var totalVisitorOthers = calc.Where(s => s.IsVisitors).Count(s => s.BrTitle == "Other");
+                var totalPeople = totalIni + totalJig + totalOther + totalChild + totalSantSu + totalVisitorIni + totalVisitorOthers;
                 finalLst.Add(new BranchAttendanceSummary
                 {
                     ActivityName = calc.Key.ActivityName,
                     AttendanceDate = calc.Key.AttendanceDate,
                     TotalIni = totalIni,
                     TotalJig = totalJig,
-                    TotalChil = totalChild,
-                    TotalSantSu = totalSantSu,
+                    TotalChil = totalChild + totalSantSu,
+                    //TotalSantSu = totalSantSu,
                     TotalOther = totalOther,
+                    TotalVisitorIni = totalVisitorIni,
+                    TotalVisitorOther = totalVisitorOthers,
                     TotalPeople = totalPeople
                 });
             }
+            lst.Clear();
             return finalLst;
         }
     }

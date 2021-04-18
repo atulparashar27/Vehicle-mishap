@@ -117,6 +117,19 @@ namespace ODPortalWebDL.Constants
                     $"ORDER BY mstBr.Name_Full";
         }
 
+        internal static string ReportsBranchVisitorsPeopleSummary(BranchPeopleSummaryModel branchPeopleAttendance)
+        {
+            string allActCode = string.Join("' , '", branchPeopleAttendance.ActivityCode);
+            return $"SELECT code.Act_cd as Act_cd, code.Act_Name as Act_Name, attend.Initiated as Initiated ,    " +
+                    $" attend.Act_Date as Act_Date " +
+                    $"FROM VisitorOD attend inner join ActivityCode code " +
+                    $"on attend.Act_cd = code.Act_cd " +
+                    $"WHERE attend.Act_cd in ('{allActCode}') " +
+                    $"AND attend.Act_Date >= #{branchPeopleAttendance.StartDate}# " +
+                    $"AND attend.Act_Date <= #{branchPeopleAttendance.EndDate}# ";
+
+        }
+
         internal static string GetProfileData(string uidNo, string rollNo)
         {
             var doubleRollNo = Convert.ToDouble(rollNo);
