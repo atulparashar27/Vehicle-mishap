@@ -87,5 +87,18 @@ namespace ODPortalWebAPI.Controllers
             };
             return Ok(res);
         }
+
+        [HttpPost]
+        [Route("VoidAttendance")]
+        public IActionResult VoidAttendance(string actCode, DateTime actDate)
+        {
+            var res = new RequestResult<bool>
+            {
+                Data = _attendanceManager.VoidActivityAttendance(actCode, actDate),
+                Message = "Success",
+                Success = true
+            };
+            return Ok(res);
+        }
     }
 }

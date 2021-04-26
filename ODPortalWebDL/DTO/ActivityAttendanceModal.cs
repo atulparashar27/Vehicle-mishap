@@ -17,6 +17,7 @@ namespace ODPortalWebDL.DTO
         public List<int> RollNoList { get; set; }
         public string ActivityCode { get; set; }
         public string ActivityDate { get;set;}
+        public List<string> Name { get; set; }
     }
 
     public class SavedAttendanceModal

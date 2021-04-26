@@ -80,6 +80,18 @@ namespace ODPortalWebDL.Constants
                     $"ORDER BY mstBr.Name_Full" ;
         }
 
+        internal static string ReportsBranchPeopleAttendanceVoided(List<string> activityCode, DateTime? startDate, DateTime? endDate)
+        {
+            string allActCode = string.Join("' , '", activityCode);
+            return $"SELECT code.Act_cd, code.Act_Name as Act_Name, attend.Act_Date as Act_Date " +
+                    $"FROM Act2018 attend, ActivityCode code " +
+                    $"WHERE attend.Act_cd = code.Act_cd " +
+                    $"AND attend.Act_cd in ('{allActCode}') " +
+                    $"AND attend.Act_Date >= #{startDate}# " +
+                    $"AND attend.Act_Date <= #{endDate}# " +
+                    $"AND attend.NoActivity like '%NA%'" +
+                    $"GROUP BY code.Act_cd, code.Act_Name, attend.Act_Date ";
+        }
 
         internal static string ReportsBranchIndividualAttendance(BranchPeopleAttendance branchPeopleAttendance)
         {
@@ -117,16 +129,16 @@ namespace ODPortalWebDL.Constants
                     $"ORDER BY mstBr.Name_Full";
         }
 
-        internal static string ReportsBranchVisitorsPeopleSummary(BranchPeopleSummaryModel branchPeopleAttendance)
+        internal static string ReportsBranchVisitorsPeopleSummary(List<string> activityCode, DateTime? startDate, DateTime? endDate)
         {
-            string allActCode = string.Join("' , '", branchPeopleAttendance.ActivityCode);
+            string allActCode = string.Join("' , '", activityCode);
             return $"SELECT code.Act_cd as Act_cd, code.Act_Name as Act_Name, attend.Initiated as Initiated ,    " +
                     $" attend.Act_Date as Act_Date " +
                     $"FROM VisitorOD attend inner join ActivityCode code " +
                     $"on attend.Act_cd = code.Act_cd " +
                     $"WHERE attend.Act_cd in ('{allActCode}') " +
-                    $"AND attend.Act_Date >= #{branchPeopleAttendance.StartDate}# " +
-                    $"AND attend.Act_Date <= #{branchPeopleAttendance.EndDate}# ";
+                    $"AND attend.Act_Date >= #{startDate}# " +
+                    $"AND attend.Act_Date <= #{endDate}# ";
 
         }
 

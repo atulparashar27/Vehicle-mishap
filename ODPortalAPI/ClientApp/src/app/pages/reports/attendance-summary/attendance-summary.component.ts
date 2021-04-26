@@ -28,14 +28,37 @@ export class AttendanceSummaryComponent implements OnInit {
   branchPeopleAttendanceColumDefs = [
     { headerName: 'Activity Name', field: 'activityName', width: 220, resizable: true, filter: true, sortable: true },
     { headerName: 'Attendance Date', field: 'attendanceDate', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Total Initiated', field: 'totalIni', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Total Jigyasu', field: 'totalJig', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Total Childs', field: 'totalChil', width: 150, resizable: true, filter: true, sortable: true },
+    {
+      headerName: 'Total Initiated', field: 'totalIni', width: 150,
+       resizable: true, filter: true, sortable: true,
+      cellClassRules: {
+        'rag-red': (param) => +param.value === -1
+      } },
+    { headerName: 'Total Jigyasu', field: 'totalJig', width: 150, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => +param.value === -1
+    } },
+    { headerName: 'Total Childs', field: 'totalChil', width: 150, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => +param.value === -1
+    } },
     // { headerName: 'Total Sant Su', field: 'totalSantSu', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Total Others', field: 'totalOther', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Total Initiated Visitors', field: 'totalVisitorIni', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Total Other Visitors', field: 'totalVisitorOther', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Total People', field: 'totalPeople', width: 150, resizable: true, filter: true, sortable: true },
+    { headerName: 'Total Others', field: 'totalOther', width: 150, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => +param.value === -1
+    } },
+    { headerName: 'Total Initiated Visitors', field: 'totalVisitorIni', width: 150, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => +param.value === -1
+    } },
+    { headerName: 'Total Other Visitors', field: 'totalVisitorOther', width: 150, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => +param.value === -1
+    } },
+    { headerName: 'Total People', field: 'totalPeople', width: 150, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => +param.value === -1
+    } },
   ];
   gridApi: GridOptions;
   page = 1;

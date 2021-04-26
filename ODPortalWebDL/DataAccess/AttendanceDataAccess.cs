@@ -79,7 +79,15 @@ namespace ODPortalWebDL.DataAccess
 
         internal bool DeleteSavedAttendance(SubmitActivityAttendanceModal deleteSavedAttendance)
         {
-            return _dbConnection.DeleteSavedAttendance(deleteSavedAttendance) > 1 ? true : false;
+            if (deleteSavedAttendance.RollNoList.Count > 0)
+            {
+                _dbConnection.DeleteSavedAttendance(deleteSavedAttendance);
+            }
+            if (deleteSavedAttendance.Name.Count > 0)
+            {
+                _dbConnection.DeleteVisitorsSavedAttendance(deleteSavedAttendance);
+            }
+            return true;
         }
 
         internal bool SubmitVisitorsAttendance(List<VisitorsAttendanceModal> visitors)
@@ -103,7 +111,13 @@ namespace ODPortalWebDL.DataAccess
                 };
                 attendPeopleList.Add(record);
             }
-                return attendPeopleList;
+            return attendPeopleList;
+        }
+
+
+        internal void VoidActivityAttendance(string actCode, DateTime actDate)
+        {
+             _dbConnection.VoidActivityAttendance(actCode, actDate);
         }
 
     }

@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ODPortalWebDL.DataAccess
 {
@@ -16,6 +17,7 @@ namespace ODPortalWebDL.DataAccess
         private readonly string local = Environment.CurrentDirectory + $"\\App_Data\\odrsa-database.accdb";
         private readonly string prod = "d:\\DZHosts\\LocalUser\\atulparashar27\\www.odrsa.somee.com\\server\\App_Data\\odrsa-database.accdb";
         private readonly string connString = "";
+        private readonly object lockObj = new object();
 
         public DbConnection()
         {
@@ -66,18 +68,33 @@ namespace ODPortalWebDL.DataAccess
                     using (var cmd = new OleDbCommand(@"Insert into Act2018 (Roll_NO, Act_cd, Act_Date) VALUES (@Roll_NO, @Act_cd, @Act_Date)", connection))
                     {
                         cmd.CommandTimeout = 300;
-                        foreach (var rollNo in submitActivityAttendanceModal.RollNoList)
+                        Parallel.ForEach(submitActivityAttendanceModal.RollNoList , rollNo =>
                         {
-                            cmd.Parameters.Clear();
-                            cmd.Parameters.AddRange(new OleDbParameter[]
-                            {
-                                new OleDbParameter { ParameterName = "@Roll_NO", Value = rollNo },
-                                new OleDbParameter { ParameterName = "@Act_cd", Value = submitActivityAttendanceModal.ActivityCode },
-                                new OleDbParameter { ParameterName = "@Act_Date", Value = submitActivityAttendanceModal.ActivityDate },
-                            });
-                            final = final + cmd.ExecuteNonQuery();
-                        }
+                           lock (lockObj)
+                           {
+                               cmd.Parameters.Clear();
+                               cmd.Parameters.AddRange(new OleDbParameter[]
+                               {
+                                    new OleDbParameter { ParameterName = "@Roll_NO", Value = rollNo },
+                                    new OleDbParameter { ParameterName = "@Act_cd", Value = submitActivityAttendanceModal.ActivityCode },
+                                    new OleDbParameter { ParameterName = "@Act_Date", Value = submitActivityAttendanceModal.ActivityDate },
+                               });
+                               cmd.ExecuteNonQueryAsync();
+                           }
+                        });
+                        //foreach (var rollNo in submitActivityAttendanceModal.RollNoList)
+                        //{
+                        //    cmd.Parameters.Clear();
+                        //    cmd.Parameters.AddRange(new OleDbParameter[]
+                        //    {
+                        //        new OleDbParameter { ParameterName = "@Roll_NO", Value = rollNo },
+                        //        new OleDbParameter { ParameterName = "@Act_cd", Value = submitActivityAttendanceModal.ActivityCode },
+                        //        new OleDbParameter { ParameterName = "@Act_Date", Value = submitActivityAttendanceModal.ActivityDate },
+                        //    });
+                        //    cmd.ExecuteNonQuery();
+                        //}
                     }
+                    //return Task.FromResult(bool);
                     return true;
                 }
             }
@@ -126,6 +143,35 @@ namespace ODPortalWebDL.DataAccess
                 rowAffected = 0;
             }
         }
+
+        internal void VoidActivityAttendance(string actCode, DateTime actDate)
+        {
+            try
+            {
+                using (var connection = new OleDbConnection(connString))
+                {
+                    connection.Open();
+                    using (var cmd = new OleDbCommand(@"Insert into Act2018 (Roll_NO, Act_cd, Act_Date, NoActivity) VALUES (@Roll_NO, @Act_cd, @Act_Date, @NoActivity)", connection))
+                    {
+                        cmd.CommandTimeout = 300;
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddRange(new OleDbParameter[]
+                        {
+                            new OleDbParameter { ParameterName = "@Roll_NO", Value = -1 },
+                            new OleDbParameter { ParameterName = "@Act_cd", Value = actCode },
+                            new OleDbParameter { ParameterName = "@Act_Date", Value = actDate },
+                            new OleDbParameter { ParameterName = "@NoActivity", Value = "NA" },
+                        });
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"$$$SaveActivityAttend$$$####Error Message ->>>{ex} && {ex.Message}###### + StackTrace {ex.StackTrace}######## + InnerEx{ex.InnerException}#####");
+            }
+        }
+
         public void UpdateActivity(AllActivityCode allActivityCode, out int rowAffected)
         {
             try
@@ -174,6 +220,7 @@ namespace ODPortalWebDL.DataAccess
         internal int DeleteSavedAttendance(SubmitActivityAttendanceModal obj)
         {
             int final = 0;
+            List<int> validRollNum = obj.RollNoList.Where(s => s != 0).Select(s => s).ToList();
             try
             {
                 using (var connection = new OleDbConnection(connString))
@@ -183,11 +230,11 @@ namespace ODPortalWebDL.DataAccess
                     {
                         cmd.Connection = connection;
                         cmd.CommandTimeout = 300;
-                        for (int i = 0; i < obj.RollNoList.Count(); i++)
+                        for (int i = 0; i < validRollNum.Count(); i++)
                         {
                             cmd.Parameters.Clear();
                             cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_Date", Value = (obj.ActivityDate), OleDbType = OleDbType.Date });
-                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Roll_No", Value = obj.RollNoList[i], OleDbType = OleDbType.SmallInt });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Roll_No", Value = validRollNum[i], OleDbType = OleDbType.SmallInt });
                             cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_cd", Value = obj.ActivityCode, OleDbType = OleDbType.WChar });
                             final += cmd.ExecuteNonQuery();
                         }
@@ -202,6 +249,36 @@ namespace ODPortalWebDL.DataAccess
             }
         }
 
+        internal int DeleteVisitorsSavedAttendance(SubmitActivityAttendanceModal obj)
+        {
+            int final = 0;
+            try
+            {
+                using (var connection = new OleDbConnection(connString))
+                {
+                    connection.Open();
+                    using (var cmd = new OleDbCommand("DELETE FROM VisitorOD WHERE Act_Date = @Act_Date and VisitorName = @VisitorName and Act_cd = @Act_cd", connection))
+                    {
+                        cmd.Connection = connection;
+                        cmd.CommandTimeout = 300;
+                        for (int i = 0; i < obj.Name.Count(); i++)
+                        {
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_Date", Value = (obj.ActivityDate), OleDbType = OleDbType.Date });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@VisitorName", Value = obj.Name[i], OleDbType = OleDbType.VarChar });
+                            cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_cd", Value = obj.ActivityCode, OleDbType = OleDbType.WChar });
+                            final += cmd.ExecuteNonQuery();
+                        }
+                    }
+                    return final;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"ManageActivity####Error Message ->>>{ex} && {ex.Message}###### + StackTrace {ex.StackTrace}######## + InnerEx{ex.InnerException}#####");
+                return 0;
+            }
+        }
 
         internal int UnassignRoles(UpdateRolesModal updateRolesModal)
         {

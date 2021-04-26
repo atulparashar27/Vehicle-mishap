@@ -17,8 +17,10 @@ namespace ODPortalWebDL.DataAccess
         }
         internal BranchPeoplePaginationAttendance GetPeopleAttendance(BranchPeopleAttendance branchPeopleAttendance, int page)
         {
-            var tableResponse = _dbConnection.GetModelDetails(RawSQL.ReportsBranchPeopleAttendance(branchPeopleAttendance));
             var lst = new List<BranchPeopleAttendance>();
+
+            // Users Attendance
+            var tableResponse = _dbConnection.GetModelDetails(RawSQL.ReportsBranchPeopleAttendance(branchPeopleAttendance));
             foreach (DataRow dataRow in tableResponse.AsEnumerable())
             {
                 var record = new BranchPeopleAttendance
@@ -35,6 +37,40 @@ namespace ODPortalWebDL.DataAccess
                     SingleActivityCode = dataRow.Field<string>("Act_cd"),
                     AttendanceDate = dataRow.Field<DateTime?>("Act_Date"),
                     MobileNum = dataRow.Field<string>("Mobile")
+                };
+                lst.Add(record);
+            }
+
+            // Visitors Attendance Result
+            var visitorsAttendance = _dbConnection.GetModelDetails(RawSQL.ReportsBranchVisitorsPeopleSummary(branchPeopleAttendance.ActivityCode,
+                branchPeopleAttendance.StartDate, branchPeopleAttendance.EndDate));
+            foreach (DataRow dataRow in visitorsAttendance.AsEnumerable())
+            {
+                var record = new BranchPeopleAttendance()
+                {
+                    BrTitle = dataRow.Field<string>("Initiated").ToLower() == "yes".ToLower() ? "Initiated" : "Other",
+                    ActivityName = dataRow.Field<string>("Act_Name"),
+                    AttendanceDate = dataRow.Field<DateTime?>("Act_Date"),
+                    IsVisitors = true
+                };
+                lst.Add(record);
+            }
+
+            // Voided Records
+            var tableResponseVoidedRec = _dbConnection.GetModelDetails(RawSQL.ReportsBranchPeopleAttendanceVoided(branchPeopleAttendance.ActivityCode, branchPeopleAttendance.StartDate, branchPeopleAttendance.EndDate));
+            foreach (DataRow dataRow in tableResponseVoidedRec.AsEnumerable())
+            {
+                var record = new BranchPeopleAttendance
+                {
+                    UidNo = "NA",
+                    Name = "NA",
+                    RollNo = -1,
+                    BrTitle = "NA",
+                    AttendanceCount = 1,
+                    ActivityName = dataRow.Field<string>("Act_Name"),
+                    SingleActivityCode = dataRow.Field<string>("Act_cd"),
+                    AttendanceDate = dataRow.Field<DateTime?>("Act_Date"),
+                    MobileNum = "NA"
                 };
                 lst.Add(record);
             }
@@ -77,8 +113,10 @@ namespace ODPortalWebDL.DataAccess
         }
         internal List<BranchAttendanceSummary> GetPeopleAttendanceSummary(BranchPeopleSummaryModel branchPeopleAttendance)
         {
-            var branchAttendance = _dbConnection.GetModelDetails(RawSQL.ReportsBranchPeopleSummary(branchPeopleAttendance));
             List<BranchPeopleAttendance> lst = new List<BranchPeopleAttendance>();
+            
+            // Registered Users Attendance Result
+            var branchAttendance = _dbConnection.GetModelDetails(RawSQL.ReportsBranchPeopleSummary(branchPeopleAttendance));
             foreach (DataRow dataRow in branchAttendance.AsEnumerable())
             {
                 var record = new BranchPeopleAttendance()
@@ -94,7 +132,8 @@ namespace ODPortalWebDL.DataAccess
                 lst.Add(record);
             }
 
-            var visitorsAttendance = _dbConnection.GetModelDetails(RawSQL.ReportsBranchVisitorsPeopleSummary(branchPeopleAttendance));
+            // Visitors Attendance Result
+            var visitorsAttendance = _dbConnection.GetModelDetails(RawSQL.ReportsBranchVisitorsPeopleSummary(branchPeopleAttendance.ActivityCode, branchPeopleAttendance.StartDate, branchPeopleAttendance.EndDate));
             foreach (DataRow dataRow in visitorsAttendance.AsEnumerable())
             {
                 var record = new BranchPeopleAttendance()
@@ -124,14 +163,41 @@ namespace ODPortalWebDL.DataAccess
                     TotalIni = totalIni,
                     TotalJig = totalJig,
                     TotalChil = totalChild + totalSantSu,
-                    //TotalSantSu = totalSantSu,
                     TotalOther = totalOther,
                     TotalVisitorIni = totalVisitorIni,
                     TotalVisitorOther = totalVisitorOthers,
                     TotalPeople = totalPeople
                 });
             }
-            lst.Clear();
+
+            // Voided Attendance 
+            List<BranchPeopleAttendance> voidLst = new List<BranchPeopleAttendance>();
+            var branchVoidedRec = _dbConnection.GetModelDetails(RawSQL.ReportsBranchPeopleAttendanceVoided(branchPeopleAttendance.ActivityCode, branchPeopleAttendance.StartDate, branchPeopleAttendance.EndDate));
+            foreach (DataRow dataRow in branchVoidedRec.AsEnumerable())
+            {
+                var record = new BranchPeopleAttendance()
+                {
+                    BrTitle = "NA",
+                    ActivityName = dataRow.Field<string>("Act_Name"),
+                    AttendanceDate = dataRow.Field<DateTime?>("Act_Date")
+                };
+                voidLst.Add(record);
+            }
+            foreach(var add in voidLst)
+            {
+                finalLst.Add(new BranchAttendanceSummary
+                {
+                    ActivityName = add.ActivityName,
+                    AttendanceDate = add.AttendanceDate,
+                    TotalIni = -1,
+                    TotalJig = -1,
+                    TotalChil = -1,
+                    TotalOther = -1,
+                    TotalVisitorIni = -1,
+                    TotalVisitorOther = -1,
+                    TotalPeople = -1,
+                });
+            }
             return finalLst;
         }
     }

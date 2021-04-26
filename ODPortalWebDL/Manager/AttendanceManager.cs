@@ -41,5 +41,11 @@ namespace ODPortalWebDL.Manager
         {
             return _attendanceDataAccess.SubmitVisitorsAttendance(visitors);
         }
+
+        public bool VoidActivityAttendance(string actCode, DateTime actDate)
+        {
+            _attendanceDataAccess.VoidActivityAttendance(actCode, actDate);
+            return true;
+        }
     }
 }

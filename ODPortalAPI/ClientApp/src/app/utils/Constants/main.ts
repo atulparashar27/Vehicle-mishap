@@ -19,6 +19,7 @@ export const MAIN = {
           SAVE_QUALIFICATION_INFO: 'updateQualificationDetails',
           SAVE_COMPANY_INFO: 'updateCompanyDetails',
           GET_SAVED_ATTENDANCE: 'Attendance/GetSavedAttendance',
+          VOID_ATTENDANCE: 'Attendance/VoidAttendance',
           GET_FAMILY_DETAILS: 'UserProfile/GetFamilyDetails',
           SAVE_VISITORS_ATTENDANCE : 'Attendance/SubmitVisitorsAttendance',
           DELETE_SELECTED_PEOPLE_ATTENDANCE: 'Attendance/DeleteSavedAttendance',

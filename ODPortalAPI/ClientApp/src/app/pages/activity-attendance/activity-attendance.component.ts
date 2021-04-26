@@ -229,4 +229,27 @@ export class ActivityAttendanceComponent implements OnInit {
     this.activeModal.open(event);
   }
 
+  openProcessVoidConfirmModal(event) {
+    this.activeModal.open(event);
+  }
+
+  voidSelectedActivity() {
+    this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
+    this.attendanceService.voidSelectedAttendance(this.utilsService.formatDate(this.attendDate),
+    this.selectedActivityCode[0].actId).subscribe(
+      (response) => {
+        this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + 'Saved Successfully',
+            '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_SUCCESS);
+            setTimeout(() => { this.spinner.hide(); }, 1000);
+        this.attendDate = '';
+        this.selectedActivityCode = [];
+      },
+      (error) => {
+        setTimeout(() => { this.spinner.hide(); }, 1000);
+        const errMsg = this.utilsService.errorServiceHandler(error);
+        this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + errMsg,
+          '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
+      }
+    );
+  }
 }

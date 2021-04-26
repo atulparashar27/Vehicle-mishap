@@ -37,4 +37,9 @@ export class AttendanceService extends HttpService {
   deleteSelectedAttendance(data) {
     return this.postWithoutHeaders(this.relativeUrl + CONSTANTS.MAIN.APP.URLS.DELETE_SELECTED_PEOPLE_ATTENDANCE, data);
   }
+
+  voidSelectedAttendance(date, code) {
+    return this.postWithoutHeaders(this.relativeUrl + CONSTANTS.MAIN.APP.URLS.VOID_ATTENDANCE +
+       `?actCode=` + code + `&actDate=` + date, {});
+  }
 }

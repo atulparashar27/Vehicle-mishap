@@ -314,7 +314,8 @@ export class SavedAttendanceComponent implements OnInit {
     const dataToSend = {
       rollNoList: this.selectedRows.map(s => +s.rollNo),
       activityCode: this.routePassedCode,
-      activityDate: this.utilsService.formatDate(this.attendDate)
+      activityDate: this.utilsService.formatDate(this.attendDate),
+      name: this.selectedRows.filter(ele => !ele.rollNo).map(ele => ele.name)
     };
     this.spinner.show(undefined, { type: 'ball-fussion', color: 'rgba(100,149,237,.8)' });
     this.attendanceService.deleteSelectedAttendance(dataToSend).subscribe(
