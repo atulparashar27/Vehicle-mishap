@@ -66,7 +66,7 @@ namespace ODPortalWebDL.DataAccess
                     Name = "NA",
                     RollNo = -1,
                     BrTitle = "NA",
-                    AttendanceCount = 1,
+                    AttendanceCount = -1,
                     ActivityName = dataRow.Field<string>("Act_Name"),
                     SingleActivityCode = dataRow.Field<string>("Act_cd"),
                     AttendanceDate = dataRow.Field<DateTime?>("Act_Date"),

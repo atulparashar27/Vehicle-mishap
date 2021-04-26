@@ -5,6 +5,7 @@ using ODPortalWebDL.DTO.ExceptionModal;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ODPortalWebDL.Manager
 {
@@ -17,7 +18,7 @@ namespace ODPortalWebDL.Manager
             //_logger = logger;
             _activityCodeDataList = new ActivityCodeDataList();
         }
-        public List<AllActivityCode> GetAllActivity()
+        public Task<List<AllActivityCode>> GetAllActivity()
         {
             return _activityCodeDataList.GetAllActivity();
         }

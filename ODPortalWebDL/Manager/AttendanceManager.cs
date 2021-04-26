@@ -4,6 +4,7 @@ using ODPortalWebDL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ODPortalWebDL.Manager
 {
@@ -17,7 +18,7 @@ namespace ODPortalWebDL.Manager
             _attendanceDataAccess = new AttendanceDataAccess();
         }
 
-        public List<ActivityAttendanceModal> GetPeopleDate(string status)
+        public Task<List<ActivityAttendanceModal>> GetPeopleDate(string status)
         {
             return _attendanceDataAccess.GetPeopleDate(status);
         }

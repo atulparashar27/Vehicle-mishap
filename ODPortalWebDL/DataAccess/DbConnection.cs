@@ -23,7 +23,7 @@ namespace ODPortalWebDL.DataAccess
         {
             ILoggerFactory loggerFactory = new LoggerFactory();
             _logger = loggerFactory.CreateLogger<DbConnection>();
-            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={local};Persist Security Info=True";
+            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={prod};Persist Security Info=True";
         }
         public DataTable GetModelDetails(string rawSql)
         {

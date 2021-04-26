@@ -28,13 +28,31 @@ export class BranchPeopleAttendanceComponent implements OnInit {
   branchPeopleAttendanceColumDefs = [
     { headerName: 'Activity Code', field: 'singleActivityCode', width: 120, resizable: true, filter: true, sortable: true },
     { headerName: 'Activity Name', field: 'activityName', width: 220, resizable: true, filter: true, sortable: true },
-    { headerName: 'UID Number', field: 'uidNo', width: 120, resizable: true, filter: true, sortable: true },
-    { headerName: 'Roll Number', field: 'rollNo', width: 120, resizable: true, filter: true, sortable: true },
-    { headerName: 'Name', field: 'name', width: 220, resizable: true, filter: true, sortable: true },
-    { headerName: 'Branch Title', field: 'brTitle', width: 150, resizable: true, filter: true, sortable: true },
     { headerName: 'Attendance Date', field: 'attendanceDate', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Mobile Number', field: 'mobileNum', width: 150, resizable: true, filter: true, sortable: true },
-    { headerName: 'Attendance Count', field: 'attendanceCount', width: 150, resizable: true, filter: true, sortable: true }
+    { headerName: 'UID Number', field: 'uidNo', width: 120, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => param.value === 'NA'
+    } },
+    { headerName: 'Roll Number', field: 'rollNo', width: 120, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => +param.value === -1
+    } },
+    { headerName: 'Name', field: 'name', width: 220, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => param.value === 'NA'
+    } },
+    { headerName: 'Branch Title', field: 'brTitle', width: 150, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => param.value === 'NA'
+    } },
+    { headerName: 'Mobile Number', field: 'mobileNum', width: 150, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => param.value === 'NA'
+    } },
+    { headerName: 'Attendance Count', field: 'attendanceCount', width: 150, resizable: true, filter: true, sortable: true,
+    cellClassRules: {
+      'rag-red': (param) => +param.value === -1
+    } }
   ];
   branchPeopleDetailedAttendanceColumDefs = [
     { headerName: 'Activity Name', field: 'activityName', width: 220, resizable: true, filter: true, sortable: true },

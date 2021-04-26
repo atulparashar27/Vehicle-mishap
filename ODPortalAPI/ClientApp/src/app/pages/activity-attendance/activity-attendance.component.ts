@@ -182,7 +182,8 @@ export class ActivityAttendanceComponent implements OnInit {
             // this.resetAll();
           } else {
             setTimeout(() => { this.spinner.hide(); }, 1000);
-            this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + 'Could not save Attendance',
+            const msg = response.message ? response.message : 'Could not save Attendance';
+            this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + msg,
               '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
           }
         },

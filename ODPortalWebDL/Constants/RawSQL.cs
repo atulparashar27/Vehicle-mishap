@@ -58,6 +58,15 @@ namespace ODPortalWebDL.Constants
                     $"AND Act_date=#{actDate}# ";
         }
 
+        public static string GetVoidedAttendance(string activityDate, string activityCode)
+        {
+            return $"SELECT Act_cd, Act_Date " +
+                    $"FROM Act2018 " +
+                    $"WHERE Act_cd='{activityCode}' " +
+                    $"AND Act_Date= #{activityDate}# " +
+                    $"AND NoActivity='NA' ";
+        }
+
         internal static string ReportsBranchPeopleAttendance(BranchPeopleAttendance branchPeopleAttendance)
         {
             string allActCode = string.Join("' , '", branchPeopleAttendance.ActivityCode);

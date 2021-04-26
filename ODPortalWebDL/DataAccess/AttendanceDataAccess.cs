@@ -1,17 +1,20 @@
 ﻿using Microsoft.Extensions.Logging;
 using ODPortalWebDL.Constants;
 using ODPortalWebDL.DTO;
+using ODPortalWebDL.DTO.ExceptionModal;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ODPortalWebDL.DataAccess
 {
     public class AttendanceDataAccess
     {
         private readonly DbConnection _dbConnection;
+        private readonly object lockPeople = new object();
 
         //private readonly ILogger _logger;
         public AttendanceDataAccess()
@@ -19,26 +22,47 @@ namespace ODPortalWebDL.DataAccess
             //_logger = logger;
             _dbConnection = new DbConnection();
         }
-        internal List<ActivityAttendanceModal> GetPeopleDate(string status)
+        internal Task<List<ActivityAttendanceModal>> GetPeopleDate(string status)
         {
             var tableResponse = _dbConnection.GetModelDetails(RawSQL.GetAllPeopleList(status));
             List<ActivityAttendanceModal> peopleList = new List<ActivityAttendanceModal>();
-            foreach (DataRow dataRow in tableResponse.AsEnumerable())
+            Parallel.ForEach(tableResponse.AsEnumerable(), dataRow =>
             {
-                var record = new ActivityAttendanceModal()
+                lock (lockPeople)
                 {
-                    UidNo = dataRow.Field<string>("UID_No") ?? "",
-                    Name = dataRow.Field<string>("Name_Full"),
-                    RollNo = Convert.ToInt32(dataRow.Field<double>("Roll_No")),
-                    IniJigStatus = dataRow.Field<string>("INI_JIG_NON") == "INI" ? "Initiated" 
-                                    : dataRow.Field<string>("INI_JIG_NON") == "CHL" ? "Children" 
-                                    : dataRow.Field<string>("INI_JIG_NON") == "OTH" ? "Other" 
-                                    : dataRow.Field<string>("INI_JIG_NON") == "JIG" ? "Jigyasu" : "",
-                    FamilyCode = Convert.ToInt32(dataRow.Field<double>("Family_cd"))
-                };
-                peopleList.Add(record);
-            }
-            return peopleList;
+                    var record = new ActivityAttendanceModal()
+                    {
+                        UidNo = dataRow.Field<string>("UID_No") ?? "",
+                        Name = dataRow.Field<string>("Name_Full"),
+                        RollNo = Convert.ToInt32(dataRow.Field<double>("Roll_No")),
+                        IniJigStatus = dataRow.Field<string>("INI_JIG_NON") == "INI" ? "Initiated"
+                                                        : dataRow.Field<string>("INI_JIG_NON") == "CHL" ? "Children"
+                                                        : dataRow.Field<string>("INI_JIG_NON") == "OTH" ? "Other"
+                                                        : dataRow.Field<string>("INI_JIG_NON") == "JIG" ? "Jigyasu" : "",
+                        FamilyCode = Convert.ToInt32(dataRow.Field<double>("Family_cd"))
+                    };
+                    peopleList.Add(record);
+                }
+            });
+            //foreach (DataRow dataRow in tableResponse.AsEnumerable())
+            //{
+            //    lock(lockPeople)
+            //    {
+            //        var record = new ActivityAttendanceModal()
+            //        {
+            //            UidNo = dataRow.Field<string>("UID_No") ?? "",
+            //            Name = dataRow.Field<string>("Name_Full"),
+            //            RollNo = Convert.ToInt32(dataRow.Field<double>("Roll_No")),
+            //            IniJigStatus = dataRow.Field<string>("INI_JIG_NON") == "INI" ? "Initiated"
+            //                                            : dataRow.Field<string>("INI_JIG_NON") == "CHL" ? "Children"
+            //                                            : dataRow.Field<string>("INI_JIG_NON") == "OTH" ? "Other"
+            //                                            : dataRow.Field<string>("INI_JIG_NON") == "JIG" ? "Jigyasu" : "",
+            //            FamilyCode = Convert.ToInt32(dataRow.Field<double>("Family_cd"))
+            //        };
+            //        peopleList.Add(record);
+            //    }
+            //}
+            return Task.FromResult(peopleList);
         }
 
         internal SavedAttendanceModal GetSavedAttendance(string actCode, DateTime actDate)
@@ -74,6 +98,12 @@ namespace ODPortalWebDL.DataAccess
 
         internal bool SubmitActivityAttendance(SubmitActivityAttendanceModal submitActivityAttendanceModal)
         {
+            var tableResponse = _dbConnection.GetModelDetails(RawSQL.GetVoidedAttendance(submitActivityAttendanceModal.ActivityDate, submitActivityAttendanceModal.ActivityCode));
+            var checkRec = tableResponse.AsEnumerable().FirstOrDefault();
+            if (checkRec != null)
+            {
+                throw new CustomException("Selected Activity is voided, unable to post attendance");
+            }
             return _dbConnection.SaveActivityAttendance(submitActivityAttendanceModal);
         }
 

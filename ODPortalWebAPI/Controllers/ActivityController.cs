@@ -29,7 +29,7 @@ namespace ODPortalWebAPI.Controllers
         {
             var res = new RequestResult<List<AllActivityCode>>()
             {
-                Data = _activityCodeData.GetAllActivity(),
+                Data = await _activityCodeData.GetAllActivity(),
                 Message = "Success",
                 Success = true
             };

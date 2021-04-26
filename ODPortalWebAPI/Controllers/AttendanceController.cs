@@ -25,11 +25,11 @@ namespace ODPortalWebAPI.Controllers
 
         [HttpGet]
         [Route("GetPeopleData")]
-        public IActionResult GetPeopleData(string status)
+        public async Task<IActionResult> GetPeopleData(string status)
         {
             var result = new RequestResult<List<ActivityAttendanceModal>>()
             {
-                Data = _attendanceManager.GetPeopleDate(status),
+                Data = await _attendanceManager.GetPeopleDate(status),
                 Message = "Success",
                 Success = true
             };

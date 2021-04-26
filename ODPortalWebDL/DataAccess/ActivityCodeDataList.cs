@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ODPortalWebDL.DataAccess
 {
@@ -20,10 +21,10 @@ namespace ODPortalWebDL.DataAccess
             //_logger = logger;
             _dbConnection = new DbConnection();
         }
-        internal List<AllActivityCode> GetAllActivity()
+        internal Task<List<AllActivityCode>> GetAllActivity()
         {
             var tableResponse = JsonConvert.SerializeObject(_dbConnection.GetModelDetails(RawSQL.GetAllActCode()));
-            return JsonConvert.DeserializeObject<List<AllActivityCode>>(tableResponse);
+            return Task.FromResult(JsonConvert.DeserializeObject<List<AllActivityCode>>(tableResponse));
         }
 
         internal bool ManageActivity(AllActivityCode allActivityCode, string action)
