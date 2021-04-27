@@ -23,7 +23,7 @@ namespace ODPortalWebDL.DataAccess
         {
             ILoggerFactory loggerFactory = new LoggerFactory();
             _logger = loggerFactory.CreateLogger<DbConnection>();
-            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={prod};Persist Security Info=True";
+            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={local};Persist Security Info=True";
         }
         public DataTable GetModelDetails(string rawSql)
         {
@@ -172,6 +172,30 @@ namespace ODPortalWebDL.DataAccess
             }
         }
 
+        internal void UnVoidActivityAttendance(string actCode, DateTime actDate)
+        {
+            try
+            {
+                using (var connection = new OleDbConnection(connString))
+                {
+                    connection.Open();
+                    using (var cmd = new OleDbCommand("DELETE FROM Act2018 WHERE Act_Date = @Act_Date and Roll_NO = @Roll_NO and Act_cd = @Act_cd and NoActivity = @NoActivity", connection))
+                    {
+                        cmd.CommandTimeout = 300;
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_Date", Value = actDate, OleDbType = OleDbType.Date });
+                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Roll_No", Value = -1, OleDbType = OleDbType.SmallInt });
+                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_cd", Value = actCode, OleDbType = OleDbType.WChar });
+                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@NoActivity", Value = "NA", OleDbType = OleDbType.VarChar });
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"$$$SaveActivityAttend$$$####Error Message ->>>{ex} && {ex.Message}###### + StackTrace {ex.StackTrace}######## + InnerEx{ex.InnerException}#####");
+            }
+        }
         public void UpdateActivity(AllActivityCode allActivityCode, out int rowAffected)
         {
             try

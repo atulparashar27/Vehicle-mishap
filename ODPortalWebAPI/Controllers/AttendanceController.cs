@@ -100,5 +100,18 @@ namespace ODPortalWebAPI.Controllers
             };
             return Ok(res);
         }
+
+        [HttpDelete]
+        [Route("UnvoidAttendance")]
+        public IActionResult UnVoidAttendance(string actCode, DateTime actDate)
+        {
+            var res = new RequestResult<bool>
+            {
+                Data = _attendanceManager.UnVoidActivityAttendance(actCode, actDate),
+                Message = "Success",
+                Success = true
+            };
+            return Ok(res);
+        }
     }
 }

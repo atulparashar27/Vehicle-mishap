@@ -5,6 +5,7 @@ using ODPortalWebDL.DTO.ExceptionModal;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,10 +47,8 @@ namespace ODPortalWebDL.DataAccess
             });
             //foreach (DataRow dataRow in tableResponse.AsEnumerable())
             //{
-            //    lock(lockPeople)
+            //    var record = new ActivityAttendanceModal()
             //    {
-            //        var record = new ActivityAttendanceModal()
-            //        {
             //            UidNo = dataRow.Field<string>("UID_No") ?? "",
             //            Name = dataRow.Field<string>("Name_Full"),
             //            RollNo = Convert.ToInt32(dataRow.Field<double>("Roll_No")),
@@ -58,9 +57,8 @@ namespace ODPortalWebDL.DataAccess
             //                                            : dataRow.Field<string>("INI_JIG_NON") == "OTH" ? "Other"
             //                                            : dataRow.Field<string>("INI_JIG_NON") == "JIG" ? "Jigyasu" : "",
             //            FamilyCode = Convert.ToInt32(dataRow.Field<double>("Family_cd"))
-            //        };
-            //        peopleList.Add(record);
-            //    }
+            //      };
+            //      peopleList.Add(record);
             //}
             return Task.FromResult(peopleList);
         }
@@ -150,5 +148,9 @@ namespace ODPortalWebDL.DataAccess
              _dbConnection.VoidActivityAttendance(actCode, actDate);
         }
 
+        internal void UnVoidActivityAttendance(string actCode, DateTime actDate)
+        {
+            _dbConnection.UnVoidActivityAttendance(actCode, actDate);
+        }
     }
 }

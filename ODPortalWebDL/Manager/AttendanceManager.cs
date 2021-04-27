@@ -48,5 +48,11 @@ namespace ODPortalWebDL.Manager
             _attendanceDataAccess.VoidActivityAttendance(actCode, actDate);
             return true;
         }
+
+        public bool UnVoidActivityAttendance(string actCode, DateTime actDate)
+        {
+            _attendanceDataAccess.UnVoidActivityAttendance(actCode, actDate);
+            return true;
+        }
     }
 }

@@ -275,3 +275,7 @@ ODPortalWebDL.DTO.ExceptionModal.CustomException: Selected Activity is voided, u
 2021-04-26T20:42:28.8746310+05:30  [INF] Hosting environment: "Development" (c3307c92)
 2021-04-26T20:42:28.8783191+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
 2021-04-26T20:42:28.9626268+05:30 80000004-0001-fb00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2021-04-26T21:07:57.5348912+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-26T21:07:57.6199781+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-26T21:07:57.6298767+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
+2021-04-26T21:08:00.2376369+05:30 80000087-0006-fa00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)

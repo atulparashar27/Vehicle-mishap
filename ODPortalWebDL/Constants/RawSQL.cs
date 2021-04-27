@@ -38,7 +38,9 @@ namespace ODPortalWebDL.Constants
 
         public static string GetAllPeopleList(string status)
         {
-            return $"SELECT * FROM BranchMaster WHERE Status='{status}'";
+            return $"SELECT UID_No, Name_Full, Roll_No, INI_JIG_NON, Family_cd  " +
+                    $"FROM BranchMaster " +
+                    $"WHERE Status='{status}'";
         }
 
         public static string GetSavedAttendance(string actCode, DateTime actDate)
