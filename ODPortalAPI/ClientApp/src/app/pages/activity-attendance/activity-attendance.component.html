@@ -30,6 +30,7 @@
                                     value="{{ attendDate | date:'dd-MM-yyyy' }}" placeholder="Attendance Date"
                                     type="text" [bsConfig]="{ isAnimated: true, containerClass: 'theme-dark-blue',
                                     dateInputFormat: 'DD-MM-YYYY' }" bsDatepicker
+                                    [maxDate]="futureDateDisabled"
                                 />
                             </div>
                         </div>

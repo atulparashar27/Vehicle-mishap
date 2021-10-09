@@ -49,6 +49,7 @@ export class ActivityAttendanceComponent implements OnInit {
   attendDate = '';
   dropdownSettings = {};
   dropdownList = [];
+  futureDateDisabled: Date = new Date();
   @HostBinding('style.height') height;
   constructor(private attendanceService: AttendanceService, private spinner: NgxSpinnerService, private utilsService: UtilsService,
     private loginService: LoginService, public activeModal: NgbModal, private alertService: ToastrService) { }

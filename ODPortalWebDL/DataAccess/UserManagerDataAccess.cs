@@ -25,7 +25,7 @@ namespace ODPortalWebDL.DataAccess
         }
         internal GetUserLoginObject CheckUserPassWord(Credentials credentials)
         {
-            _logger.LogInformation($"$$$$$$ --- USER----{credentials.UserName} ----------$$$$$$$$$");
+            _logger.LogTrace($"$$$$$$ --- USER----{credentials.UserName} ----------$$$$$$$$$");
             var checkPassword = _dbConnection.GetModelDetails(RawSQL.GetAllUserPassword(credentials.UserName));
             var checkSecurity = checkPassword.AsEnumerable().FirstOrDefault();
             if (checkSecurity != null)

@@ -72,5 +72,14 @@ namespace ODPortalWebAPI
                     defaults: new { id = RouteParameter.Optional });
             });
         }
+
+        //private void AddAuthentication(IServiceCollection services)
+        //{
+        //    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //        .AddJwtBearer(option =>
+        //        {
+
+        //        });
+        //}
     }
 }

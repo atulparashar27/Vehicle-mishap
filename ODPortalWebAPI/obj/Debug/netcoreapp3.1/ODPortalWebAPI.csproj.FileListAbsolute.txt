@@ -1,3 +1,4 @@
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\App_Data\web.config
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\appsettings.json
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\ODPortalWebAPI.exe
@@ -49,7 +50,8 @@ D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcor
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\ODPortalWebDL.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\ODPortalWebDL.pdb
-D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.csprojAssemblyReference.cache
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.csproj.AssemblyReference.cache
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.GeneratedMSBuildEditorConfig.editorconfig
 D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.AssemblyInfoInputs.cache
 D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.AssemblyInfo.cs
 D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.csproj.CoreCompileInputs.cache

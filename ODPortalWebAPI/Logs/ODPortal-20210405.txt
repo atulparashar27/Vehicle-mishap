@@ -1,4 +1,0 @@
-2021-04-05T00:43:08.6750246+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
-2021-04-05T00:43:08.6874741+05:30  [INF] Hosting environment: "Development" (c3307c92)
-2021-04-05T00:43:08.6898162+05:30  [INF] Content root path: "D:\Vehicle-mishap\ODPortalWebAPI" (b5d60022)
-2021-04-05T00:43:09.0739239+05:30 80000016-0007-ff00-b63f-84710c7967bb [WRN] Failed to determine the https port for redirect. (ca76cc21)
