@@ -23,7 +23,7 @@ namespace ODPortalWebDL.DataAccess
             //_logger = logger;
             _dbConnection = new DbConnection();
         }
-        internal Task<List<ActivityAttendanceModal>> GetPeopleDate(string status)
+        internal async Task<List<ActivityAttendanceModal>> GetPeopleDate(string status)
         {
             var tableResponse = _dbConnection.GetModelDetails(RawSQL.GetAllPeopleList(status));
             List<ActivityAttendanceModal> peopleList = new List<ActivityAttendanceModal>();
@@ -60,7 +60,7 @@ namespace ODPortalWebDL.DataAccess
             //      };
             //      peopleList.Add(record);
             //}
-            return Task.FromResult(peopleList);
+            return peopleList;
         }
 
         internal SavedAttendanceModal GetSavedAttendance(string actCode, DateTime actDate)

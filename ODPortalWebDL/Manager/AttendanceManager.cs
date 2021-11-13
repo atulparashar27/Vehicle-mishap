@@ -18,9 +18,9 @@ namespace ODPortalWebDL.Manager
             _attendanceDataAccess = new AttendanceDataAccess();
         }
 
-        public Task<List<ActivityAttendanceModal>> GetPeopleDate(string status)
+        public async Task<List<ActivityAttendanceModal>> GetPeopleDate(string status)
         {
-            return _attendanceDataAccess.GetPeopleDate(status);
+            return await _attendanceDataAccess.GetPeopleDate(status);
         }
 
         public bool SubmitActivityAttendance(SubmitActivityAttendanceModal submitActivityAttendanceModal)

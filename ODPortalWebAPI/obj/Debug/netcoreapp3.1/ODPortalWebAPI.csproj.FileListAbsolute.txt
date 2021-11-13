@@ -9,6 +9,7 @@ D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\ODPortalWebAPI.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\ODPortalWebAPI.pdb
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -16,6 +17,11 @@ D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Lo
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.Win32.Registry.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
@@ -32,6 +38,7 @@ D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\System.Data.OleDb.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\System.Diagnostics.PerformanceCounter.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\System.Security.AccessControl.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 D:\Vehicle-mishap\ODPortalWebAPI\bin\Debug\netcoreapp3.1\System.Security.Permissions.dll
@@ -60,7 +67,7 @@ D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\staticwebassets\ODPorta
 D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\staticwebassets\ODPortalWebAPI.StaticWebAssets.xml
 D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\scopedcss\bundle\ODPortalWebAPI.styles.css
 D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.RazorTargetAssemblyInfo.cache
-D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.csproj.CopyComplete
 D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.dll
 D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.pdb
 D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.genruntimeconfig.cache
+D:\Vehicle-mishap\ODPortalWebAPI\obj\Debug\netcoreapp3.1\ODPortalWebAPI.csproj.CopyComplete

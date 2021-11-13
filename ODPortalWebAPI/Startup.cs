@@ -12,6 +12,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ODPortalWebAPI
 {
@@ -76,9 +81,15 @@ namespace ODPortalWebAPI
         //private void AddAuthentication(IServiceCollection services)
         //{
         //    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        //        .AddJwtBearer(option =>
+        //        .AddJwtBearer(options =>
         //        {
-
+        //            options.TokenValidationParameters = new TokenValidationParameters
+        //            {
+        //                ValidateIssuer = true,
+        //                ValidateAudience = true,
+        //                ValidateLifetime = true,
+        //                ValidIssuer = Configuration["Jwt:Issuer"],
+        //            };
         //        });
         //}
     }
