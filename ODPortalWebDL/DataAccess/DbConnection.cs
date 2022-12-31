@@ -31,24 +31,18 @@ namespace ODPortalWebDL.DataAccess
             DataTable table = new DataTable();
             try
             {
-                using (var sqlCon = new OleDbConnection(connString))
-                {                    
-                    if (sqlCon.State.ToString().Trim().ToLower() == "closed")
-                    {
-                        _logger.LogInformation($"#####Connection Open####");
-                        sqlCon.Open();
-                    }
-                    using (var sqlCmd = new OleDbCommand(rawSql, sqlCon))
-                    {
-                        sqlCmd.CommandTimeout = 300;
-                        using (var sqlAdapt = new OleDbDataAdapter(sqlCmd))
-                        {
-                            _logger.LogWarning($"#####Table  Retrieved####");
-                            sqlAdapt.Fill(table);
-                            return table;
-                        }
-                    }
+                using var sqlCon = new OleDbConnection(connString);
+                if (sqlCon.State.ToString().Trim().ToLower() == "closed")
+                {
+                    _logger.LogInformation($"#####Connection Open####");
+                    sqlCon.Open();
                 }
+                using var sqlCmd = new OleDbCommand(rawSql, sqlCon);
+                sqlCmd.CommandTimeout = 300;
+                using var sqlAdapt = new OleDbDataAdapter(sqlCmd);
+                _logger.LogWarning($"#####Table  Retrieved####");
+                sqlAdapt.Fill(table);
+                return table;
             }
             catch (Exception ex)
             {
@@ -68,31 +62,31 @@ namespace ODPortalWebDL.DataAccess
                     using (var cmd = new OleDbCommand(@"Insert into Act2018 (Roll_NO, Act_cd, Act_Date) VALUES (@Roll_NO, @Act_cd, @Act_Date)", connection))
                     {
                         cmd.CommandTimeout = 300;
-                        Parallel.ForEach(submitActivityAttendanceModal.RollNoList , rollNo =>
-                        {
-                           lock (lockObj)
-                           {
-                               cmd.Parameters.Clear();
-                               cmd.Parameters.AddRange(new OleDbParameter[]
-                               {
-                                    new OleDbParameter { ParameterName = "@Roll_NO", Value = rollNo },
-                                    new OleDbParameter { ParameterName = "@Act_cd", Value = submitActivityAttendanceModal.ActivityCode },
-                                    new OleDbParameter { ParameterName = "@Act_Date", Value = submitActivityAttendanceModal.ActivityDate },
-                               });
-                               cmd.ExecuteNonQueryAsync();
-                           }
-                        });
-                        //foreach (var rollNo in submitActivityAttendanceModal.RollNoList)
+                        //Parallel.ForEach(submitActivityAttendanceModal.RollNoList , rollNo =>
                         //{
-                        //    cmd.Parameters.Clear();
-                        //    cmd.Parameters.AddRange(new OleDbParameter[]
-                        //    {
-                        //        new OleDbParameter { ParameterName = "@Roll_NO", Value = rollNo },
-                        //        new OleDbParameter { ParameterName = "@Act_cd", Value = submitActivityAttendanceModal.ActivityCode },
-                        //        new OleDbParameter { ParameterName = "@Act_Date", Value = submitActivityAttendanceModal.ActivityDate },
-                        //    });
-                        //    cmd.ExecuteNonQuery();
-                        //}
+                        //   lock (lockObj)
+                        //   {
+                        //       cmd.Parameters.Clear();
+                        //       cmd.Parameters.AddRange(new OleDbParameter[]
+                        //       {
+                        //            new OleDbParameter { ParameterName = "@Roll_NO", Value = rollNo },
+                        //            new OleDbParameter { ParameterName = "@Act_cd", Value = submitActivityAttendanceModal.ActivityCode },
+                        //            new OleDbParameter { ParameterName = "@Act_Date", Value = submitActivityAttendanceModal.ActivityDate },
+                        //       });
+                        //       cmd.ExecuteNonQueryAsync();
+                        //   }
+                        //});
+                        foreach (var rollNo in submitActivityAttendanceModal.RollNoList)
+                        {
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddRange(new OleDbParameter[]
+                            {
+                                new OleDbParameter { ParameterName = "@Roll_NO", Value = rollNo },
+                                new OleDbParameter { ParameterName = "@Act_cd", Value = submitActivityAttendanceModal.ActivityCode },
+                                new OleDbParameter { ParameterName = "@Act_Date", Value = submitActivityAttendanceModal.ActivityDate },
+                            });
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                     //return Task.FromResult(bool);
                     return true;
@@ -125,17 +119,13 @@ namespace ODPortalWebDL.DataAccess
             var maxCount = GetModelDetails("select MAX(Act_cd) as Act_cd from ActivityCode").AsEnumerable().FirstOrDefault().Field<string>("Act_cd");
             try
             {
-                using (var connection = new OleDbConnection(connString))
-                {
-                    connection.Open();
-                    using (var cmd = new OleDbCommand(@"INSERT into ActivityCode (Act_cd, Act_Name) VALUES (@Act_cd, @Act_Name)", connection))
-                    {
-                        cmd.CommandTimeout = 300;
-                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_cd", Value = (Convert.ToInt16(maxCount) + 1).ToString() });
-                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_Name", Value = allActivityCode.ActName });
-                        rowAffected = cmd.ExecuteNonQuery();
-                    }
-                }
+                using var connection = new OleDbConnection(connString);
+                connection.Open();
+                using var cmd = new OleDbCommand(@"INSERT into ActivityCode (Act_cd, Act_Name) VALUES (@Act_cd, @Act_Name)", connection);
+                cmd.CommandTimeout = 300;
+                cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_cd", Value = (Convert.ToInt16(maxCount) + 1).ToString() });
+                cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_Name", Value = allActivityCode.ActName });
+                rowAffected = cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -148,23 +138,19 @@ namespace ODPortalWebDL.DataAccess
         {
             try
             {
-                using (var connection = new OleDbConnection(connString))
+                using var connection = new OleDbConnection(connString);
+                connection.Open();
+                using var cmd = new OleDbCommand(@"Insert into Act2018 (Roll_NO, Act_cd, Act_Date, NoActivity) VALUES (@Roll_NO, @Act_cd, @Act_Date, @NoActivity)", connection);
+                cmd.CommandTimeout = 300;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddRange(new OleDbParameter[]
                 {
-                    connection.Open();
-                    using (var cmd = new OleDbCommand(@"Insert into Act2018 (Roll_NO, Act_cd, Act_Date, NoActivity) VALUES (@Roll_NO, @Act_cd, @Act_Date, @NoActivity)", connection))
-                    {
-                        cmd.CommandTimeout = 300;
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddRange(new OleDbParameter[]
-                        {
-                            new OleDbParameter { ParameterName = "@Roll_NO", Value = -1 },
-                            new OleDbParameter { ParameterName = "@Act_cd", Value = actCode },
-                            new OleDbParameter { ParameterName = "@Act_Date", Value = actDate },
-                            new OleDbParameter { ParameterName = "@NoActivity", Value = "NA" },
-                        });
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+                    new OleDbParameter { ParameterName = "@Roll_NO", Value = -1 },
+                    new OleDbParameter { ParameterName = "@Act_cd", Value = actCode },
+                    new OleDbParameter { ParameterName = "@Act_Date", Value = actDate },
+                    new OleDbParameter { ParameterName = "@NoActivity", Value = "NA" },
+                });
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -176,20 +162,16 @@ namespace ODPortalWebDL.DataAccess
         {
             try
             {
-                using (var connection = new OleDbConnection(connString))
-                {
-                    connection.Open();
-                    using (var cmd = new OleDbCommand("DELETE FROM Act2018 WHERE Act_Date = @Act_Date and Roll_NO = @Roll_NO and Act_cd = @Act_cd and NoActivity = @NoActivity", connection))
-                    {
-                        cmd.CommandTimeout = 300;
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_Date", Value = actDate, OleDbType = OleDbType.Date });
-                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Roll_No", Value = -1, OleDbType = OleDbType.SmallInt });
-                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_cd", Value = actCode, OleDbType = OleDbType.WChar });
-                        cmd.Parameters.Add(new OleDbParameter { ParameterName = "@NoActivity", Value = "NA", OleDbType = OleDbType.VarChar });
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+                using var connection = new OleDbConnection(connString);
+                connection.Open();
+                using var cmd = new OleDbCommand("DELETE FROM Act2018 WHERE Act_Date = @Act_Date and Roll_NO = @Roll_NO and Act_cd = @Act_cd and NoActivity = @NoActivity", connection);
+                cmd.CommandTimeout = 300;
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_Date", Value = actDate, OleDbType = OleDbType.Date });
+                cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Roll_No", Value = -1, OleDbType = OleDbType.SmallInt });
+                cmd.Parameters.Add(new OleDbParameter { ParameterName = "@Act_cd", Value = actCode, OleDbType = OleDbType.WChar });
+                cmd.Parameters.Add(new OleDbParameter { ParameterName = "@NoActivity", Value = "NA", OleDbType = OleDbType.VarChar });
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -200,17 +182,13 @@ namespace ODPortalWebDL.DataAccess
         {
             try
             {
-                using (var connection = new OleDbConnection(connString))
-                {
-                    connection.Open();
-                    using (var cmd = new OleDbCommand())
-                    {
-                        cmd.CommandTimeout = 300;
-                        cmd.Connection = connection;
-                        cmd.CommandText = "UPDATE ActivityCode SET Act_Name = '" + allActivityCode.ActName + "' WHERE Act_cd = '"+ allActivityCode.ActId +"'";
-                        rowAffected = cmd.ExecuteNonQuery();
-                    }
-                }
+                using var connection = new OleDbConnection(connString);
+                connection.Open();
+                using var cmd = new OleDbCommand();
+                cmd.CommandTimeout = 300;
+                cmd.Connection = connection;
+                cmd.CommandText = "UPDATE ActivityCode SET Act_Name = '" + allActivityCode.ActName + "' WHERE Act_cd = '" + allActivityCode.ActId + "'";
+                rowAffected = cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -222,16 +200,14 @@ namespace ODPortalWebDL.DataAccess
         {
             try
             {
-                using (var connection = new OleDbConnection(connString))
+                using var connection = new OleDbConnection(connString);
+                connection.Open();
+                using (var cmd = new OleDbCommand())
                 {
-                    connection.Open();
-                    using (var cmd = new OleDbCommand())
-                    {
-                        cmd.CommandTimeout = 300;
-                        cmd.Connection = connection;
-                        cmd.CommandText = "UPDATE ActivityCode SET DeleteInd = '" + 0 + "' WHERE Act_cd = '" + allActivityCode.ActId + "'";
-                        rowAffected = cmd.ExecuteNonQuery();
-                    }
+                    cmd.CommandTimeout = 300;
+                    cmd.Connection = connection;
+                    cmd.CommandText = "UPDATE ActivityCode SET DeleteInd = '" + 0 + "' WHERE Act_cd = '" + allActivityCode.ActId + "'";
+                    rowAffected = cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)

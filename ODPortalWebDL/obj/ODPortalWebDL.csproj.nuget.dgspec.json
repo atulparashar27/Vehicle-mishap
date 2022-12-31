@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Vehicle-mishap\\ODPortalWebDL\\ODPortalWebDL.csproj": {}
+    "E:\\Vehicle-mishap\\ODPortalWebDL\\ODPortalWebDL.csproj": {}
   },
   "projects": {
-    "D:\\Vehicle-mishap\\ODPortalWebDL\\ODPortalWebDL.csproj": {
+    "E:\\Vehicle-mishap\\ODPortalWebDL\\ODPortalWebDL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Vehicle-mishap\\ODPortalWebDL\\ODPortalWebDL.csproj",
+        "projectUniqueName": "E:\\Vehicle-mishap\\ODPortalWebDL\\ODPortalWebDL.csproj",
         "projectName": "ODPortalWebDL",
-        "projectPath": "D:\\Vehicle-mishap\\ODPortalWebDL\\ODPortalWebDL.csproj",
-        "packagesPath": "C:\\Users\\ATUL PARASHAR\\.nuget\\packages\\",
-        "outputPath": "D:\\Vehicle-mishap\\ODPortalWebDL\\obj\\",
+        "projectPath": "E:\\Vehicle-mishap\\ODPortalWebDL\\ODPortalWebDL.csproj",
+        "packagesPath": "C:\\Users\\atulp\\.nuget\\packages\\",
+        "outputPath": "E:\\Vehicle-mishap\\ODPortalWebDL\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ATUL PARASHAR\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\atulp\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -74,7 +71,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -83,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
