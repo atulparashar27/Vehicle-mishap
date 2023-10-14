@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-https://go.microsoft.com/fwlink/?LinkID=208121. 
+https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\ATUL PARASHAR\Desktop\GridCoord</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2023-01-15T10:17:03.0892692Z;True|2023-01-15T14:29:53.6883154+05:30;</History>
+    <LastFailureDetails />
   </PropertyGroup>
 </Project>

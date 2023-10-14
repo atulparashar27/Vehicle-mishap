@@ -15,16 +15,48 @@ namespace ODPortalWebDL.DataAccess
     {
         private readonly ILogger<DbConnection> _logger;
         private readonly string local = Environment.CurrentDirectory + $"\\App_Data\\odrsa-database.accdb";
-        private readonly string prod = "d:\\DZHosts\\LocalUser\\atulparashar27\\www.odrsa.somee.com\\server\\App_Data\\odrsa-database.accdb";
+        private readonly string prod = "d:\\DZHosts\\LocalUser\\atulparashar0727\\www.odrsa1.somee.com\\server\\App_Data\\odrsa-database.accdb";
         private readonly string connString = "";
         private readonly object lockObj = new object();
 
-        public DbConnection()
+        public DbConnection() 
         {
             ILoggerFactory loggerFactory = new LoggerFactory();
             _logger = loggerFactory.CreateLogger<DbConnection>();
             connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={local};Persist Security Info=True";
         }
+
+        public async Task<DataTable> GetModelDetailsAsync(string rawSql)
+        {
+            _logger.LogInformation($"$$$Initial Connection####");
+            DataTable table = new DataTable();
+
+            using var sqlCon = new OleDbConnection(connString);
+            try
+            {
+                if (sqlCon.State.ToString().Trim().ToLower() == "closed")
+                {
+                    _logger.LogInformation($"#####Connection Open####");
+                    await sqlCon.OpenAsync();
+                }
+                using var sqlCmd = new OleDbCommand(rawSql, sqlCon);
+                sqlCmd.CommandTimeout = int.MaxValue;
+                using var sqlAdapt = new OleDbDataAdapter(sqlCmd);
+                _logger.LogWarning($"#####Table  Retrieved####");
+                sqlAdapt.Fill(table);
+                return table;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"$$$GetModelDetails$$$####Error Message ->>>{ex} && {ex.Message}###### + StackTrace {ex.StackTrace}######## + InnerEx{ex.InnerException}#####");
+                return table;
+            }
+            finally
+            {
+                await sqlCon.CloseAsync();
+            }
+        }
+
         public DataTable GetModelDetails(string rawSql)
         {
             _logger.LogInformation($"$$$Initial Connection####");

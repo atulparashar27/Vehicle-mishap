@@ -52,6 +52,71 @@ namespace ODPortalWebDL.Constants
                     $"AND attend.Act_Date=#{actDate}# ";
         }
 
+        public static string GetChildrenDetailsWithParent()
+        {
+            DateTime dob = Convert.ToDateTime("7/1/2005");
+            DateTime dob2 = Convert.ToDateTime("4/30/2014");
+            var str = $"SELECT childData.Name_Full, fatherData.Roll_NO, fatherData.Name_Entry, fatherData.INI_JIG_NON ,fatherData.Mobile , motherData.Roll_NO, motherData.Name_Entry, motherData.INI_JIG_NON ,motherData.Mobile " +
+                        $"FROM BranchMaster childData, BranchMaster fatherData, BranchMaster motherData " +
+                        $"WHERE childData.Date_Birth>=#{dob}# " +
+                        $"AND childData.Date_Birth<=#{dob2}# " +
+                        $"AND childData.Father_cd = fatherData.Roll_NO " +
+                        $"AND childData.Mother_cd = motherData.Roll_NO ";
+            return str;
+        }
+
+        public static string LastSixMonthAttendanceRecord()
+        {
+            DateTime dob = Convert.ToDateTime("07/23/2005");
+            DateTime dob2 = Convert.ToDateTime("07/23/2023");
+
+            //return $"SELECT mstBr.UID_NO, mstBr.Name_Full, mstBr.Date_Birth " +
+            //                $"From BranchMaster mstBr " +
+            //                $"WHERE " +
+            //                $"mstBr.Date_Birth >= #{dob}# " +
+            //                $"and mstBr.Date_Birth <= #{dob2}# " +
+            //                $"ORDER BY mstBr.Date_Birth ";
+
+            var fatherStr = $"SELECT mstBr.UID_NO, mstBr.Name_Full , mstBr.Date_Birth " +
+                            $", mstFr.UID_No, mstFr.Name_Full " +
+                            $"From BranchMaster mstBr left join BranchMasterFather mstFr " +
+                            $"on mstBr.Mother_cd = mstFr.Roll_NO " +
+                            //$", BranchMasterMother mstMr " +
+                            $"WHERE " +
+                            //$"mstBr.Father_cd = mstFr.Roll_NO " +
+                            //$"and mstBr.Mother_cd = mstMr.Roll_NO " +
+                            $" mstBr.Date_Birth >= #{dob}# " +
+                            $"and mstBr.Date_Birth <= #{dob2}# " +
+                            $"ORDER by mstBr.Date_Birth ";
+            return fatherStr;
+
+            var motherStr = $"SELECT mstBr.UID_NO, mstBr.Name_Full , mstBr.Date_Birth " +
+                            $", mstMr.UID_No, mstMr.Name_Full " +
+                            $"From BranchMaster mstBr left join BranchMasterMother mstMr " +
+                            $"on mstBr.Mother_cd = mstMr.Roll_NO " +
+                            //$", BranchMasterMother mstMr " +
+                            $"WHERE " +
+                            //$"mstBr.Father_cd = mstFr.Roll_NO " +
+                            //$"and mstBr.Mother_cd = mstMr.Roll_NO " +
+                            $" mstBr.Date_Birth >= #{dob}# " +
+                            $"and mstBr.Date_Birth <= #{dob2}# " +
+                            $"ORDER by mstBr.Date_Birth ";
+            return motherStr;
+            var str = $"SELECT distinct attend.Roll_NO " +
+                        $"FROM Act2018 attend, ActivityCode code, BranchMaster mst " +
+                        $"WHERE attend.Act_cd = code.Act_cd " +
+                        $"AND attend.Act_Date >= #{dob2}# " +
+                        $"AND attend.Act_Date <= #{dob}# " +
+                        //$"AND attend.NoActivity like '%NA%' " +
+                        $"AND mst.Roll_NO = attend.Roll_NO " +
+                        $" ";
+            var newStr = $"SELECT UID_No, INI_JIG_NON, Name_Entry, Mobile " +
+                        $"FROM BranchMaster mst " +
+                        $"WHERE mst.Roll_NO not in ({str}) ";
+
+            return newStr;
+        }
+
         public static string GetSaveVisitorsAttendance(string actCode, DateTime actDate)
         {
             return $"SELECT VisitorName, Act_cd, Act_date, Branch_Visitor, Gender, Initiated, Age " +

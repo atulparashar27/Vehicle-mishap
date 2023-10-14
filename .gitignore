@@ -23,3 +23,10 @@ ODPortalWebAPI/obj/Debug/netcoreapp3.1/ODPortalWebAPI.GeneratedMSBuildEditorConf
 ODPortalWebAPI/obj/Debug/netcoreapp3.1/ODPortalWebAPI.dll
 ODPortalWebAPI/obj/Debug/netcoreapp3.1/ODPortalWebAPI.csproj.AssemblyReference.cache
 ODPortalWebAPI/obj/Debug/netcoreapp3.1/ODPortalWebAPI.assets.cache
+/ODPortalWebDL/obj
+/ODPortalWebDL/bin
+/ODPortalWebAPI/bin/Debug/net6.0
+/ODPortalWebAPI/bin/Release/netcoreapp3.1/publish
+/ODPortalWebAPI/Logs
+/ODPortalWebAPI/App_Data/odrsa-database_old.accdb
+/ODPortalWebAPI/App_Data/odrsa-database_old_copy.accdb
