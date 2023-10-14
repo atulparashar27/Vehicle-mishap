@@ -1,0 +1,6 @@
+ODPortalWebAPI/obj/
+/ODPortalWebAPI/bin/Debug/net6.0/App_Data/web.config
+/ODPortalWebAPI/bin
+/ODPortalWebDL/bin/Debug/net6.0
+/ODPortalWebDL/obj/Debug/net6.0
+/ODPortalWebDL/obj/Debug/netcoreapp3.1

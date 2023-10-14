@@ -39,7 +39,7 @@
                 <div class="col-md-4">
                     <div class="row" style="margin-bottom: -19px;margin-top: -9px;">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-round" [disabled]="currentActiveTab ? 
+                            <button type="submit" class="btn btn-success btn-round" [disabled]="currentActiveTab ?
                                 !(attendDate && selectedActivityCode.length > 0 && selectedRow.length > 0) :
                                 !(attendDate && selectedActivityCode.length > 0 && visitorsRowFilled)"
                                 (click)="openProcessConfirmModal(processConfirmModal);" [hidden]="roleEditPermission">
@@ -78,7 +78,8 @@
                                         rowSelection="multiple" [localeText]="{noRowsToShow: ''}"
                                         [rowData]="attendanceDDList" [columnDefs]="attendanceColumDefs"
                                         [class]="tableTheme" [rowMultiSelectWithClick]="true"
-                                        (selectionChanged)="onRowSelection($event)">
+                                        (selectionChanged)="onRowSelection($event)"
+                                        (gridReady)="onGridReady($event)">
                                     </ag-grid-angular>
                                 </div>
                             </div>

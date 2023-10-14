@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>9a6c389d-ab32-45d2-8e25-8acb8d4579a9</UserSecretsId>
+    <StartupObject>ODPortalWebAPI.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

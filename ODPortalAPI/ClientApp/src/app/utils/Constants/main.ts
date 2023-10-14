@@ -3,7 +3,7 @@ export const MAIN = {
         API_VERSION: '1.0',
         MAIN_URL: {
             HOST_URL: 'http://localhost:63289/', // local
-            // HOST_URL: 'http://odrsa.somee.com/server/', // Somee
+            // HOST_URL: 'http://odrsa1.somee.com/server/', // Somee
             // HOST_URL: window.location.origin + '/server/',
             BASE_URL: window.location.origin + '/'
         },

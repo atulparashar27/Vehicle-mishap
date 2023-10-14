@@ -1,26 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPortalWebAPI", "..\ODPortalWebAPI\ODPortalWebAPI.csproj", "{83D7D4F0-4119-4487-99F4-C10A3857C25A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ODPortalWebAPI", "..\ODPortalWebAPI\ODPortalWebAPI.csproj", "{83D7D4F0-4119-4487-99F4-C10A3857C25A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPortalWebDL", "..\ODPortalWebDL\ODPortalWebDL.csproj", "{5E46939A-D7F8-401D-ADAF-EF05C5404546}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ODPortalWebDL", "..\ODPortalWebDL\ODPortalWebDL.csproj", "{5E46939A-D7F8-401D-ADAF-EF05C5404546}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{83D7D4F0-4119-4487-99F4-C10A3857C25A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83D7D4F0-4119-4487-99F4-C10A3857C25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83D7D4F0-4119-4487-99F4-C10A3857C25A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{83D7D4F0-4119-4487-99F4-C10A3857C25A}.Debug|x86.Build.0 = Debug|Any CPU
 		{83D7D4F0-4119-4487-99F4-C10A3857C25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83D7D4F0-4119-4487-99F4-C10A3857C25A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83D7D4F0-4119-4487-99F4-C10A3857C25A}.Release|x86.ActiveCfg = Release|x86
+		{83D7D4F0-4119-4487-99F4-C10A3857C25A}.Release|x86.Build.0 = Release|x86
 		{5E46939A-D7F8-401D-ADAF-EF05C5404546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E46939A-D7F8-401D-ADAF-EF05C5404546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E46939A-D7F8-401D-ADAF-EF05C5404546}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5E46939A-D7F8-401D-ADAF-EF05C5404546}.Debug|x86.Build.0 = Debug|Any CPU
 		{5E46939A-D7F8-401D-ADAF-EF05C5404546}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E46939A-D7F8-401D-ADAF-EF05C5404546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E46939A-D7F8-401D-ADAF-EF05C5404546}.Release|x86.ActiveCfg = Release|Any CPU
+		{5E46939A-D7F8-401D-ADAF-EF05C5404546}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

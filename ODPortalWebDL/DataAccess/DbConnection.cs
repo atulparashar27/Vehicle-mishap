@@ -14,8 +14,8 @@ namespace ODPortalWebDL.DataAccess
     public class DbConnection
     {
         private readonly ILogger<DbConnection> _logger;
-        private readonly string local = Environment.CurrentDirectory + $"\\App_Data\\odrsa-database.accdb";
-        private readonly string prod = "d:\\DZHosts\\LocalUser\\atulparashar27\\www.odrsa.somee.com\\server\\App_Data\\odrsa-database.accdb";
+        private readonly string local = "C:\\Users\\ATUL_PARASHAR\\Downloads\\odrsa-database (7).accdb";
+        //private readonly string prod = "d:\\DZHosts\\LocalUser\\atulparashar27\\www.odrsa.somee.com\\server\\App_Data\\odrsa-database.accdb";
         private readonly string connString = "";
         private readonly object lockObj = new object();
 
