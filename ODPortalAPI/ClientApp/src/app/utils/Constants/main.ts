@@ -2,8 +2,8 @@ export const MAIN = {
     APP: {
         API_VERSION: '1.0',
         MAIN_URL: {
-            HOST_URL: 'http://localhost:63289/', // local
-            // HOST_URL: 'http://odrsa.somee.com/server/', // Somee
+            // HOST_URL: 'http://localhost:63289/', // local
+            HOST_URL: 'http://odrsa.somee.com/', // Somee
             // HOST_URL: window.location.origin + '/server/',
             BASE_URL: window.location.origin + '/'
         },
@@ -32,7 +32,7 @@ export const MAIN = {
           GET_ALL_BRANCH_PEOPLE_ATTENDANCE_SUMMARY: 'Reports/GetPeopleAttendanceSummary',
           GET_ALL_LOCALITY_LIST: 'Misc/GetLocalityList',
           GET_ALL_LOCALITY_PEOPLE_LIST: 'Misc/GetLocalityPeopleList',
-          GET_MENU_JSON: '/assets/json/menu.json'
+          GET_MENU_JSON: '/odrsa/assets/json/menu.json'
         },
         CONSTANTS: {
             AG_GRID_CLS_THEME: 'ag-theme-balham',
