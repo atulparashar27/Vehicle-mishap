@@ -30,3 +30,6 @@ ODPortalWebAPI/obj/Debug/netcoreapp3.1/ODPortalWebAPI.assets.cache
 /ODPortalWebAPI/Logs
 /ODPortalWebAPI/App_Data/odrsa-database_old.accdb
 /ODPortalWebAPI/App_Data/odrsa-database_old_copy.accdb
+/ODPortalWebAPI/bin/x86/Debug/netcoreapp3.1
+/ODPortalWebAPI/obj/x86/Debug/netcoreapp3.1
+/ODPortalWebAPI/bin/Release/net6.0

@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>E:\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
-    <History>True|2023-01-15T10:17:03.0892692Z;True|2023-01-15T14:29:53.6883154+05:30;</History>
+    <_PublishTargetUrl>C:\MyProject\Vehicle-mishap\ODPortalWebAPI\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2023-10-14T22:09:33.5498176Z;True|2023-10-15T02:22:36.0246027+05:30;True|2023-10-15T02:21:35.6636789+05:30;True|2023-10-15T02:20:49.2712554+05:30;True|2023-10-15T02:19:50.9851996+05:30;True|2023-10-15T02:11:08.7819991+05:30;False|2023-10-15T02:10:35.5395564+05:30;False|2023-10-15T02:09:01.9584642+05:30;True|2023-01-15T15:47:03.0892692+05:30;True|2023-01-15T14:29:53.6883154+05:30;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

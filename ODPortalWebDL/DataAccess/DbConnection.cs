@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ODPortalWebDL.DataAccess
@@ -14,16 +13,15 @@ namespace ODPortalWebDL.DataAccess
     public class DbConnection
     {
         private readonly ILogger<DbConnection> _logger;
-        private readonly string local = Environment.CurrentDirectory + $"\\App_Data\\odrsa-database.accdb";
-        private readonly string prod = "d:\\DZHosts\\LocalUser\\atulparashar0727\\www.odrsa1.somee.com\\server\\App_Data\\odrsa-database.accdb";
+        //private readonly string local = Environment.CurrentDirectory + $"\\App_Data\\odrsa-database.accdb";
+        //private readonly string prod = "d:\\DZHosts\\LocalUser\\atulparashar0727\\www.odrsa.somee.com\\App_Data\\odrsa-database.accdb";
         private readonly string connString = "";
-        private readonly object lockObj = new object();
 
         public DbConnection() 
         {
             ILoggerFactory loggerFactory = new LoggerFactory();
             _logger = loggerFactory.CreateLogger<DbConnection>();
-            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={local};Persist Security Info=True";
+            connString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={Environment.GetEnvironmentVariable("dataSource")};Persist Security Info=True";
         }
 
         public async Task<DataTable> GetModelDetailsAsync(string rawSql)
