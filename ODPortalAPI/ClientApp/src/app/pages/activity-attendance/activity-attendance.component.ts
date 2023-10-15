@@ -1,5 +1,6 @@
 import { Component, HostBinding, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GridOptions } from 'ag-grid-community';
 import { CONSTANTS } from 'app/utils/Constants';
 import { AttendanceService } from 'app/utils/services/attendance/attendance.service';
 import { LoginService } from 'app/utils/services/login/login.service';
@@ -50,6 +51,7 @@ export class ActivityAttendanceComponent implements OnInit {
   dropdownSettings = {};
   dropdownList = [];
   futureDateDisabled: Date = new Date();
+  gridApi: GridOptions;
   @HostBinding('style.height') height;
   constructor(private attendanceService: AttendanceService, private spinner: NgxSpinnerService, private utilsService: UtilsService,
     private loginService: LoginService, public activeModal: NgbModal, private alertService: ToastrService) { }
@@ -178,18 +180,18 @@ export class ActivityAttendanceComponent implements OnInit {
               '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_SUCCESS);
             setTimeout(() => {
               this.spinner.hide();
-              window.open('/#/savedAttendance/' + dataToSave.activityCode + '/' + dataToSave.activityDate, '_blank');
-            }, 1000);
+              window.open('/odrsa/#/savedAttendance/' + dataToSave.activityCode + '/' + dataToSave.activityDate, '_blank');
+            }, 0);
             // this.resetAll();
           } else {
-            setTimeout(() => { this.spinner.hide(); }, 1000);
+            setTimeout(() => { this.spinner.hide(); }, 0);
             const msg = response.message ? response.message : 'Could not save Attendance';
             this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + msg,
               '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
           }
         },
         (error) => {
-          setTimeout(() => { this.spinner.hide(); }, 1000);
+          setTimeout(() => { this.spinner.hide(); }, 0);
           const errMsg = this.utilsService.errorServiceHandler(error);
           this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + errMsg,
             '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
@@ -209,6 +211,7 @@ export class ActivityAttendanceComponent implements OnInit {
         this.utilsService.formatDate(this.attendDate), this.isOpenNewWindow);
     }
     this.isOpenNewWindow = true;
+    this.gridApi.api.deselectAll();
   }
 
   resetAll() {
@@ -253,5 +256,9 @@ export class ActivityAttendanceComponent implements OnInit {
           '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_ERR);
       }
     );
+  }
+  
+  onGridReady(params) {
+    this.gridApi = params;
   }
 }

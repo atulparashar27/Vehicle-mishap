@@ -29,11 +29,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.Imagedata.push(
-      '../../../assets/img/odbranch1.jpeg',
-      '../../../assets/img/odbranch2.jpeg',
-      '../../../assets/img/odbranch3.jpeg',
-      '../../../assets/img/odbranch4.jpeg',
-      '../../../assets/img/odbranch5.jpeg'
+      '../../../odrsa/assets/img/odbranch1.jpeg',
+      '../../../odrsa/assets/img/odbranch2.jpeg',
+      '../../../odrsa/assets/img/odbranch3.jpeg',
+      '../../../odrsa/assets/img/odbranch4.jpeg',
+      '../../../odrsa/assets/img/odbranch5.jpeg'
     );
 
     // this.chartColor = "#FFFFFF";

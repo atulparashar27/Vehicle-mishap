@@ -78,7 +78,8 @@
                                         rowSelection="multiple" [localeText]="{noRowsToShow: ''}"
                                         [rowData]="attendanceDDList" [columnDefs]="attendanceColumDefs"
                                         [class]="tableTheme" [rowMultiSelectWithClick]="true"
-                                        (selectionChanged)="onRowSelection($event)">
+                                        (selectionChanged)="onRowSelection($event)"
+                                        (gridReady)="onGridReady($event)">
                                     </ag-grid-angular>
                                 </div>
                             </div>

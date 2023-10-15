@@ -30,6 +30,11 @@ ODPortalWebAPI/obj/Debug/netcoreapp3.1/ODPortalWebAPI.assets.cache
 /ODPortalWebAPI/Logs
 /ODPortalWebAPI/App_Data/odrsa-database_old.accdb
 /ODPortalWebAPI/App_Data/odrsa-database_old_copy.accdb
+/ODPortalWebAPI/obj/Debug/net6.0/ODPortalWebAPI.AssemblyInfo.cs
+/ODPortalWebAPI/obj/Debug/net6.0/ODPortalWebAPI.AssemblyInfoInputs.cache
+/ODPortalWebAPI/obj/Debug/net6.0/ODPortalWebAPI.csproj.AssemblyReference.cache
+/ODPortalWebAPI/obj/Debug/net6.0/ODPortalWebAPI.GeneratedMSBuildEditorConfig.editorconfig
+/ODPortalWebAPI/obj/project.nuget.cache
 /ODPortalWebAPI/bin/x86/Debug/netcoreapp3.1
 /ODPortalWebAPI/obj/x86/Debug/netcoreapp3.1
 /ODPortalWebAPI/bin/Release/net6.0

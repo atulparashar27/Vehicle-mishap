@@ -188,7 +188,7 @@ export class VisitorsAttendanceComponent implements OnInit {
             this.alertService.show(CONSTANTS.MAIN.APP.CONSTANTS.ALERT_MSG_ICON + 'Attendance Saved successfully',
             '', CONSTANTS.MAIN.APP.CONSTANTS.MSG_TYPE_SUCCESS);
             if (openNewWindow) {
-              window.open('/#/savedAttendance/' + activityCode + '/' + this.utilsService.formatDate(activityDate), '_blank');
+              window.open('/odrsa/#/savedAttendance/' + activityCode + '/' + this.utilsService.formatDate(activityDate), '_blank');
             }
           } else {
             // tslint:disable-next-line: max-line-length
