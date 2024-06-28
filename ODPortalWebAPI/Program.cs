@@ -10,8 +10,8 @@ using System.Web.Http;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(s => s.AllowEmptyInputInBodyModelBinding = true);
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(opt => opt.AddPolicy("ODRSA", c =>
 {
@@ -31,7 +31,7 @@ if (builder.Environment.IsDevelopment())
 }
 else
 {
-    Environment.SetEnvironmentVariable("dataSource", "d:\\DZHosts\\LocalUser\\atulparashar0727\\www.odrsa.somee.com\\App_Data\\odrsa-database.accdb");
+    Environment.SetEnvironmentVariable("dataSource", "d:\\DZHosts\\LocalUser\\atulparashar27\\www.odrsa.somee.com\\App_Data\\odrsa-database.accdb");
 }
 
 var app = builder.Build();
@@ -44,8 +44,8 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseExceptionHandler("/error");
-app.UseSwagger();
-app.UseSwaggerUI();
+//app.UseSwagger();
+//app.UseSwaggerUI();
 
 
 app.Use(async (context, next) =>
